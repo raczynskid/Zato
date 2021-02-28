@@ -1,0 +1,138 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Assets/Sprites/Spritesheets/Swordmaster-Sheet.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Player.gd" type="Script" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 15.5406
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 4.49618
+height = 12.5008
+
+[sub_resource type="Animation" id=3]
+tracks/0/type = "value"
+tracks/0/path = NodePath("VisualNodes/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 12 ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("VisualNodes/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "slash_damage"
+}, {
+"args": [  ],
+"method": "end_slash"
+} ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("VisualNodes/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 11, 10 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "Slash"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "Walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=9]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=10]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=11]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id=13]
+states/Idle/node = SubResource( 6 )
+states/Idle/position = Vector2( 1321, 225 )
+states/Slash/node = SubResource( 7 )
+states/Slash/position = Vector2( 1571, 232 )
+states/Walk/node = SubResource( 8 )
+states/Walk/position = Vector2( 1252, 68 )
+transitions = [ "Idle", "Walk", SubResource( 9 ), "Idle", "Slash", SubResource( 10 ), "Walk", "Idle", SubResource( 11 ), "Slash", "Idle", SubResource( 12 ) ]
+start_node = "Idle"
+graph_offset = Vector2( 10, 60 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=14]
+
+[node name="Player" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="VisualNodes" type="Node2D" parent="."]
+position = Vector2( 0, -21.052 )
+
+[node name="Sprite" type="Sprite" parent="VisualNodes"]
+position = Vector2( -14.5164, -8.34274 )
+texture = ExtResource( 1 )
+hframes = 15
+frame = 11
+
+[node name="Damage_area" type="Area2D" parent="VisualNodes"]
+
+[node name="Slash_hitbox" type="CollisionShape2D" parent="VisualNodes/Damage_area"]
+position = Vector2( -35.2064, 6.34048 )
+shape = SubResource( 1 )
+disabled = true
+
+[node name="Movement_collision" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Idle = SubResource( 3 )
+anims/Slash = SubResource( 4 )
+anims/Walk = SubResource( 5 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 13 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 14 )
