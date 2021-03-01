@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Zato"
-run/main_scene="res://UI/Main_menu.tscn"
+run/main_scene="res://Levels/World.tscn"
 config/icon="res://UI/icons/icon.png"
 config/windows_native_icon="res://UI/icons/icon.ico"
 
