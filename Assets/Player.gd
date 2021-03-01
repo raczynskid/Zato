@@ -16,6 +16,8 @@ onready var animationPlayer = get_node("AnimationPlayer")
 onready var animationTree = get_node("AnimationTree")
 onready var animationState = animationTree.get("parameters/playback")
 
+onready var walk_animation = animationPlayer.get_animation("Walk")
+
 # load hitboxes and hurtboxes
 onready var damage_area = get_node("VisualNodes/Damage_area")
 onready var slash_hitbox = get_node("VisualNodes/Damage_area/Slash_hitbox")
