@@ -161,10 +161,10 @@ script = ExtResource( 2 )
 position = Vector2( 0, -21.052 )
 
 [node name="Sprite" type="Sprite" parent="VisualNodes"]
-position = Vector2( -14.748, -6.221 )
+position = Vector2( -16.2243, -6.221 )
 texture = ExtResource( 1 )
 hframes = 15
-frame = 10
+frame = 9
 
 [node name="shadow" type="Sprite" parent="VisualNodes/Sprite"]
 modulate = Color( 0, 0, 0, 0.2 )
@@ -175,7 +175,7 @@ texture = ExtResource( 1 )
 offset = Vector2( -1.137, -2.902 )
 flip_v = true
 hframes = 15
-frame = 10
+frame = 9
 
 [node name="Damage_area" type="Area2D" parent="VisualNodes"]
 
