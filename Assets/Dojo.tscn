@@ -11,7 +11,7 @@
 emission_shape = 2
 emission_box_extents = Vector3( 100, 1, 1 )
 flag_disable_z = true
-gravity = Vector3( 0, 5, 0 )
+gravity = Vector3( 0, 2, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 tangential_accel = 1.0
@@ -35,7 +35,7 @@ damping = 0.01
 angle = 360.4
 angle_random = 1.0
 scale = 0.3
-scale_random = 1.0
+scale_random = 0.25
 
 [sub_resource type="ParticlesMaterial" id=3]
 emission_shape = 2
@@ -50,7 +50,7 @@ damping = 0.01
 angle = 360.4
 angle_random = 1.0
 scale = 0.2
-scale_random = 1.0
+scale_random = 0.2
 
 [sub_resource type="StreamTexture" id=4]
 load_path = "res://.import/Snowflake.png-4e09bd749e2e29030728f006f2f72f06.stex"
@@ -72,7 +72,7 @@ texture = ExtResource( 2 )
 [node name="Snow_particles" type="Particles2D" parent="Snow"]
 position = Vector2( 201.971, 4.95143 )
 amount = 250
-lifetime = 6.0
+lifetime = 12.0
 preprocess = 30.0
 process_material = SubResource( 1 )
 texture = ExtResource( 4 )
@@ -87,7 +87,7 @@ texture = ExtResource( 3 )
 
 [node name="Snow_particles3" type="Particles2D" parent="Snow"]
 position = Vector2( 201.971, 4.95143 )
-amount = 250
+amount = 1000
 lifetime = 30.0
 preprocess = 30.0
 process_material = SubResource( 3 )

@@ -3,7 +3,7 @@
 [ext_resource path="res://Assets/Sprites/Spritesheets/Swordmaster-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Player.gd" type="Script" id=2]
 
-[sub_resource type="CanvasItemMaterial" id=16]
+[sub_resource type="CanvasItemMaterial" id=1]
 light_mode = 2
 
 [sub_resource type="CircleShape2D" id=2]
@@ -84,7 +84,7 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id=6]
-length = 0.6
+length = 0.7
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("VisualNodes/Sprite:frame")
@@ -93,10 +93,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 11, 10 ]
+"values": [ 10, 11, 10, 9 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("VisualNodes/Sprite/shadow:frame")
@@ -105,10 +105,22 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 11, 10 ]
+"values": [ 10, 11, 10, 9 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("VisualNodes/Sprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -10.319, -6.221 ), Vector2( -19.177, -6.221 ) ]
 }
 
 [sub_resource type="AnimationNodeAnimation" id=7]
@@ -138,7 +150,7 @@ states/Walk/node = SubResource( 9 )
 states/Walk/position = Vector2( 1252, 68 )
 transitions = [ "Idle", "Walk", SubResource( 10 ), "Idle", "Slash", SubResource( 11 ), "Walk", "Idle", SubResource( 12 ), "Slash", "Idle", SubResource( 13 ) ]
 start_node = "Idle"
-graph_offset = Vector2( 201, -141 )
+graph_offset = Vector2( 199, 24.004 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=15]
 
@@ -149,20 +161,21 @@ script = ExtResource( 2 )
 position = Vector2( 0, -21.052 )
 
 [node name="Sprite" type="Sprite" parent="VisualNodes"]
-position = Vector2( -14.5164, -8.34274 )
+position = Vector2( -16.2243, -6.221 )
 texture = ExtResource( 1 )
 hframes = 15
-frame = 12
+frame = 9
 
 [node name="shadow" type="Sprite" parent="VisualNodes/Sprite"]
 modulate = Color( 0, 0, 0, 0.2 )
 show_behind_parent = true
-material = SubResource( 16 )
+material = SubResource( 1 )
 position = Vector2( 1.33482, 58.6827 )
 texture = ExtResource( 1 )
+offset = Vector2( -1.137, -2.902 )
 flip_v = true
 hframes = 15
-frame = 8
+frame = 9
 
 [node name="Damage_area" type="Area2D" parent="VisualNodes"]
 
@@ -183,5 +196,4 @@ anims/Walk = SubResource( 6 )
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 14 )
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/playback = SubResource( 15 )

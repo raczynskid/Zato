@@ -14,7 +14,7 @@ script = ExtResource( 4 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 242.025, 181.482 )
-speed = 2000
+speed = 3000
 
 [node name="Tamashigiri" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( 91.5688, 233.084 )
