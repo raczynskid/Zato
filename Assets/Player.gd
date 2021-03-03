@@ -88,3 +88,9 @@ func slash_damage():
 				target.die()
 
 	slash_hitbox.disabled = true
+
+func slash2():
+	pass
+
+func slash3():
+	pass
