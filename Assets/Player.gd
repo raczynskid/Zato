@@ -22,8 +22,10 @@ onready var walk_animation = animationPlayer.get_animation("Walk")
 onready var damage_area = get_node("VisualNodes/Damage_area")
 onready var slash_hitbox = get_node("VisualNodes/Damage_area/Slash_hitbox")
 
-
 onready var state = "Idle"
+
+# enable attack animations
+var slash_enabled : int = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -40,7 +42,7 @@ func _physics_process(delta):
 	else:
 		animationState.travel('Idle')
 
-	if Input.is_action_pressed("Attack"):
+	if Input.is_action_just_pressed("Attack"):
 		execute_slash()
 
 	velocity = move_and_slide(input_vector * speed * delta)
@@ -58,7 +60,7 @@ func get_movement_inputs():
 	# right = 1
 
 	# prevent movement in attack state
-	if animationState.get_current_node() == "Slash":
+	if animationState.get_current_node() in ["Slash", "Slash2", "Slash3"]:
 		input_vector = Vector2.ZERO
 
 	# flip entire node on direction change
@@ -71,20 +73,30 @@ func get_movement_inputs():
 	return input_vector.normalized()
 
 func execute_slash():
-	if state != "Slash":
-		state = "Slash"
-		slash_hitbox.disabled = false
-	animationState.travel('Slash')
+	# execute slash 1 if idle or moving
+	if slash_enabled == 1:
+		if state != "Slash":
+			state = "Slash"
+		animationState.travel('Slash')
+	elif slash_enabled == 2:
+		animationState.travel('Slash2')
+	elif slash_enabled == 3:
+		animationState.travel('Slash3')
+
 
 func end_slash():
 	state = "Idle"
+	slash_enabled = 1
 
 func slash_damage():
-
 	for area in damage_area.get_overlapping_areas():
 		var target = area.get_parent().get_parent()
 		if target.is_in_group("enemies"):
 			if not target.dead:
 				target.die()
 
-	slash_hitbox.disabled = true
+func slash2():
+	slash_enabled = 2
+
+func slash3():
+	slash_enabled = 3
