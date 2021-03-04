@@ -4,6 +4,7 @@
 [ext_resource path="res://Assets/Player.gd" type="Script" id=2]
 
 [sub_resource type="CanvasItemMaterial" id=1]
+light_mode = 2
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 15.5406
@@ -59,7 +60,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1, 0.4, 0.7 ),
+"times": PoolRealArray( 0.1, 0.3, 0.7 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
 "args": [  ],
@@ -119,9 +120,12 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.4, 0.7 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0.1, 0.4, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "slash_damage"
+}, {
 "args": [  ],
 "method": "slash3"
 }, {
@@ -163,9 +167,12 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.7 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0.1, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "slash_damage"
+}, {
 "args": [  ],
 "method": "end_slash"
 } ]
@@ -235,17 +242,15 @@ animation = "Walk"
 [sub_resource type="AnimationNodeStateMachineTransition" id=17]
 switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=18]
-switch_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=19]
-switch_mode = 2
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=20]
 switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=21]
 switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=25]
 
 [sub_resource type="AnimationNodeStateMachine" id=22]
 states/Idle/node = SubResource( 9 )
@@ -258,9 +263,9 @@ states/Slash3/node = SubResource( 12 )
 states/Slash3/position = Vector2( 1569, 320.004 )
 states/Walk/node = SubResource( 13 )
 states/Walk/position = Vector2( 1252, 68 )
-transitions = [ "Idle", "Walk", SubResource( 14 ), "Idle", "Slash", SubResource( 15 ), "Walk", "Idle", SubResource( 16 ), "Slash", "Idle", SubResource( 17 ), "Slash", "Slash2", SubResource( 18 ), "Slash2", "Slash3", SubResource( 19 ), "Slash3", "Idle", SubResource( 20 ), "Slash2", "Idle", SubResource( 21 ) ]
+transitions = [ "Idle", "Walk", SubResource( 14 ), "Idle", "Slash", SubResource( 15 ), "Walk", "Idle", SubResource( 16 ), "Slash", "Idle", SubResource( 17 ), "Slash3", "Idle", SubResource( 20 ), "Slash2", "Idle", SubResource( 21 ), "Slash", "Slash2", SubResource( 24 ), "Slash2", "Slash3", SubResource( 25 ) ]
 start_node = "Idle"
-graph_offset = Vector2( 189, -16.996 )
+graph_offset = Vector2( 808, 35.004 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=23]
 
@@ -274,6 +279,7 @@ position = Vector2( 0, -21.052 )
 position = Vector2( -16.9625, -6.221 )
 texture = ExtResource( 1 )
 hframes = 23
+frame = 4
 
 [node name="shadow" type="Sprite" parent="VisualNodes/Sprite"]
 modulate = Color( 0, 0, 0, 0.2 )
@@ -284,14 +290,13 @@ texture = ExtResource( 1 )
 offset = Vector2( -1.137, -2.902 )
 flip_v = true
 hframes = 23
-frame = 12
+frame = 4
 
 [node name="Damage_area" type="Area2D" parent="VisualNodes"]
 
 [node name="Slash_hitbox" type="CollisionShape2D" parent="VisualNodes/Damage_area"]
 position = Vector2( -35.2064, 6.34048 )
 shape = SubResource( 2 )
-disabled = true
 
 [node name="Movement_collision" type="CollisionShape2D" parent="."]
 rotation = 1.5708
