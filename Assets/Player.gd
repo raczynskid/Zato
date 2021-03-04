@@ -48,16 +48,12 @@ func _physics_process(delta):
 	velocity = move_and_slide(input_vector * speed * delta)
 
 func _draw():
-	if shadow_blob:
-		draw_circle(Vector2(0,0), 10, Color(0,0,0,0.2))
+	pass
 
 func get_movement_inputs():
 	# get current movement vector from keyobard inptus
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-
-	# left = -1
-	# right = 1
 
 	# prevent movement in attack state
 	if animationState.get_current_node() in ["Slash", "Slash2", "Slash3"]:
@@ -66,8 +62,9 @@ func get_movement_inputs():
 	# flip entire node on direction change
 	if (last_vector.x != input_vector.x) and (input_vector.x != 0):
 		sprites.scale.x = last_vector.x
-
-	if (last_vector.x != input_vector.x) and input_vector.x != 0:
+	
+	# save last active movement vector
+	if (last_vector.x != input_vector.x) and (input_vector.x != 0):
 		last_vector.x = input_vector.x
 
 	return input_vector.normalized()
@@ -78,8 +75,12 @@ func execute_slash():
 		if state != "Slash":
 			state = "Slash"
 		animationState.travel('Slash')
+	
+	# execute slash 2 if in opportunity window
 	elif slash_enabled == 2:
 		animationState.travel('Slash2')
+	
+	# execute slash 3 if in opportunity window
 	elif slash_enabled == 3:
 		animationState.travel('Slash3')
 
@@ -89,6 +90,8 @@ func end_slash():
 	slash_enabled = 1
 
 func slash_damage():
+	# get all collision object for sword hitbox
+	# and deal damage if colliders belong to enemies group
 	for area in damage_area.get_overlapping_areas():
 		var target = area.get_parent().get_parent()
 		if target.is_in_group("enemies"):
@@ -96,7 +99,11 @@ func slash_damage():
 				target.die()
 
 func slash2():
+	# open window of opportunity for slash 2
+	# called from animation Slash1
 	slash_enabled = 2
 
 func slash3():
+	# open window of opportunity for slash 3
+	# called from animation Slash2
 	slash_enabled = 3
