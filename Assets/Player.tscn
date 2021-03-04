@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Assets/Sprites/Spritesheets/Swordmaster-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Player.gd" type="Script" id=2]
@@ -242,17 +242,19 @@ animation = "Walk"
 [sub_resource type="AnimationNodeStateMachineTransition" id=17]
 switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=20]
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
 switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=20]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=21]
-switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=25]
-
-[sub_resource type="AnimationNodeStateMachine" id=22]
+[sub_resource type="AnimationNodeStateMachine" id=23]
 states/Idle/node = SubResource( 9 )
 states/Idle/position = Vector2( 1252, 224 )
 states/Slash/node = SubResource( 10 )
@@ -262,12 +264,12 @@ states/Slash2/position = Vector2( 1564, 211.004 )
 states/Slash3/node = SubResource( 12 )
 states/Slash3/position = Vector2( 1569, 320.004 )
 states/Walk/node = SubResource( 13 )
-states/Walk/position = Vector2( 1252, 68 )
-transitions = [ "Idle", "Walk", SubResource( 14 ), "Idle", "Slash", SubResource( 15 ), "Walk", "Idle", SubResource( 16 ), "Slash", "Idle", SubResource( 17 ), "Slash3", "Idle", SubResource( 20 ), "Slash2", "Idle", SubResource( 21 ), "Slash", "Slash2", SubResource( 24 ), "Slash2", "Slash3", SubResource( 25 ) ]
+states/Walk/position = Vector2( 1252, 80 )
+transitions = [ "Idle", "Walk", SubResource( 14 ), "Idle", "Slash", SubResource( 15 ), "Walk", "Idle", SubResource( 16 ), "Slash", "Idle", SubResource( 17 ), "Slash3", "Idle", SubResource( 18 ), "Slash2", "Idle", SubResource( 19 ), "Slash", "Slash2", SubResource( 20 ), "Slash2", "Slash3", SubResource( 21 ), "Walk", "Slash", SubResource( 22 ) ]
 start_node = "Idle"
-graph_offset = Vector2( 808, 35.004 )
+graph_offset = Vector2( 741, -21.996 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=23]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=24]
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -279,7 +281,6 @@ position = Vector2( 0, -21.052 )
 position = Vector2( -16.9625, -6.221 )
 texture = ExtResource( 1 )
 hframes = 23
-frame = 4
 
 [node name="shadow" type="Sprite" parent="VisualNodes/Sprite"]
 modulate = Color( 0, 0, 0, 0.2 )
@@ -290,7 +291,6 @@ texture = ExtResource( 1 )
 offset = Vector2( -1.137, -2.902 )
 flip_v = true
 hframes = 23
-frame = 4
 
 [node name="Damage_area" type="Area2D" parent="VisualNodes"]
 
@@ -310,7 +310,7 @@ anims/Slash3 = SubResource( 7 )
 anims/Walk = SubResource( 8 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 22 )
+tree_root = SubResource( 23 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 23 )
+parameters/playback = SubResource( 24 )
