@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/Dojo.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://UI/Main_menu.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Levels/World.gd" type="Script" id=4]
 [ext_resource path="res://Assets/Enemies/Tamashigiri.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Effects/crt_shader.tscn" type="PackedScene" id=6]
 
 [node name="World" type="Node"]
 script = ExtResource( 4 )
@@ -13,7 +15,7 @@ script = ExtResource( 4 )
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Player" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 242.025, 181.482 )
+position = Vector2( 205.816, 172.992 )
 speed = 3000
 
 [node name="Tamashigiri" parent="YSort" instance=ExtResource( 5 )]
@@ -29,3 +31,11 @@ scale = Vector2( -1, 1 )
 [node name="Tamashigiri4" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( 310.085, 231.003 )
 scale = Vector2( -1, 1 )
+
+[node name="crt_overlay" parent="." instance=ExtResource( 6 )]
+visible = false
+modulate = Color( 1, 1, 1, 0.321569 )
+rect_scale = Vector2( 1.00042, 1.00122 )
+
+[node name="Pause_menu" parent="." instance=ExtResource( 3 )]
+visible = false
