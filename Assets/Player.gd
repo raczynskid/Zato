@@ -96,7 +96,7 @@ func slash_damage():
 		var target = area.get_parent().get_parent()
 		if target.is_in_group("enemies"):
 			if not target.dead:
-				target.die()
+				target.dmg()
 
 func slash2():
 	# open window of opportunity for slash 2

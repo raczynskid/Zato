@@ -1,14 +1,15 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=36 format=2]
 
-[ext_resource path="res://Assets/Sprites/Spritesheets/tamashigiri_placeholder.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Sprites/Spritesheets/tamashigiri_3_strike-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Enemies/Tamashigiri.gd" type="Script" id=2]
 
-[sub_resource type="CapsuleShape2D" id=2]
+[sub_resource type="CapsuleShape2D" id=1]
 radius = 4.05437
 height = 41.7913
 
-[sub_resource type="Animation" id=1]
-resource_name = "Die"
+[sub_resource type="Animation" id=8]
+resource_name = "Dead"
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -16,15 +17,233 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+"values": [ 33 ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "Die1"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 25, 26, 27, 28, 29, 30, 31 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Die2"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 17, 18, 19, 20, 21, 22, 23 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "Die3"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 10, 11, 12, 13, 14, 15, 16 ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "Dmg1"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 3 ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "Dmg2"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 7 ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "Idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Strike1"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Strike2"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 6, 7 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Strike3"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 8, 9, 10 ]
 }
 
 [sub_resource type="CapsuleShape2D" id=3]
 radius = 2.92422
 height = 2.98732
+
+[sub_resource type="AnimationNodeAnimation" id=15]
+animation = "Die1"
+
+[sub_resource type="AnimationNodeAnimation" id=16]
+animation = "Die2"
+
+[sub_resource type="AnimationNodeAnimation" id=17]
+animation = "Die3"
+
+[sub_resource type="AnimationNodeAnimation" id=18]
+animation = "Dmg1"
+
+[sub_resource type="AnimationNodeAnimation" id=19]
+animation = "Dmg2"
+
+[sub_resource type="AnimationNodeAnimation" id=20]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=21]
+animation = "Strike1"
+
+[sub_resource type="AnimationNodeAnimation" id=22]
+animation = "Strike2"
+
+[sub_resource type="AnimationNodeAnimation" id=23]
+animation = "Strike3"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=25]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=26]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=27]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=28]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=29]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=30]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=33]
+
+[sub_resource type="AnimationNodeStateMachine" id=13]
+states/Die1/node = SubResource( 15 )
+states/Die1/position = Vector2( 738, -117.667 )
+states/Die2/node = SubResource( 16 )
+states/Die2/position = Vector2( 737.778, 71 )
+states/Die3/node = SubResource( 17 )
+states/Die3/position = Vector2( 737.481, 241 )
+states/Dmg1/node = SubResource( 18 )
+states/Dmg1/position = Vector2( 739.556, -26.3333 )
+states/Dmg2/node = SubResource( 19 )
+states/Dmg2/position = Vector2( 758.667, 150.407 )
+states/Idle/node = SubResource( 20 )
+states/Idle/position = Vector2( 319.667, 85.6667 )
+states/Strike1/node = SubResource( 21 )
+states/Strike1/position = Vector2( 498.667, -48.3333 )
+states/Strike2/node = SubResource( 22 )
+states/Strike2/position = Vector2( 499.111, 45 )
+states/Strike3/node = SubResource( 23 )
+states/Strike3/position = Vector2( 501.333, 151.667 )
+transitions = [ "Idle", "Strike1", SubResource( 24 ), "Idle", "Strike2", SubResource( 25 ), "Idle", "Strike3", SubResource( 26 ), "Strike1", "Die1", SubResource( 27 ), "Strike1", "Dmg1", SubResource( 28 ), "Dmg1", "Strike2", SubResource( 29 ), "Strike2", "Die2", SubResource( 30 ), "Strike2", "Dmg2", SubResource( 31 ), "Strike3", "Die3", SubResource( 32 ), "Dmg2", "Strike3", SubResource( 33 ) ]
+start_node = "Idle"
+graph_offset = Vector2( -119, -276 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=14]
 
 [node name="Tamashigiri" type="KinematicBody2D" groups=[
 "enemies",
@@ -34,18 +253,33 @@ script = ExtResource( 2 )
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -31.125 )
 texture = ExtResource( 1 )
-hframes = 11
+hframes = 34
 
 [node name="Hurtbox_area" type="Area2D" parent="Sprite"]
 position = Vector2( 0.0834274, -0.0834274 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Hurtbox_area"]
 position = Vector2( 0.0787506, -7.1658 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Die = SubResource( 1 )
+anims/Dead = SubResource( 8 )
+anims/Die1 = SubResource( 9 )
+anims/Die2 = SubResource( 6 )
+anims/Die3 = SubResource( 7 )
+anims/Dmg1 = SubResource( 10 )
+anims/Dmg2 = SubResource( 11 )
+anims/Idle = SubResource( 12 )
+anims/Strike1 = SubResource( 2 )
+anims/Strike2 = SubResource( 4 )
+anims/Strike3 = SubResource( 5 )
 
 [node name="Movement_collision" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 0.16 )
 shape = SubResource( 3 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 13 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 14 )
