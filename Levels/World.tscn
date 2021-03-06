@@ -28,6 +28,10 @@ position = Vector2( 91.5688, 147.759 )
 position = Vector2( 309.193, 144.786 )
 scale = Vector2( -1, 1 )
 
+[node name="Tamashigiri5" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 309.193, 144.786 )
+scale = Vector2( -1, 1 )
+
 [node name="Tamashigiri4" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( 310.085, 231.003 )
 scale = Vector2( -1, 1 )
