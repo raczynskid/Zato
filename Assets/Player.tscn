@@ -281,6 +281,7 @@ position = Vector2( 0, -21.052 )
 position = Vector2( -16.9625, -6.221 )
 texture = ExtResource( 1 )
 hframes = 23
+frame = 1
 
 [node name="shadow" type="Sprite" parent="VisualNodes/Sprite"]
 modulate = Color( 0, 0, 0, 0.2 )
@@ -291,11 +292,12 @@ texture = ExtResource( 1 )
 offset = Vector2( -1.137, -2.902 )
 flip_v = true
 hframes = 23
+frame = 1
 
 [node name="Damage_area" type="Area2D" parent="VisualNodes"]
 
 [node name="Slash_hitbox" type="CollisionShape2D" parent="VisualNodes/Damage_area"]
-position = Vector2( -35.2064, 6.34048 )
+position = Vector2( -29.9151, 3.6948 )
 shape = SubResource( 2 )
 
 [node name="Movement_collision" type="CollisionShape2D" parent="."]
