@@ -3,6 +3,7 @@ extends KinematicBody2D
 export (int) var speed = 1000
 export (int) var health = 100
 export (bool) var shadow_blob = false
+onready var dead = false
 
 # load vectors
 var velocity = Vector2.ZERO

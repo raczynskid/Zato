@@ -210,12 +210,12 @@ tracks/2/path = NodePath("VisualNodes/Sprite:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
-"times": PoolRealArray( 0.2, 0.6 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
 "update": 0,
-"values": [ Vector2( -10.319, -6.221 ), Vector2( -19.177, -6.221 ) ]
+"values": [  ]
 }
 
 [sub_resource type="AnimationNodeAnimation" id=9]
@@ -271,14 +271,16 @@ graph_offset = Vector2( 741, -21.996 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=24]
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" groups=[
+"Player",
+]]
 script = ExtResource( 2 )
 
 [node name="VisualNodes" type="Node2D" parent="."]
 position = Vector2( 0, -21.052 )
 
 [node name="Sprite" type="Sprite" parent="VisualNodes"]
-position = Vector2( -16.9625, -6.221 )
+position = Vector2( -16.2243, -6.221 )
 texture = ExtResource( 1 )
 hframes = 23
 
@@ -292,7 +294,9 @@ offset = Vector2( -1.137, -2.902 )
 flip_v = true
 hframes = 23
 
-[node name="Damage_area" type="Area2D" parent="VisualNodes"]
+[node name="Damage_area" type="Area2D" parent="VisualNodes" groups=[
+"Player",
+]]
 
 [node name="Slash_hitbox" type="CollisionShape2D" parent="VisualNodes/Damage_area"]
 position = Vector2( -29.9151, 3.6948 )
