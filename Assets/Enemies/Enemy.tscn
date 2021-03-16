@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Assets/Sprites/Spritesheets/enemy_placeholder.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Enemies/Enemy.gd" type="Script" id=2]
@@ -6,15 +6,38 @@
 [sub_resource type="CanvasItemMaterial" id=1]
 light_mode = 2
 
-[sub_resource type="CircleShape2D" id=11]
+[sub_resource type="CircleShape2D" id=2]
 radius = 15.1218
 
-[sub_resource type="CapsuleShape2D" id=2]
+[sub_resource type="Gradient" id=3]
+colors = PoolColorArray( 0.896484, 0.896484, 0.896484, 1, 0.919922, 0.702634, 0.089686, 1 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+trail_divisor = 10
+trail_color_modifier = SubResource( 4 )
+emission_shape = 1
+emission_sphere_radius = 3.54
+flag_disable_z = true
+direction = Vector3( 90, 4.229, 3.462 )
+spread = 114.81
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 55.19
+angular_velocity = 10.89
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color = Color( 0.945098, 0.921569, 0.466667, 1 )
+hue_variation = 0.24
+hue_variation_random = 0.38
+
+[sub_resource type="CapsuleShape2D" id=6]
 radius = 5.42938
 height = 12.7178
 
-[sub_resource type="Animation" id=8]
-resource_name = "Attack_ready"
+[sub_resource type="Animation" id=7]
 tracks/0/type = "value"
 tracks/0/path = NodePath("VisualNodes/Sprite:frame")
 tracks/0/interp = 1
@@ -27,9 +50,20 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 1, 2, 3, 4 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("VisualNodes/Sprite/shadow:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4 ]
+}
 
-[sub_resource type="Animation" id=3]
-resource_name = "Idle"
+[sub_resource type="Animation" id=8]
 tracks/0/type = "value"
 tracks/0/path = NodePath("VisualNodes/Sprite:frame")
 tracks/0/interp = 1
@@ -55,27 +89,94 @@ tracks/1/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=9]
+[sub_resource type="Animation" id=9]
+tracks/0/type = "value"
+tracks/0/path = NodePath("VisualNodes/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("VisualNodes/Sprite/shadow:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 3 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("VisualNodes/Sparks")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "restart"
+} ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.9 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "end_parry"
+} ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=10]
 animation = "Attack_ready"
 
-[sub_resource type="AnimationNodeAnimation" id=5]
+[sub_resource type="AnimationNodeAnimation" id=11]
 animation = "Idle"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=10]
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "Parry"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=12]
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
 
-[sub_resource type="AnimationNodeStateMachine" id=6]
-states/Attack_ready/node = SubResource( 9 )
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id=17]
+states/Attack_ready/node = SubResource( 10 )
 states/Attack_ready/position = Vector2( 844.333, 181.667 )
-states/Idle/node = SubResource( 5 )
+states/Idle/node = SubResource( 11 )
 states/Idle/position = Vector2( 533.667, 181.667 )
-transitions = [ "Idle", "Attack_ready", SubResource( 10 ), "Attack_ready", "Idle", SubResource( 12 ) ]
+states/Parry/node = SubResource( 12 )
+states/Parry/position = Vector2( 925.667, 345.667 )
+transitions = [ "Idle", "Attack_ready", SubResource( 13 ), "Attack_ready", "Idle", SubResource( 14 ), "Attack_ready", "Parry", SubResource( 15 ), "Parry", "Attack_ready", SubResource( 16 ) ]
 start_node = "Idle"
+graph_offset = Vector2( 36, 108 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=7]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=18]
 
-[node name="Enemy" type="KinematicBody2D"]
+[node name="Enemy" type="KinematicBody2D" groups=[
+"enemies",
+]]
 script = ExtResource( 2 )
 
 [node name="VisualNodes" type="Node2D" parent="."]
@@ -84,7 +185,7 @@ script = ExtResource( 2 )
 position = Vector2( 18.9202, -27.6094 )
 texture = ExtResource( 1 )
 hframes = 11
-frame = 2
+frame = 3
 
 [node name="shadow" type="Sprite" parent="VisualNodes/Sprite"]
 self_modulate = Color( 0, 0, 0, 0.2 )
@@ -93,24 +194,37 @@ position = Vector2( 0.264557, 53.7071 )
 texture = ExtResource( 1 )
 flip_v = true
 hframes = 11
+frame = 3
 
 [node name="Damage_area" type="Area2D" parent="VisualNodes"]
 
 [node name="Slash_hurtbox" type="CollisionShape2D" parent="VisualNodes/Damage_area"]
 position = Vector2( 31.1815, -24.4997 )
-shape = SubResource( 11 )
+shape = SubResource( 2 )
+
+[node name="Sparks" type="Particles2D" parent="VisualNodes"]
+position = Vector2( 7.72983, -44.7935 )
+emitting = false
+amount = 500
+lifetime = 0.99
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.78
+randomness = 1.0
+process_material = SubResource( 5 )
 
 [node name="Movement_collision" type="CollisionShape2D" parent="."]
 position = Vector2( -0.742416, -0.148483 )
 rotation = 1.5708
-shape = SubResource( 2 )
+shape = SubResource( 6 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Attack_ready = SubResource( 8 )
-anims/Idle = SubResource( 3 )
+anims/Attack_ready = SubResource( 7 )
+anims/Idle = SubResource( 8 )
+anims/Parry = SubResource( 9 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 6 )
+tree_root = SubResource( 17 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 7 )
+parameters/playback = SubResource( 18 )

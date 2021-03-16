@@ -38,7 +38,7 @@ func _process(_delta):
 		elif hp == 1:
 			animationState.travel("Dmg2")
 
-func dmg():
+func get_hit():
 	hp -= 1
 
 func die():
