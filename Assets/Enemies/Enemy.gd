@@ -3,6 +3,9 @@ extends KinematicBody2D
 export (int) var speed = 1000
 export (int) var health = 100
 
+onready var dead : bool = false
+onready var parry : bool = false
+
 # load vectors
 var velocity = Vector2.ZERO
 var input_vector = Vector2.ZERO
@@ -31,10 +34,14 @@ func _ready():
 
 func _physics_process(_delta):
 	# check for player in target zone
-	if player_in_range():
+	if player_in_range() and not parry:
 		ready_attack(true)
 	else:
 		ready_attack(false)
+	
+	if parry:
+		animationState.travel("Parry")
+	
 
 func player_in_range():
 	# check target zone for player
@@ -50,3 +57,10 @@ func ready_attack(is_attack_ready):
 	else:
 		state = "Idle"
 		animationState.travel('Idle')
+
+func get_hit():
+	# hit by player state
+	parry = true
+
+func end_parry():
+	parry = false
