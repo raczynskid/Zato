@@ -41,6 +41,7 @@ func _physics_process(_delta):
 	
 	if parry:
 		animationState.travel("Parry")
+		parry = false
 	
 
 func player_in_range():
