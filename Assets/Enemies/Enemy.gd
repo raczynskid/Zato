@@ -34,7 +34,7 @@ func _ready():
 
 func _physics_process(_delta):
 	# check for player in target zone
-	if player_in_range() and not parry:
+	if player_in_range():
 		ready_attack(true)
 	else:
 		ready_attack(false)
@@ -52,16 +52,39 @@ func player_in_range():
 			return true
 				
 func ready_attack(is_attack_ready):
-	if is_attack_ready:
-		state = "Attack_ready"
-		animationState.travel('Attack_ready')
-	else:
-		state = "Idle"
-		animationState.travel('Idle')
+	if not parry and state != "Strike":
+		if is_attack_ready:
+			state = "Attack_ready"
+			animationState.travel('Attack_ready')
+		else:
+			state = "Idle"
+			animationState.travel('Idle')
 
 func get_hit():
 	# hit by player state
-	parry = true
+	# 50% chance to block
+	print("got hit")
+
+	if not parry:
+		if randi() % 2:
+			parry = true
+		else:
+			die()
+	else:
+		strike()
+
+func counter():
+	# should be fired from parry animation, if active when recieving hit, strike and kill player
+	pass
 
 func end_parry():
 	parry = false
+	state = "Idle"
+
+func die():
+	var blood = get_node("VisualNodes/Blood")
+	blood.restart()
+
+func strike():
+	state = "Strike"
+	animationState.travel("Strike")

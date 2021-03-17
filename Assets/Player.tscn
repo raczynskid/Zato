@@ -1,7 +1,8 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Assets/Sprites/Spritesheets/Swordmaster-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Player.gd" type="Script" id=2]
+[ext_resource path="res://Effects/Blood.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 light_mode = 2
@@ -285,7 +286,7 @@ texture = ExtResource( 1 )
 hframes = 23
 
 [node name="shadow" type="Sprite" parent="VisualNodes/Sprite"]
-modulate = Color( 0, 0, 0, 0.2 )
+self_modulate = Color( 0, 0, 0, 0.2 )
 show_behind_parent = true
 material = SubResource( 1 )
 position = Vector2( 1.33482, 58.6827 )
@@ -293,6 +294,10 @@ texture = ExtResource( 1 )
 offset = Vector2( -1.137, -2.902 )
 flip_v = true
 hframes = 23
+
+[node name="Blood" parent="VisualNodes" instance=ExtResource( 3 )]
+position = Vector2( 4.88925, -8.11501 )
+scale = Vector2( -1, 1 )
 
 [node name="Damage_area" type="Area2D" parent="VisualNodes" groups=[
 "Player",

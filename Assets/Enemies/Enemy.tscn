@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Assets/Sprites/Spritesheets/enemy_placeholder.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Enemies/Enemy.gd" type="Script" id=2]
+[ext_resource path="res://Effects/Blood.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 light_mode = 2
@@ -143,6 +144,33 @@ tracks/3/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=19]
+resource_name = "Strike"
+tracks/0/type = "value"
+tracks/0/path = NodePath("VisualNodes/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 4, 9 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("VisualNodes/Sprite/shadow:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 4, 10 ]
+}
+
 [sub_resource type="AnimationNodeAnimation" id=10]
 animation = "Attack_ready"
 
@@ -151,6 +179,9 @@ animation = "Idle"
 
 [sub_resource type="AnimationNodeAnimation" id=12]
 animation = "Parry"
+
+[sub_resource type="AnimationNodeAnimation" id=20]
+animation = "Strike"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=13]
 
@@ -161,16 +192,25 @@ animation = "Parry"
 [sub_resource type="AnimationNodeStateMachineTransition" id=16]
 switch_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+switch_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id=17]
 states/Attack_ready/node = SubResource( 10 )
-states/Attack_ready/position = Vector2( 844.333, 181.667 )
+states/Attack_ready/position = Vector2( 532.556, 352.334 )
 states/Idle/node = SubResource( 11 )
 states/Idle/position = Vector2( 533.667, 181.667 )
 states/Parry/node = SubResource( 12 )
 states/Parry/position = Vector2( 925.667, 345.667 )
-transitions = [ "Idle", "Attack_ready", SubResource( 13 ), "Attack_ready", "Idle", SubResource( 14 ), "Attack_ready", "Parry", SubResource( 15 ), "Parry", "Attack_ready", SubResource( 16 ) ]
+states/Strike/node = SubResource( 20 )
+states/Strike/position = Vector2( 926.889, 182.297 )
+transitions = [ "Idle", "Attack_ready", SubResource( 13 ), "Attack_ready", "Idle", SubResource( 14 ), "Attack_ready", "Parry", SubResource( 15 ), "Parry", "Attack_ready", SubResource( 16 ), "Attack_ready", "Strike", SubResource( 21 ), "Parry", "Strike", SubResource( 22 ), "Strike", "Idle", SubResource( 23 ) ]
 start_node = "Idle"
-graph_offset = Vector2( 36, 108 )
+graph_offset = Vector2( 72, 50 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=18]
 
@@ -185,7 +225,6 @@ script = ExtResource( 2 )
 position = Vector2( 18.9202, -27.6094 )
 texture = ExtResource( 1 )
 hframes = 11
-frame = 3
 
 [node name="shadow" type="Sprite" parent="VisualNodes/Sprite"]
 self_modulate = Color( 0, 0, 0, 0.2 )
@@ -194,7 +233,6 @@ position = Vector2( 0.264557, 53.7071 )
 texture = ExtResource( 1 )
 flip_v = true
 hframes = 11
-frame = 3
 
 [node name="Damage_area" type="Area2D" parent="VisualNodes"]
 
@@ -213,6 +251,8 @@ explosiveness = 0.78
 randomness = 1.0
 process_material = SubResource( 5 )
 
+[node name="Blood" parent="VisualNodes" instance=ExtResource( 3 )]
+
 [node name="Movement_collision" type="CollisionShape2D" parent="."]
 position = Vector2( -0.742416, -0.148483 )
 rotation = 1.5708
@@ -222,6 +262,7 @@ shape = SubResource( 6 )
 anims/Attack_ready = SubResource( 7 )
 anims/Idle = SubResource( 8 )
 anims/Parry = SubResource( 9 )
+anims/Strike = SubResource( 19 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 17 )
