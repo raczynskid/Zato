@@ -1,15 +1,20 @@
 extends KinematicBody2D
 
+const Cooldown = preload('res://Scripts/Cooldown.gd')
+
 export (int) var speed = 1000
 export (int) var health = 100
 
 onready var dead : bool = false
-onready var parry : bool = false
 
 # load vectors
 var velocity = Vector2.ZERO
-var input_vector = Vector2.ZERO
-var last_vector = Vector2(-1,0)
+
+# other
+var is_player_in_range : bool = false
+
+# load timers
+onready var action_cooldown = Cooldown.new(3)
 
 # load animation nodes
 onready var sprites = get_node("VisualNodes")
@@ -24,44 +29,77 @@ onready var walk_animation = animationPlayer.get_animation("Walk")
 onready var damage_area = get_node("VisualNodes/Damage_area")
 onready var slash_hitbox = get_node("VisualNodes/Damage_area/Slash_hitbox")
 
+# load labels
+
+onready var label1 = get_node("Label")
 onready var state = "Idle"
 
 func _ready():
 	animationTree.active = true
 	velocity = Vector2(0,0)
-	state = "Idle"
+	action_cooldown.max_time = 100
 
-
-func _physics_process(_delta):
-	# check for player in target zone
-	if player_in_range() and not parry:
-		ready_attack(true)
-	else:
-		ready_attack(false)
-	
-	if parry:
-		animationState.travel("Parry")
-		parry = false
-	
-
-func player_in_range():
+func player_in_range(): 
 	# check target zone for player
 	for area in damage_area.get_overlapping_areas():
 		var target = area.get_parent().get_parent()
 		if target.is_in_group("Player"):
 			return true
-				
-func ready_attack(is_attack_ready):
-	if is_attack_ready:
-		state = "Attack_ready"
-		animationState.travel('Attack_ready')
-	else:
-		state = "Idle"
-		animationState.travel('Idle')
+	return false
+
+func set_idle_state():
+	state = "Idle"
+
+func action_choice():
+	if state != "Parry":
+		if action_cooldown.is_ready():
+			action_cooldown.reset()
+			if randi() % 2:
+				if randi() % 2:
+					return "Ready"
+				else:
+					return "Strike"
+			else:
+				return "Idle"
+		else:
+			action_cooldown.tick(1)
+	return state
+
+func combat_state():
+	state = action_choice()
+	animationState.travel(state)
+	label1.text = state
+
+func movement_state():
+	label1.text = "player not in range"
+	animationState.travel("Idle")
+
+func _physics_process(_delta):
+	if state != "Dead":
+		# check for player in target zone
+		if player_in_range():
+			combat_state()
+		else:
+			movement_state()
+	
 
 func get_hit():
-	# hit by player state
-	parry = true
+	if state == "Idle":
+		state = "Parry"
+		animationState.travel("Parry")
+	if state == "Parry":
+		get_node("VisualNodes/Sparks").restart()
+	if state in ["Ready", "Strike"]:
+		die()
 
 func end_parry():
-	parry = false
+	state = "Idle"
+
+func die():
+	#state = "Dead"
+	#animationState.travel('Die')
+	var blood = get_node("VisualNodes/Blood")
+	blood.restart()
+
+func strike():
+	pass

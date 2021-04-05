@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Effects/Blood.material" type="Material" id=1]
+
+[node name="Blood" type="Particles2D"]
+position = Vector2( -4.34464, -25.9276 )
+emitting = false
+amount = 917
+one_shot = true
+process_material = ExtResource( 1 )
