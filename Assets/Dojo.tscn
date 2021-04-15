@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Assets/Sprites/Static/Dojo.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Sprites/Static/Snow_view.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Assets/Sprites/Static/Snowflake.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Sprites/Static/Shadows.png" type="Texture" id=5]
 [ext_resource path="res://Effects/LightMask.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Sprites/Stoat.tscn" type="PackedScene" id=7]
 
 [sub_resource type="ParticlesMaterial" id=1]
 emission_shape = 2
@@ -92,6 +93,9 @@ lifetime = 30.0
 preprocess = 30.0
 process_material = SubResource( 3 )
 texture = SubResource( 4 )
+
+[node name="Stoat" parent="." instance=ExtResource( 7 )]
+position = Vector2( 412.208, 86.4765 )
 
 [node name="Dojo" type="Sprite" parent="."]
 position = Vector2( 200, 150 )
