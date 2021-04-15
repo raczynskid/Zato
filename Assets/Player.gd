@@ -95,7 +95,8 @@ func slash_damage():
 	# and deal damage if colliders belong to enemies group
 	for area in damage_area.get_overlapping_areas():
 		var target = area.get_parent().get_parent()
-		if target.is_in_group("enemies"):
+		# check if target is enemy and if hurtbox was hit
+		if target.is_in_group("enemies") and area.name == "Hurtbox_area":
 			if not target.dead:
 				target.get_hit()
 
