@@ -98,7 +98,8 @@ func slash_damage():
 		# check if target is enemy and if hurtbox was hit
 		if target.is_in_group("enemies") and area.name == "Hurtbox_area":
 			if not target.dead:
-				target.get_hit()
+				#print(slash_enabled)
+				target.get_hit(slash_enabled)
 
 func slash2():
 	# open window of opportunity for slash 2
