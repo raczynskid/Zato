@@ -24,6 +24,7 @@ onready var animationTree = get_node("AnimationTree")
 onready var animationState = animationTree.get("parameters/playback")
 
 onready var walk_animation = animationPlayer.get_animation("Walk")
+onready var slash_effects = get_node("VisualNodes/Strikes/AnimationPlayer")
 
 # load hitboxes and hurtboxes
 onready var damage_area = get_node("VisualNodes/Damage_area")
@@ -83,14 +84,14 @@ func _physics_process(_delta):
 			movement_state()
 	
 
-func get_hit():
+func get_hit(slash_type):
 	if state == "Idle":
 		state = "Parry"
 		animationState.travel("Parry")
 	if state == "Parry":
 		get_node("VisualNodes/Sparks").restart()
 	if state in ["Ready", "Strike"]:
-		die()
+		slash_effects.play("strike" + str(slash_type))
 
 func end_parry():
 	state = "Idle"
