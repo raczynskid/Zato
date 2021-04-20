@@ -57,7 +57,7 @@ func get_movement_inputs():
 	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 
 	# prevent movement in attack state
-	if animationState.get_current_node() in ["Slash", "Slash2", "Slash3"]:
+	if animationState.get_current_node() in ["Slash", "Slash2", "Slash3", "Block"]:
 		input_vector = Vector2.ZERO
 
 	# flip entire node on direction change
@@ -110,3 +110,8 @@ func slash3():
 	# open window of opportunity for slash 3
 	# called from animation Slash2
 	slash_enabled = 3
+
+func block():
+	print("blocking")
+	get_node("VisualNodes/Sparks").restart()
+	animationState.travel('Block')
