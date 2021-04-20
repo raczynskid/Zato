@@ -3,7 +3,8 @@ extends KinematicBody2D
 export (int) var speed = 1000
 export (int) var health = 100
 export (bool) var shadow_blob = false
-onready var dead = false
+onready var dead : bool = false
+onready var block_enabled : bool = false
 
 # load vectors
 var velocity = Vector2.ZERO
@@ -34,7 +35,6 @@ func _ready():
 	velocity = Vector2(0,0)
 	state = "Idle"
 	Global.Player = self
-	connect("Attack", Global.Player, "on_enemy_attack")
 
 func _physics_process(delta):
 	# get arrow key inputs
@@ -47,6 +47,9 @@ func _physics_process(delta):
 
 	if Input.is_action_just_pressed("Attack"):
 		execute_slash()
+	
+	if state == "Block":
+		animationState.travel('Block')
 
 	velocity = move_and_slide(input_vector * speed * delta)
 
@@ -115,8 +118,22 @@ func slash3():
 
 func block():
 	print("blocking")
+	state = "Block"
 	get_node("VisualNodes/Sparks").restart()
-	animationState.travel('Block')
 
-func enemy_attack():
-	print("attack_signal recieved")
+func end_block():
+	state = "Idle"
+	print("block ended")
+
+func calculate_block_direction(enemy):
+	if enemy.position.x - position.x <= 0:
+		return "ui_left"
+	else:
+		return "ui_right"
+
+func on_attack(enemy):
+	print("attack_signal recieved from " + enemy.name + " " + str(enemy.get_instance_id()))
+	print(calculate_block_direction(enemy))
+	if Input.get_action_strength(calculate_block_direction(enemy)) != 0:
+		block()
+

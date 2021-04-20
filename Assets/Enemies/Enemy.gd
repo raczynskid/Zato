@@ -2,12 +2,11 @@ extends KinematicBody2D
 
 const Cooldown = preload('res://Scripts/Cooldown.gd')
 
-signal attack
-
 export (int) var speed = 1000
 export (int) var health = 100
 
 onready var dead : bool = false
+onready var player = Global.Player
 
 # load vectors
 var velocity = Vector2.ZERO
@@ -41,6 +40,7 @@ func _ready():
 	animationTree.active = true
 	velocity = Vector2(0,0)
 	action_cooldown.max_time = 100
+	
 
 func player_in_range(): 
 	# check target zone for player
@@ -57,13 +57,14 @@ func action_choice():
 	if state != "Parry":
 		if action_cooldown.is_ready():
 			action_cooldown.reset()
-			if randi() % 2:
-				if randi() % 2:
-					return "Ready"
-				else:
-					return "Strike"
-			else:
-				return "Idle"
+			return "Strike"
+			#if randi() % 2:
+			#	if randi() % 2:
+			#		return "Ready"
+			#	else:
+			#		return "Strike"
+			#else:
+			#	return "Idle"
 		else:
 			action_cooldown.tick(1)
 	return state
@@ -105,5 +106,4 @@ func die():
 	blood.restart()
 
 func strike():
-	print("strike signal emitted")
-	emit_signal("Attack")
+	player.on_attack(self)

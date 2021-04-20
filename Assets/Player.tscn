@@ -32,6 +32,20 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 15 ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.8 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "end_block"
+} ]
+}
 
 [sub_resource type="Animation" id=6]
 tracks/0/type = "value"
@@ -311,7 +325,7 @@ states/Walk/node = SubResource( 16 )
 states/Walk/position = Vector2( 1252, 80 )
 transitions = [ "Idle", "Walk", SubResource( 17 ), "Idle", "Slash", SubResource( 18 ), "Walk", "Idle", SubResource( 19 ), "Slash", "Idle", SubResource( 20 ), "Slash3", "Idle", SubResource( 21 ), "Slash2", "Idle", SubResource( 22 ), "Slash", "Slash2", SubResource( 23 ), "Slash2", "Slash3", SubResource( 24 ), "Walk", "Slash", SubResource( 25 ), "Idle", "Block", SubResource( 26 ), "Block", "Idle", SubResource( 27 ) ]
 start_node = "Idle"
-graph_offset = Vector2( 709, -78.996 )
+graph_offset = Vector2( 732, 28.004 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=29]
 
@@ -327,6 +341,7 @@ position = Vector2( 0, -21.052 )
 position = Vector2( -16.2243, -6.221 )
 texture = ExtResource( 1 )
 hframes = 23
+frame = 15
 
 [node name="shadow" type="Sprite" parent="VisualNodes/Sprite"]
 self_modulate = Color( 0, 0, 0, 0.2 )
