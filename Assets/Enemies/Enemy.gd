@@ -2,6 +2,8 @@ extends KinematicBody2D
 
 const Cooldown = preload('res://Scripts/Cooldown.gd')
 
+signal attack
+
 export (int) var speed = 1000
 export (int) var health = 100
 
@@ -103,4 +105,5 @@ func die():
 	blood.restart()
 
 func strike():
-	pass
+	print("strike signal emitted")
+	emit_signal("Attack")

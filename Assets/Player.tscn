@@ -18,7 +18,7 @@ height = 14.5019
 radius = 4.49618
 height = 12.5008
 
-[sub_resource type="Animation" id=26]
+[sub_resource type="Animation" id=5]
 resource_name = "Block"
 tracks/0/type = "value"
 tracks/0/path = NodePath("VisualNodes/Sprite:frame")
@@ -33,7 +33,7 @@ tracks/0/keys = {
 "values": [ 15 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 tracks/0/type = "value"
 tracks/0/path = NodePath("VisualNodes/Sprite:frame")
 tracks/0/interp = 1
@@ -59,7 +59,7 @@ tracks/1/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("VisualNodes/Sprite:frame")
@@ -114,7 +114,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("VisualNodes/Sprite:frame")
@@ -169,7 +169,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=9]
 tracks/0/type = "value"
 tracks/0/path = NodePath("VisualNodes/Sprite:frame")
 tracks/0/interp = 1
@@ -212,7 +212,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=10]
 length = 0.7
 loop = true
 tracks/0/type = "value"
@@ -252,68 +252,68 @@ tracks/2/keys = {
 "values": [  ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=27]
+[sub_resource type="AnimationNodeAnimation" id=11]
 animation = "Block"
 
-[sub_resource type="AnimationNodeAnimation" id=10]
+[sub_resource type="AnimationNodeAnimation" id=12]
 animation = "Idle"
 
-[sub_resource type="AnimationNodeAnimation" id=11]
+[sub_resource type="AnimationNodeAnimation" id=13]
 animation = "Slash"
 
-[sub_resource type="AnimationNodeAnimation" id=12]
+[sub_resource type="AnimationNodeAnimation" id=14]
 animation = "Slash2"
 
-[sub_resource type="AnimationNodeAnimation" id=13]
+[sub_resource type="AnimationNodeAnimation" id=15]
 animation = "Slash3"
 
-[sub_resource type="AnimationNodeAnimation" id=14]
+[sub_resource type="AnimationNodeAnimation" id=16]
 animation = "Walk"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=15]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=16]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=17]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=18]
-switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=19]
-switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=20]
 switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=21]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=22]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=23]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+[sub_resource type="AnimationNodeStateMachineTransition" id=25]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=26]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=27]
 switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachine" id=24]
-states/Block/node = SubResource( 27 )
+[sub_resource type="AnimationNodeStateMachine" id=28]
+states/Block/node = SubResource( 11 )
 states/Block/position = Vector2( 1866.67, 304.173 )
-states/Idle/node = SubResource( 10 )
+states/Idle/node = SubResource( 12 )
 states/Idle/position = Vector2( 1251.33, 304.667 )
-states/Slash/node = SubResource( 11 )
+states/Slash/node = SubResource( 13 )
 states/Slash/position = Vector2( 1563.46, -20.6667 )
-states/Slash2/node = SubResource( 12 )
+states/Slash2/node = SubResource( 14 )
 states/Slash2/position = Vector2( 1563.24, 87.6707 )
-states/Slash3/node = SubResource( 13 )
+states/Slash3/node = SubResource( 15 )
 states/Slash3/position = Vector2( 1563.9, 171.337 )
-states/Walk/node = SubResource( 14 )
+states/Walk/node = SubResource( 16 )
 states/Walk/position = Vector2( 1252, 80 )
-transitions = [ "Idle", "Walk", SubResource( 15 ), "Idle", "Slash", SubResource( 16 ), "Walk", "Idle", SubResource( 17 ), "Slash", "Idle", SubResource( 18 ), "Slash3", "Idle", SubResource( 19 ), "Slash2", "Idle", SubResource( 20 ), "Slash", "Slash2", SubResource( 21 ), "Slash2", "Slash3", SubResource( 22 ), "Walk", "Slash", SubResource( 23 ), "Idle", "Block", SubResource( 31 ), "Block", "Idle", SubResource( 32 ) ]
+transitions = [ "Idle", "Walk", SubResource( 17 ), "Idle", "Slash", SubResource( 18 ), "Walk", "Idle", SubResource( 19 ), "Slash", "Idle", SubResource( 20 ), "Slash3", "Idle", SubResource( 21 ), "Slash2", "Idle", SubResource( 22 ), "Slash", "Slash2", SubResource( 23 ), "Slash2", "Slash3", SubResource( 24 ), "Walk", "Slash", SubResource( 25 ), "Idle", "Block", SubResource( 26 ), "Block", "Idle", SubResource( 27 ) ]
 start_node = "Idle"
 graph_offset = Vector2( 709, -78.996 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=25]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=29]
 
 [node name="Player" type="KinematicBody2D" groups=[
 "Player",
@@ -364,15 +364,15 @@ rotation = 1.5708
 shape = SubResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Block = SubResource( 26 )
-anims/Idle = SubResource( 5 )
-anims/Slash = SubResource( 6 )
-anims/Slash2 = SubResource( 7 )
-anims/Slash3 = SubResource( 8 )
-anims/Walk = SubResource( 9 )
+anims/Block = SubResource( 5 )
+anims/Idle = SubResource( 6 )
+anims/Slash = SubResource( 7 )
+anims/Slash2 = SubResource( 8 )
+anims/Slash3 = SubResource( 9 )
+anims/Walk = SubResource( 10 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 24 )
+tree_root = SubResource( 28 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 25 )
+parameters/playback = SubResource( 29 )

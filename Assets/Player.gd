@@ -33,6 +33,8 @@ func _ready():
 	animationTree.active = true
 	velocity = Vector2(0,0)
 	state = "Idle"
+	Global.Player = self
+	connect("Attack", Global.Player, "on_enemy_attack")
 
 func _physics_process(delta):
 	# get arrow key inputs
@@ -115,3 +117,6 @@ func block():
 	print("blocking")
 	get_node("VisualNodes/Sparks").restart()
 	animationState.travel('Block')
+
+func enemy_attack():
+	print("attack_signal recieved")
