@@ -341,7 +341,6 @@ position = Vector2( 0, -21.052 )
 position = Vector2( -16.2243, -6.221 )
 texture = ExtResource( 1 )
 hframes = 23
-frame = 15
 
 [node name="shadow" type="Sprite" parent="VisualNodes/Sprite"]
 self_modulate = Color( 0, 0, 0, 0.2 )
@@ -391,3 +390,10 @@ tree_root = SubResource( 28 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 29 )
+
+[node name="Label" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
