@@ -7,7 +7,6 @@
 [ext_resource path="res://Effects/Sparks.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CanvasItemMaterial" id=1]
-light_mode = 2
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 15.1218
@@ -140,7 +139,7 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id=9]
-length = 0.9
+length = 1.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("VisualNodes/Sprite:frame")
 tracks/0/interp = 1
@@ -148,10 +147,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.5, 0.8, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 5, 6, 7 ]
+"values": [ 5, 6, 7, 8 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("VisualNodes/Sprite/shadow:frame")
@@ -160,10 +159,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.5, 0.8, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 5, 6, 7 ]
+"values": [ 5, 6, 7, 8 ]
 }
 tracks/2/type = "method"
 tracks/2/path = NodePath(".")
@@ -172,9 +171,12 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.7 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.5, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "strike_charge"
+}, {
 "args": [  ],
 "method": "strike"
 }, {
@@ -275,9 +277,9 @@ animation = "raise_sword"
 switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=21]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=22]
-switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=23]
 switch_mode = 2
@@ -305,10 +307,10 @@ states/lower_sword/node = SubResource( 17 )
 states/lower_sword/position = Vector2( 593.333, 269.333 )
 states/raise_sword/node = SubResource( 18 )
 states/raise_sword/position = Vector2( 594.148, 106.667 )
-transitions = [ "Idle", "raise_sword", SubResource( 19 ), "raise_sword", "Ready", SubResource( 20 ), "Ready", "lower_sword", SubResource( 21 ), "lower_sword", "Idle", SubResource( 22 ), "Ready", "Strike", SubResource( 23 ), "Strike", "Idle", SubResource( 24 ), "Idle", "Parry", SubResource( 25 ), "Parry", "Idle", SubResource( 26 ) ]
+transitions = [ "Idle", "raise_sword", SubResource( 19 ), "lower_sword", "Idle", SubResource( 20 ), "Strike", "Idle", SubResource( 21 ), "Idle", "Parry", SubResource( 22 ), "Parry", "Idle", SubResource( 23 ), "raise_sword", "Ready", SubResource( 24 ), "Ready", "lower_sword", SubResource( 25 ), "Ready", "Strike", SubResource( 26 ) ]
 start_node = "Idle"
 end_node = "Die"
-graph_offset = Vector2( 52, 152 )
+graph_offset = Vector2( 54, -138 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=28]
 
@@ -329,19 +331,19 @@ __meta__ = {
 [node name="VisualNodes" type="Node2D" parent="."]
 
 [node name="Sprite" type="Sprite" parent="VisualNodes"]
-position = Vector2( 28.0374, -28.9968 )
+position = Vector2( 6.576, -28.473 )
 texture = ExtResource( 1 )
-hframes = 9
+hframes = 10
 frame = 5
 
 [node name="shadow" type="Sprite" parent="VisualNodes/Sprite"]
 self_modulate = Color( 0, 0, 0, 0.2 )
 show_behind_parent = true
 material = SubResource( 1 )
-position = Vector2( 0.0663606, 57.6711 )
+position = Vector2( 0.066, 56.196 )
 texture = ExtResource( 1 )
 flip_v = true
-hframes = 9
+hframes = 10
 frame = 5
 
 [node name="Damage_area" type="Area2D" parent="VisualNodes"]

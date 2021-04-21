@@ -4,7 +4,11 @@ export (int) var speed = 1000
 export (int) var health = 100
 export (bool) var shadow_blob = false
 onready var dead : bool = false
+
+# setup block states
 onready var block_enabled : bool = false
+onready var blocking : bool = false
+onready var block_direction : String = ""
 
 # load vectors
 var velocity = Vector2.ZERO
@@ -29,6 +33,9 @@ onready var state = "Idle"
 # enable attack animations
 var slash_enabled : int = 1
 
+# load debug labels
+onready var label1 = get_node("Label")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	animationTree.active = true
@@ -48,9 +55,21 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("Attack"):
 		execute_slash()
 	
+	# checks for block input in the time window
+	# where blocking is enabled via on_attack_charge() method
+	# ie between first and second frame of enemy attack
+
+	if (block_enabled) and (block_direction != ""):
+
+		# if block input is succesfull in the timeframe, proceed to block
+		if Input.get_action_strength(block_direction) != 0:
+			blocking = true
+
+
 	if state == "Block":
 		animationState.travel('Block')
 
+	label1.text = str(Input.get_action_strength("ui_left"))
 	velocity = move_and_slide(input_vector * speed * delta)
 
 func _draw():
@@ -117,23 +136,44 @@ func slash3():
 	slash_enabled = 3
 
 func block():
+	# called if enemy strike is successfullt blocked
+
 	print("blocking")
 	state = "Block"
 	get_node("VisualNodes/Sparks").restart()
 
 func end_block():
+	# resets all block states
+	# called from last frame of block animation
+
 	state = "Idle"
 	print("block ended")
+	block_enabled = false
+	blocking = false
 
 func calculate_block_direction(enemy):
+	# check which directional button needs to be pressed to block incoming attack
+
 	if enemy.position.x - position.x <= 0:
 		return "ui_left"
 	else:
 		return "ui_right"
 
 func on_attack(enemy):
-	print("attack_signal recieved from " + enemy.name + " " + str(enemy.get_instance_id()))
-	print(calculate_block_direction(enemy))
-	if Input.get_action_strength(calculate_block_direction(enemy)) != 0:
+	# called on strike frame of enemy attack (damage frame)
+	# if block was pressed previously, attack will be blocked, otherwise will deal damage
+
+	if blocking:
 		block()
 
+func on_attack_charged(enemy):
+	# called on first frame of attack animation
+	# weapon raised
+	# calculates position of attacking opponent and opens window for block input
+
+	print("attack_signal recieved from " + enemy.name + " " + str(enemy.get_instance_id()))
+	print(calculate_block_direction(enemy))
+	block_enabled = true
+	block_direction = calculate_block_direction(enemy)
+
+		

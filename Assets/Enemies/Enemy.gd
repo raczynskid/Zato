@@ -102,8 +102,19 @@ func end_parry():
 func die():
 	#state = "Dead"
 	#animationState.travel('Die')
+
 	var blood = get_node("VisualNodes/Blood")
 	blood.restart()
 
 func strike():
+	# does a check on player blocking state
+	# calls for damage if player has not blocked
+
 	player.on_attack(self)
+	player.block_enabled = false
+
+func strike_charge():
+	# opens blocking window for player and provides info on attacker
+	# to player object
+	
+	player.on_attack_charged(self)
