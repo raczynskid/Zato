@@ -390,10 +390,3 @@ tree_root = SubResource( 28 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 29 )
-
-[node name="Label" type="Label" parent="."]
-margin_right = 40.0
-margin_bottom = 14.0
-__meta__ = {
-"_edit_use_anchors_": false
-}

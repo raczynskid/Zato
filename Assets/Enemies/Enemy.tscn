@@ -1,10 +1,13 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Assets/Sprites/Spritesheets/Enemy revA.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Enemies/Enemy.gd" type="Script" id=2]
 [ext_resource path="res://Effects/Blood.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Effects/Strikes.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Effects/Sparks.tscn" type="PackedScene" id=5]
+
+[sub_resource type="CircleShape2D" id=29]
+radius = 77.2865
 
 [sub_resource type="CanvasItemMaterial" id=1]
 
@@ -319,7 +322,14 @@ graph_offset = Vector2( 54, -138 )
 ]]
 script = ExtResource( 2 )
 
+[node name="detection_area" type="Area2D" parent="."]
+
+[node name="player_detection" type="CollisionShape2D" parent="detection_area"]
+position = Vector2( 0, -21.965 )
+shape = SubResource( 29 )
+
 [node name="Label" type="Label" parent="."]
+visible = false
 margin_left = 9.88832
 margin_top = -65.6867
 margin_right = 49.8883
@@ -334,7 +344,6 @@ __meta__ = {
 position = Vector2( 6.576, -28.473 )
 texture = ExtResource( 1 )
 hframes = 10
-frame = 5
 
 [node name="shadow" type="Sprite" parent="VisualNodes/Sprite"]
 self_modulate = Color( 0, 0, 0, 0.2 )
@@ -344,7 +353,6 @@ position = Vector2( 0.066, 56.196 )
 texture = ExtResource( 1 )
 flip_v = true
 hframes = 10
-frame = 5
 
 [node name="Damage_area" type="Area2D" parent="VisualNodes"]
 
