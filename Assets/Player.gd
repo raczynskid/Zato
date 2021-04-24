@@ -34,7 +34,7 @@ onready var state = "Idle"
 var slash_enabled : int = 1
 
 # load debug labels
-onready var label1 = get_node("Label")
+#
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -65,11 +65,9 @@ func _physics_process(delta):
 		if Input.get_action_strength(block_direction) != 0:
 			blocking = true
 
-
 	if state == "Block":
 		animationState.travel('Block')
 
-	label1.text = str(Input.get_action_strength("ui_left"))
 	velocity = move_and_slide(input_vector * speed * delta)
 
 func _draw():
