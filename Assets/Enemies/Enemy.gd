@@ -30,6 +30,7 @@ onready var slash_effects = get_node("VisualNodes/Strikes/AnimationPlayer")
 # load hitboxes and hurtboxes
 onready var damage_area = get_node("VisualNodes/Damage_area")
 onready var slash_hitbox = get_node("VisualNodes/Damage_area/Slash_hitbox")
+onready var player_detection_area = get_node("detection_area")
 
 # load labels
 
@@ -40,15 +41,29 @@ func _ready():
 	animationTree.active = true
 	velocity = Vector2(0,0)
 	action_cooldown.max_time = 100
-	
+
+func player_detected():
+	# check detection zone for player
+	# to be used as movement AI
+	for area in player_detection_area.get_overlapping_areas():
+		var colliding_object = area.get_parent().get_parent()
+		if colliding_object == player:
+			return true
+	return false
 
 func player_in_range(): 
 	# check target zone for player
+	# player detection for combat
 	for area in damage_area.get_overlapping_areas():
 		var target = area.get_parent().get_parent()
 		if target.is_in_group("Player"):
 			return true
 	return false
+
+func player_vector():
+	var player_vector : Vector2 = position - player.position
+	print(player_vector)
+	return player_vector
 
 func set_idle_state():
 	state = "Idle"
@@ -58,13 +73,6 @@ func action_choice():
 		if action_cooldown.is_ready():
 			action_cooldown.reset()
 			return "Strike"
-			#if randi() % 2:
-			#	if randi() % 2:
-			#		return "Ready"
-			#	else:
-			#		return "Strike"
-			#else:
-			#	return "Idle"
 		else:
 			action_cooldown.tick(1)
 	return state
@@ -77,6 +85,7 @@ func combat_state():
 func movement_state():
 	label1.text = "player not in range"
 	animationState.travel("Idle")
+	player_vector()
 
 func _physics_process(_delta):
 	if state != "Dead":
@@ -84,7 +93,9 @@ func _physics_process(_delta):
 		if player_in_range():
 			combat_state()
 		else:
-			movement_state()
+			# check if player in detection
+			if player_detected():
+				movement_state()
 	
 
 func get_hit(slash_type):
