@@ -13,7 +13,7 @@ func look():
 	animationPlayer.play("Idle")
 
 func _process(delta):
-	if self.position.x < 150 and not looked:
+	if self.position.x < 250 and not looked:
 		look()
 	else:
 		run(delta)

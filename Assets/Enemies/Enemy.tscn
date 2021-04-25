@@ -6,25 +6,26 @@
 [ext_resource path="res://Effects/Strikes.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Effects/Sparks.tscn" type="PackedScene" id=5]
 
-[sub_resource type="CircleShape2D" id=29]
+[sub_resource type="CircleShape2D" id=1]
 radius = 77.2865
 
-[sub_resource type="CanvasItemMaterial" id=1]
+[sub_resource type="CanvasItemMaterial" id=2]
+light_mode = 2
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=3]
 radius = 15.1218
 
-[sub_resource type="CapsuleShape2D" id=3]
+[sub_resource type="CapsuleShape2D" id=4]
 radius = 11.0976
 height = 20.114
 
-[sub_resource type="CapsuleShape2D" id=4]
+[sub_resource type="CapsuleShape2D" id=5]
 radius = 5.42938
 height = 12.7178
 
-[sub_resource type="Animation" id=5]
-
 [sub_resource type="Animation" id=6]
+
+[sub_resource type="Animation" id=7]
 tracks/0/type = "value"
 tracks/0/path = NodePath("VisualNodes/Sprite:frame")
 tracks/0/interp = 1
@@ -50,7 +51,7 @@ tracks/1/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 tracks/0/type = "value"
 tracks/0/path = NodePath("VisualNodes/Sprite:frame")
 tracks/0/interp = 1
@@ -104,7 +105,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=9]
 tracks/0/type = "value"
 tracks/0/path = NodePath("VisualNodes/Sprite:frame")
 tracks/0/interp = 1
@@ -141,7 +142,7 @@ tracks/2/keys = {
 "values": [  ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=10]
 length = 1.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("VisualNodes/Sprite:frame")
@@ -188,7 +189,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=11]
 length = 0.7
 tracks/0/type = "value"
 tracks/0/path = NodePath("VisualNodes/Sprite:frame")
@@ -215,7 +216,7 @@ tracks/1/keys = {
 "values": [ 4, 3 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=12]
 length = 0.7
 tracks/0/type = "value"
 tracks/0/path = NodePath("VisualNodes/Sprite:frame")
@@ -253,69 +254,69 @@ tracks/2/keys = {
 "values": [  ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=12]
+[sub_resource type="AnimationNodeAnimation" id=13]
 animation = "Die"
 
-[sub_resource type="AnimationNodeAnimation" id=13]
+[sub_resource type="AnimationNodeAnimation" id=14]
 animation = "Idle"
 
-[sub_resource type="AnimationNodeAnimation" id=14]
+[sub_resource type="AnimationNodeAnimation" id=15]
 animation = "Parry"
 
-[sub_resource type="AnimationNodeAnimation" id=15]
+[sub_resource type="AnimationNodeAnimation" id=16]
 animation = "Ready"
 
-[sub_resource type="AnimationNodeAnimation" id=16]
+[sub_resource type="AnimationNodeAnimation" id=17]
 animation = "Strike"
 
-[sub_resource type="AnimationNodeAnimation" id=17]
+[sub_resource type="AnimationNodeAnimation" id=18]
 animation = "lower_sword"
 
-[sub_resource type="AnimationNodeAnimation" id=18]
+[sub_resource type="AnimationNodeAnimation" id=19]
 animation = "raise_sword"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=19]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=20]
-switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=21]
 switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=22]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=23]
-switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=24]
 switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=25]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=26]
 switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachine" id=27]
-states/Die/node = SubResource( 12 )
+[sub_resource type="AnimationNodeStateMachineTransition" id=26]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=27]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id=28]
+states/Die/node = SubResource( 13 )
 states/Die/position = Vector2( 988.227, 185.037 )
-states/Idle/node = SubResource( 13 )
+states/Idle/node = SubResource( 14 )
 states/Idle/position = Vector2( 339, 185.222 )
-states/Parry/node = SubResource( 14 )
+states/Parry/node = SubResource( 15 )
 states/Parry/position = Vector2( 339.877, 16.6667 )
-states/Ready/node = SubResource( 15 )
+states/Ready/node = SubResource( 16 )
 states/Ready/position = Vector2( 822.667, 185.259 )
-states/Strike/node = SubResource( 16 )
+states/Strike/node = SubResource( 17 )
 states/Strike/position = Vector2( 593.58, 453.333 )
-states/lower_sword/node = SubResource( 17 )
+states/lower_sword/node = SubResource( 18 )
 states/lower_sword/position = Vector2( 593.333, 269.333 )
-states/raise_sword/node = SubResource( 18 )
+states/raise_sword/node = SubResource( 19 )
 states/raise_sword/position = Vector2( 594.148, 106.667 )
-transitions = [ "Idle", "raise_sword", SubResource( 19 ), "lower_sword", "Idle", SubResource( 20 ), "Strike", "Idle", SubResource( 21 ), "Idle", "Parry", SubResource( 22 ), "Parry", "Idle", SubResource( 23 ), "raise_sword", "Ready", SubResource( 24 ), "Ready", "lower_sword", SubResource( 25 ), "Ready", "Strike", SubResource( 26 ) ]
+transitions = [ "Idle", "raise_sword", SubResource( 20 ), "lower_sword", "Idle", SubResource( 21 ), "Strike", "Idle", SubResource( 22 ), "Idle", "Parry", SubResource( 23 ), "Parry", "Idle", SubResource( 24 ), "raise_sword", "Ready", SubResource( 25 ), "Ready", "lower_sword", SubResource( 26 ), "Ready", "Strike", SubResource( 27 ) ]
 start_node = "Idle"
 end_node = "Die"
 graph_offset = Vector2( 54, -138 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=28]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=29]
 
 [node name="Enemy" type="KinematicBody2D" groups=[
 "enemies",
@@ -326,7 +327,7 @@ script = ExtResource( 2 )
 
 [node name="player_detection" type="CollisionShape2D" parent="detection_area"]
 position = Vector2( 0, -21.965 )
-shape = SubResource( 29 )
+shape = SubResource( 1 )
 
 [node name="Label" type="Label" parent="."]
 visible = false
@@ -348,7 +349,7 @@ hframes = 10
 [node name="shadow" type="Sprite" parent="VisualNodes/Sprite"]
 self_modulate = Color( 0, 0, 0, 0.2 )
 show_behind_parent = true
-material = SubResource( 1 )
+material = SubResource( 2 )
 position = Vector2( 0.066, 56.196 )
 texture = ExtResource( 1 )
 flip_v = true
@@ -358,13 +359,13 @@ hframes = 10
 
 [node name="Slash_hitbox" type="CollisionShape2D" parent="VisualNodes/Damage_area"]
 position = Vector2( 31.1815, -24.4997 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Hurtbox_area" type="Area2D" parent="VisualNodes"]
 
 [node name="Hurtbox" type="CollisionShape2D" parent="VisualNodes/Hurtbox_area"]
 position = Vector2( 1.18921, -21.2075 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="Sparks" parent="VisualNodes" instance=ExtResource( 5 )]
 
@@ -378,19 +379,19 @@ position = Vector2( -1.19084, -27.497 )
 [node name="Movement_collision" type="CollisionShape2D" parent="."]
 position = Vector2( -0.742416, -0.148483 )
 rotation = 1.5708
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Die = SubResource( 5 )
-anims/Idle = SubResource( 6 )
-anims/Parry = SubResource( 7 )
-anims/Ready = SubResource( 8 )
-anims/Strike = SubResource( 9 )
-anims/lower_sword = SubResource( 10 )
-anims/raise_sword = SubResource( 11 )
+anims/Die = SubResource( 6 )
+anims/Idle = SubResource( 7 )
+anims/Parry = SubResource( 8 )
+anims/Ready = SubResource( 9 )
+anims/Strike = SubResource( 10 )
+anims/lower_sword = SubResource( 11 )
+anims/raise_sword = SubResource( 12 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 27 )
+tree_root = SubResource( 28 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 28 )
+parameters/playback = SubResource( 29 )

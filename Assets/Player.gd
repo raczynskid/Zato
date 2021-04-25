@@ -62,7 +62,7 @@ func _physics_process(delta):
 	if (block_enabled) and (block_direction != ""):
 
 		# if block input is succesfull in the timeframe, proceed to block
-		if Input.get_action_strength(block_direction) != 0:
+		if Input.is_action_just_pressed(block_direction):
 			blocking = true
 
 	if state == "Block":
