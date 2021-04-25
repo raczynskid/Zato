@@ -95,7 +95,7 @@ process_material = SubResource( 3 )
 texture = SubResource( 4 )
 
 [node name="Stoat" parent="." instance=ExtResource( 7 )]
-position = Vector2( 412.208, 86.4765 )
+position = Vector2( 420.125, 76.0368 )
 
 [node name="Dojo" type="Sprite" parent="."]
 position = Vector2( 200, 150 )

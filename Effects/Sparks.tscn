@@ -1,14 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=2 format=2]
 
-[sub_resource type="Gradient" id=1]
-colors = PoolColorArray( 0.896484, 0.896484, 0.896484, 1, 0.919922, 0.702634, 0.089686, 1 )
-
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 1 )
-
-[sub_resource type="ParticlesMaterial" id=3]
+[sub_resource type="ParticlesMaterial" id=1]
 trail_divisor = 10
-trail_color_modifier = SubResource( 2 )
 emission_shape = 1
 emission_sphere_radius = 3.54
 flag_disable_z = true
@@ -20,17 +13,14 @@ angular_velocity = 10.89
 angular_velocity_random = 1.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-color = Color( 0.945098, 0.921569, 0.466667, 1 )
-hue_variation = 0.24
-hue_variation_random = 0.38
 
 [node name="Sparks" type="Particles2D"]
 position = Vector2( 8.72084, -29.532 )
 emitting = false
 amount = 500
-lifetime = 0.99
+lifetime = 0.66
 one_shot = true
 speed_scale = 2.0
 explosiveness = 0.78
 randomness = 1.0
-process_material = SubResource( 3 )
+process_material = SubResource( 1 )
