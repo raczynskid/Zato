@@ -157,6 +157,20 @@ func die():
 	var blood = get_node("VisualNodes/Blood")
 	blood.restart()
 
+func on_strike_ready():
+	# call player method for reactions
+	player.on_enemy_strike_ready()
+
+func on_strike_ready_end():
+	# end player ready window
+	player.on_enemy_strike_ready_end()
+
+func strike_charge():
+	# opens blocking window for player and provides info on attacker
+	# to player object
+	
+	player.on_attack_charged(self)
+
 func strike():
 	# does a check on player blocking state
 	# calls for damage if player has not blocked
@@ -164,8 +178,5 @@ func strike():
 	player.on_attack(self)
 	player.block_enabled = false
 
-func strike_charge():
-	# opens blocking window for player and provides info on attacker
-	# to player object
-	
-	player.on_attack_charged(self)
+func strike_end():
+	player.on_enemy_strike_end()

@@ -5,10 +5,15 @@ export (int) var health = 100
 export (bool) var shadow_blob = false
 onready var dead : bool = false
 
+# variables to handle double tap mechanic
+onready var input_forward_data = {'taps':0, 'timer':0, 'reset_time':1}
+
 # setup block states
 onready var block_enabled : bool = false
 onready var blocking : bool = false
 onready var block_direction : String = ""
+onready var fumble_window_on : bool = false
+onready var fumble : bool = false
 
 # load vectors
 var velocity = Vector2.ZERO
@@ -34,7 +39,7 @@ onready var state = "Idle"
 var slash_enabled : int = 1
 
 # load debug labels
-#
+onready var fumble_label = get_node("Label")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -58,11 +63,20 @@ func _physics_process(delta):
 	# checks for block input in the time window
 	# where blocking is enabled via on_attack_charge() method
 	# ie between first and second frame of enemy attack
+	
+	fumble_label.text = str(fumble)
+	
+	# check double tap on any direction for fumble
+	# (temp workaround for bug where player 
+	# doesn't fumble if walking past opponent)
+	if double_tap("ui_left", delta) or double_tap("ui_right", delta):
+		if fumble_window_on:
+			fumble = true
 
 	if (block_enabled) and (block_direction != ""):
 
 		# if block input is succesfull in the timeframe, proceed to block
-		if Input.is_action_just_pressed(block_direction):
+		if double_tap(block_direction, delta) and (not fumble):
 			blocking = true
 
 	if state == "Block":
@@ -72,6 +86,26 @@ func _physics_process(delta):
 
 func _draw():
 	pass
+
+func double_tap(tap_direction, delta):
+    # handle the timer.
+    if input_forward_data['timer'] > 0:
+        input_forward_data['timer'] -= delta
+        if input_forward_data['timer'] <= 0:
+            input_forward_data['taps'] = 0
+    # when the forward key is pressed:
+    if Input.is_action_just_pressed(tap_direction):
+        input_forward_data['taps'] += 1
+
+        # set the timer going.
+        if input_forward_data['timer'] <= 0:
+            input_forward_data['timer'] = input_forward_data['reset_time']
+
+        if input_forward_data['taps'] == 2:
+            return true
+        else:
+            return false
+
 
 func get_movement_inputs():
 	# get current movement vector from keyobard inptus
@@ -157,12 +191,18 @@ func calculate_block_direction(enemy):
 	else:
 		return "ui_right"
 
-func on_attack(enemy):
+func on_attack(_enemy):
 	# called on strike frame of enemy attack (damage frame)
 	# if block was pressed previously, attack will be blocked, otherwise will deal damage
 
 	if blocking:
 		block()
+
+func on_enemy_strike_ready():
+	fumble_window_on = true
+
+func on_enemy_strike_ready_end():
+	fumble_window_on = false
 
 func on_attack_charged(enemy):
 	# called on first frame of attack animation
@@ -174,4 +214,5 @@ func on_attack_charged(enemy):
 	block_enabled = true
 	block_direction = calculate_block_direction(enemy)
 
-		
+func on_enemy_strike_end():
+	fumble = false

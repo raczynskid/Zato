@@ -188,6 +188,23 @@ tracks/2/keys = {
 "method": "set_idle_state"
 } ]
 }
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "on_strike_ready_end"
+}, {
+"args": [  ],
+"method": "strike_end"
+} ]
+}
 
 [sub_resource type="Animation" id=11]
 length = 0.7
@@ -249,9 +266,12 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
-"values": [  ]
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "on_strike_ready"
+} ]
 }
 
 [sub_resource type="AnimationNodeAnimation" id=13]
@@ -345,6 +365,7 @@ __meta__ = {
 position = Vector2( 6.576, -28.473 )
 texture = ExtResource( 1 )
 hframes = 10
+frame = 5
 
 [node name="shadow" type="Sprite" parent="VisualNodes/Sprite"]
 self_modulate = Color( 0, 0, 0, 0.2 )
@@ -354,6 +375,7 @@ position = Vector2( 0.066, 56.196 )
 texture = ExtResource( 1 )
 flip_v = true
 hframes = 10
+frame = 5
 
 [node name="Damage_area" type="Area2D" parent="VisualNodes"]
 
