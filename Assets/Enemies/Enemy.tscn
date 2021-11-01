@@ -130,17 +130,6 @@ tracks/1/keys = {
 "update": 1,
 "values": [ 4 ]
 }
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
-"values": [  ]
-}
 
 [sub_resource type="Animation" id=10]
 length = 1.2
@@ -259,20 +248,6 @@ tracks/1/keys = {
 "update": 1,
 "values": [ 3, 4 ]
 }
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "on_strike_ready"
-} ]
-}
 
 [sub_resource type="AnimationNodeAnimation" id=13]
 animation = "Die"
@@ -334,7 +309,7 @@ states/raise_sword/position = Vector2( 594.148, 106.667 )
 transitions = [ "Idle", "raise_sword", SubResource( 20 ), "lower_sword", "Idle", SubResource( 21 ), "Strike", "Idle", SubResource( 22 ), "Idle", "Parry", SubResource( 23 ), "Parry", "Idle", SubResource( 24 ), "raise_sword", "Ready", SubResource( 25 ), "Ready", "lower_sword", SubResource( 26 ), "Ready", "Strike", SubResource( 27 ) ]
 start_node = "Idle"
 end_node = "Die"
-graph_offset = Vector2( 54, -138 )
+graph_offset = Vector2( 48, -20 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=29]
 

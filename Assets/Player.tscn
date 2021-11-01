@@ -1,9 +1,8 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Assets/Sprites/Spritesheets/Swordmaster-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Player.gd" type="Script" id=2]
 [ext_resource path="res://Effects/Blood.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Effects/Sparks.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 light_mode = 2
@@ -267,28 +266,28 @@ tracks/2/keys = {
 }
 
 [sub_resource type="AnimationNodeAnimation" id=11]
-animation = "Block"
-
-[sub_resource type="AnimationNodeAnimation" id=12]
 animation = "Idle"
 
-[sub_resource type="AnimationNodeAnimation" id=13]
+[sub_resource type="AnimationNodeAnimation" id=12]
 animation = "Slash"
 
-[sub_resource type="AnimationNodeAnimation" id=14]
+[sub_resource type="AnimationNodeAnimation" id=13]
 animation = "Slash2"
 
-[sub_resource type="AnimationNodeAnimation" id=15]
+[sub_resource type="AnimationNodeAnimation" id=14]
 animation = "Slash3"
 
-[sub_resource type="AnimationNodeAnimation" id=16]
+[sub_resource type="AnimationNodeAnimation" id=15]
 animation = "Walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=17]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=18]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=19]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=20]
 switch_mode = 2
@@ -297,37 +296,27 @@ switch_mode = 2
 switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=22]
-switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=23]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=24]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=25]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=26]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=27]
-switch_mode = 2
-
-[sub_resource type="AnimationNodeStateMachine" id=28]
-states/Block/node = SubResource( 11 )
-states/Block/position = Vector2( 1866.67, 304.173 )
-states/Idle/node = SubResource( 12 )
+[sub_resource type="AnimationNodeStateMachine" id=25]
+states/Idle/node = SubResource( 11 )
 states/Idle/position = Vector2( 1251.33, 304.667 )
-states/Slash/node = SubResource( 13 )
+states/Slash/node = SubResource( 12 )
 states/Slash/position = Vector2( 1563.46, -20.6667 )
-states/Slash2/node = SubResource( 14 )
+states/Slash2/node = SubResource( 13 )
 states/Slash2/position = Vector2( 1563.24, 87.6707 )
-states/Slash3/node = SubResource( 15 )
+states/Slash3/node = SubResource( 14 )
 states/Slash3/position = Vector2( 1563.9, 171.337 )
-states/Walk/node = SubResource( 16 )
+states/Walk/node = SubResource( 15 )
 states/Walk/position = Vector2( 1252, 80 )
-transitions = [ "Idle", "Walk", SubResource( 17 ), "Idle", "Slash", SubResource( 18 ), "Walk", "Idle", SubResource( 19 ), "Slash", "Idle", SubResource( 20 ), "Slash3", "Idle", SubResource( 21 ), "Slash2", "Idle", SubResource( 22 ), "Slash", "Slash2", SubResource( 23 ), "Slash2", "Slash3", SubResource( 24 ), "Walk", "Slash", SubResource( 25 ), "Idle", "Block", SubResource( 26 ), "Block", "Idle", SubResource( 27 ) ]
+transitions = [ "Idle", "Walk", SubResource( 16 ), "Idle", "Slash", SubResource( 17 ), "Walk", "Idle", SubResource( 18 ), "Slash", "Idle", SubResource( 19 ), "Slash3", "Idle", SubResource( 20 ), "Slash2", "Idle", SubResource( 21 ), "Slash", "Slash2", SubResource( 22 ), "Slash2", "Slash3", SubResource( 23 ), "Walk", "Slash", SubResource( 24 ) ]
 start_node = "Idle"
-graph_offset = Vector2( 732, 28.004 )
+graph_offset = Vector2( 736, -101.996 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=29]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=26]
 
 [node name="Player" type="KinematicBody2D" groups=[
 "Player",
@@ -341,6 +330,7 @@ position = Vector2( 0, -21.052 )
 position = Vector2( -16.2243, -6.221 )
 texture = ExtResource( 1 )
 hframes = 23
+frame = 9
 
 [node name="shadow" type="Sprite" parent="VisualNodes/Sprite"]
 self_modulate = Color( 0, 0, 0, 0.2 )
@@ -351,6 +341,7 @@ texture = ExtResource( 1 )
 offset = Vector2( -1.137, -2.902 )
 flip_v = true
 hframes = 23
+frame = 9
 
 [node name="Blood" parent="VisualNodes" instance=ExtResource( 3 )]
 position = Vector2( 4.88925, -8.11501 )
@@ -370,9 +361,6 @@ shape = SubResource( 2 )
 position = Vector2( 3.22342, -3.50374 )
 shape = SubResource( 3 )
 
-[node name="Sparks" parent="VisualNodes" instance=ExtResource( 4 )]
-position = Vector2( -7.80212, -18.0914 )
-
 [node name="Movement_collision" type="CollisionShape2D" parent="."]
 rotation = 1.5708
 shape = SubResource( 4 )
@@ -386,10 +374,10 @@ anims/Slash3 = SubResource( 9 )
 anims/Walk = SubResource( 10 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 28 )
+tree_root = SubResource( 25 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 29 )
+parameters/playback = SubResource( 26 )
 
 [node name="Label" type="Label" parent="."]
 visible = false
