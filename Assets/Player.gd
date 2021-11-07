@@ -29,7 +29,7 @@ onready var state = "Idle"
 var slash_enabled : int = 1
 
 # load debug labels
-onready var fumble_label = get_node("Label")
+onready var label1 = get_node("Label")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -116,4 +116,4 @@ func slash3():
 
 func on_attack(_enemy):
 	# called on strike frame of enemy attack (damage frame)
-	pass
+	print("PLAYER HIT")

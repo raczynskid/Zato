@@ -314,7 +314,7 @@ states/Walk/node = SubResource( 15 )
 states/Walk/position = Vector2( 1252, 80 )
 transitions = [ "Idle", "Walk", SubResource( 16 ), "Idle", "Slash", SubResource( 17 ), "Walk", "Idle", SubResource( 18 ), "Slash", "Idle", SubResource( 19 ), "Slash3", "Idle", SubResource( 20 ), "Slash2", "Idle", SubResource( 21 ), "Slash", "Slash2", SubResource( 22 ), "Slash2", "Slash3", SubResource( 23 ), "Walk", "Slash", SubResource( 24 ) ]
 start_node = "Idle"
-graph_offset = Vector2( 736, -101.996 )
+graph_offset = Vector2( 677, -31.996 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=26]
 
@@ -330,7 +330,7 @@ position = Vector2( 0, -21.052 )
 position = Vector2( -16.2243, -6.221 )
 texture = ExtResource( 1 )
 hframes = 23
-frame = 9
+frame = 15
 
 [node name="shadow" type="Sprite" parent="VisualNodes/Sprite"]
 self_modulate = Color( 0, 0, 0, 0.2 )
@@ -341,7 +341,6 @@ texture = ExtResource( 1 )
 offset = Vector2( -1.137, -2.902 )
 flip_v = true
 hframes = 23
-frame = 9
 
 [node name="Blood" parent="VisualNodes" instance=ExtResource( 3 )]
 position = Vector2( 4.88925, -8.11501 )
@@ -355,7 +354,9 @@ scale = Vector2( -1, 1 )
 position = Vector2( -29.9151, 3.6948 )
 shape = SubResource( 2 )
 
-[node name="Hurtbox_area" type="Area2D" parent="VisualNodes"]
+[node name="Hurtbox_area" type="Area2D" parent="VisualNodes" groups=[
+"player_hurtbox",
+]]
 
 [node name="Hurtbox" type="CollisionShape2D" parent="VisualNodes/Hurtbox_area"]
 position = Vector2( 3.22342, -3.50374 )

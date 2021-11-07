@@ -65,7 +65,7 @@ extents = Vector2( 66.7301, 10 )
 [node name="Dojo" type="Node2D"]
 
 [node name="Snow_view" type="Sprite" parent="."]
-position = Vector2( 190.564, 52.3027 )
+position = Vector2( 200, 152 )
 texture = ExtResource( 2 )
 
 [node name="Snow" type="Node2D" parent="."]
