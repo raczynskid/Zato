@@ -117,3 +117,4 @@ func slash3():
 func on_attack(_enemy):
 	# called on strike frame of enemy attack (damage frame)
 	print("PLAYER HIT")
+	health -= 10

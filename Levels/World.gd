@@ -1,6 +1,7 @@
 extends Node
 onready var pause_menu = get_node("Pause_menu")
 onready var enemy_template = load("res://Assets/Enemies/Enemy.tscn")
+onready var player = Global.Player
 
 var enemies = []
 
@@ -8,6 +9,7 @@ func _ready():
 	pass
 
 func _process(_delta):
+	interface_update()
 	var enemies_count : int = get_tree().get_nodes_in_group("enemies").size()
 	if Input.is_action_just_pressed("ui_cancel"):
 		if not pause_menu.visible:
@@ -39,3 +41,5 @@ func spawn_enemy(n):
 
 		enemies.append(new_enemy)
 
+func interface_update():
+	get_node("Label").text = "Health: " + str(player.health) + "       Enemies defeated: " + str(Global.ENEMIES_DEFEATED)
