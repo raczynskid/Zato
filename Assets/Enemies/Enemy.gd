@@ -36,6 +36,7 @@ onready var player_detection_area = get_node("detection_area")
 # load labels
 
 onready var label1 = get_node("Label")
+onready var label2 = get_node("Label2")
 onready var state = "Idle"
 
 onready var prev_facing = dir_facing()
@@ -71,6 +72,10 @@ func player_vector():
 func set_idle_state():
 	# return to idle state
 	# to be called from animations
+	if health <= 0:
+		state = "Dead"
+		die()
+		return
 	state = "Idle"
 
 func action_choice():
@@ -113,6 +118,7 @@ func movement_state():
 
 func _physics_process(_delta):
 	label1.text = str(health)
+	label2.text = str(state)
 	if state != "Dead":
 		if player_detected():
 			# rotate towards player
@@ -150,7 +156,9 @@ func get_hit(slash_type):
 		slash_effects.play("strike" + str(slash_type))
 		health -= 1
 	if health <= 0:
+		state = "Dead"
 		die()
+		
 
 func end_parry():
 	# return to idle after parry
@@ -161,14 +169,19 @@ func end_parry():
 	state = "Idle"
 
 func die():
-	animationState.travel("Die")
+	randomize()
+	var fatality_roll = int(rand_range(0,5))
+	if fatality_roll == 0:
+		animationState.travel("Fatality")
+	else:
+		animationState.travel("Die")
 	get_node("Movement_collision").disabled = true
-	state = "Dead"
-	Global.ENEMIES_DEFEATED += 1
 
 func dispose():
 	# fade out sprite and destroy object
-	to_dispose = true
+	if not to_dispose:
+		to_dispose = true
+		Global.ENEMIES_DEFEATED += 1
 
 func strike():
 	# calls for damage if player has not blocked
