@@ -3,9 +3,10 @@ extends KinematicBody2D
 const Cooldown = preload('res://Scripts/Cooldown.gd')
 
 export (float) var speed = 0.5
-export (int) var health = 100
+export (int) var health = 3
 
 onready var dead : bool = false
+onready var to_dispose : bool = false
 onready var player = Global.Player
 
 # load vectors
@@ -56,9 +57,9 @@ func player_detected():
 func player_in_range(): 
 	# check target zone for player
 	# player detection for combat
+	var target = player.get_node("VisualNodes/Hurtbox_area")
 	for area in damage_area.get_overlapping_areas():
-		var target = area.get_parent().get_parent()
-		if target == player:
+		if area == target:
 			return true
 	return false
 
@@ -111,6 +112,7 @@ func movement_state():
 	
 
 func _physics_process(_delta):
+	label1.text = str(health)
 	if state != "Dead":
 		if player_detected():
 			# rotate towards player
@@ -126,7 +128,12 @@ func _physics_process(_delta):
 		else:
 			# if player not detected just stand there I guess
 			animationState.travel("Idle")
-
+	else:
+		# fade out if dead?
+		if to_dispose:
+			visual_nodes.get_node("Sprite").modulate.a -= 0.01
+			if visual_nodes.get_node("Sprite").modulate.a <= 0:
+				queue_free()
 
 func get_hit(slash_type):
 	# triggered on collision with player hurtbox
@@ -141,6 +148,9 @@ func get_hit(slash_type):
 		# show blood effects if hit
 		# in one of vulnerable states
 		slash_effects.play("strike" + str(slash_type))
+		health -= 1
+	if health <= 0:
+		die()
 
 func end_parry():
 	# return to idle after parry
@@ -151,13 +161,17 @@ func end_parry():
 	state = "Idle"
 
 func die():
-	#state = "Dead"
-	#animationState.travel('Die')
+	animationState.travel("Die")
+	get_node("Movement_collision").disabled = true
+	state = "Dead"
+	Global.ENEMIES_DEFEATED += 1
 
-	var blood = get_node("VisualNodes/Blood")
-	blood.restart()
+func dispose():
+	# fade out sprite and destroy object
+	to_dispose = true
 
 func strike():
 	# calls for damage if player has not blocked
-
-	player.on_attack(self)
+	# check for vertical position (footsies) alignment
+	if abs(self.position.y - player.position.y) < 10:
+		player.on_attack(self)
