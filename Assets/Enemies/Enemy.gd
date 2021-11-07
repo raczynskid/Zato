@@ -156,8 +156,8 @@ func get_hit(slash_type):
 		slash_effects.play("strike" + str(slash_type))
 		health -= 1
 	if health <= 0:
-		state = "Dead"
 		die()
+		state = "Dead"
 		
 
 func end_parry():
@@ -169,13 +169,14 @@ func end_parry():
 	state = "Idle"
 
 func die():
-	randomize()
-	var fatality_roll = int(rand_range(0,5))
-	if fatality_roll == 0:
-		animationState.travel("Fatality")
-	else:
-		animationState.travel("Die")
-	get_node("Movement_collision").disabled = true
+	if state != "Dead":
+		randomize()
+		var fatality_roll = int(rand_range(0,5))
+		if fatality_roll == 0:
+			animationState.travel("Fatality")
+		else:
+			animationState.travel("Die")
+		get_node("Movement_collision").disabled = true
 
 func dispose():
 	# fade out sprite and destroy object

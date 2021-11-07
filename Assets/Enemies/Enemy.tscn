@@ -320,32 +320,32 @@ animation = "Ready"
 [sub_resource type="AnimationNodeAnimation" id=19]
 animation = "Strike"
 
-[sub_resource type="AnimationNodeAnimation" id=21]
+[sub_resource type="AnimationNodeAnimation" id=20]
 animation = "raise_sword"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+
 [sub_resource type="AnimationNodeStateMachineTransition" id=22]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=24]
 switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=25]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=26]
 switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=27]
-switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=28]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=29]
-switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=30]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=31]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=34]
-
-[sub_resource type="AnimationNodeStateMachine" id=32]
+[sub_resource type="AnimationNodeStateMachine" id=30]
 states/Die/node = SubResource( 14 )
 states/Die/position = Vector2( 168.227, 343.037 )
 states/Fatality/node = SubResource( 15 )
@@ -358,13 +358,13 @@ states/Ready/node = SubResource( 18 )
 states/Ready/position = Vector2( 822.667, 185.259 )
 states/Strike/node = SubResource( 19 )
 states/Strike/position = Vector2( 593.58, 453.333 )
-states/raise_sword/node = SubResource( 21 )
+states/raise_sword/node = SubResource( 20 )
 states/raise_sword/position = Vector2( 594.148, 106.667 )
-transitions = [ "Idle", "raise_sword", SubResource( 22 ), "Strike", "Idle", SubResource( 24 ), "Idle", "Parry", SubResource( 25 ), "Parry", "Idle", SubResource( 26 ), "raise_sword", "Ready", SubResource( 27 ), "Ready", "Strike", SubResource( 29 ), "Idle", "Fatality", SubResource( 30 ), "Idle", "Die", SubResource( 31 ), "Ready", "Idle", SubResource( 34 ) ]
+transitions = [ "Idle", "raise_sword", SubResource( 21 ), "Strike", "Idle", SubResource( 22 ), "Idle", "Parry", SubResource( 23 ), "Parry", "Idle", SubResource( 24 ), "raise_sword", "Ready", SubResource( 25 ), "Ready", "Strike", SubResource( 26 ), "Idle", "Fatality", SubResource( 27 ), "Idle", "Die", SubResource( 28 ), "Ready", "Idle", SubResource( 29 ) ]
 start_node = "Idle"
 graph_offset = Vector2( -108, 90 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=33]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=31]
 
 [node name="Enemy" type="KinematicBody2D" groups=[
 "enemies",
@@ -378,6 +378,7 @@ position = Vector2( 0, -21.965 )
 shape = SubResource( 1 )
 
 [node name="Label" type="Label" parent="."]
+visible = false
 margin_left = 9.88832
 margin_top = -65.6867
 margin_right = 49.8883
@@ -402,7 +403,6 @@ __meta__ = {
 position = Vector2( 6.576, -28.473 )
 texture = ExtResource( 6 )
 hframes = 37
-frame = 5
 
 [node name="shadow" type="Sprite" parent="VisualNodes/Sprite"]
 self_modulate = Color( 0, 0, 0, 0.2 )
@@ -413,7 +413,6 @@ texture = ExtResource( 6 )
 offset = Vector2( 0, -3.856 )
 flip_v = true
 hframes = 37
-frame = 5
 
 [node name="Damage_area" type="Area2D" parent="VisualNodes"]
 
@@ -452,7 +451,7 @@ anims/lower_sword = SubResource( 12 )
 anims/raise_sword = SubResource( 13 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 32 )
+tree_root = SubResource( 30 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 33 )
+parameters/playback = SubResource( 31 )
