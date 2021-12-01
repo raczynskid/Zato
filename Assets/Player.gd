@@ -8,7 +8,7 @@ onready var dead : bool = false
 # load vectors
 var velocity = Vector2.ZERO
 var input_vector = Vector2.ZERO
-var last_vector = Vector2(-1,0)
+var last_vector = Vector2(1,0)
 
 # load animation nodes
 onready var sprites = get_node("VisualNodes")
@@ -66,7 +66,7 @@ func get_movement_inputs():
 
 	# flip entire node on direction change
 	if (last_vector.x != input_vector.x) and (input_vector.x != 0):
-		sprites.scale.x = last_vector.x
+		sprites.scale.x = last_vector.x *-1
 	
 	# save last active movement vector
 	if (last_vector.x != input_vector.x) and (input_vector.x != 0):

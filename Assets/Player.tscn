@@ -226,7 +226,7 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id=10]
-length = 0.7
+length = 1.6
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("VisualNodes/Sprite:frame")
@@ -235,10 +235,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 18, 19, 20, 17 ]
+"values": [ 27, 28, 29, 30, 31, 32, 33, 34 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("VisualNodes/Sprite/shadow:frame")
@@ -247,22 +247,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 18, 19, 20, 17 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("VisualNodes/Sprite:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = false
-tracks/2/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
-"update": 0,
-"values": [  ]
+"values": [ 27, 28, 29, 30, 31, 32, 33, 34 ]
 }
 
 [sub_resource type="AnimationNodeAnimation" id=11]
@@ -322,14 +310,16 @@ graph_offset = Vector2( 677, -31.996 )
 "Player",
 ]]
 script = ExtResource( 2 )
+speed = 1200
 
 [node name="VisualNodes" type="Node2D" parent="."]
 position = Vector2( 0, -21.052 )
 
 [node name="Sprite" type="Sprite" parent="VisualNodes"]
-position = Vector2( -16.2243, -6.221 )
+position = Vector2( 18.8435, -8.32087 )
 texture = ExtResource( 1 )
-hframes = 23
+hframes = 35
+frame = 27
 
 [node name="shadow" type="Sprite" parent="VisualNodes/Sprite"]
 self_modulate = Color( 0, 0, 0, 0.2 )
@@ -339,7 +329,8 @@ position = Vector2( 1.33482, 58.6827 )
 texture = ExtResource( 1 )
 offset = Vector2( -1.137, -2.902 )
 flip_v = true
-hframes = 23
+hframes = 35
+frame = 27
 
 [node name="Blood" parent="VisualNodes" instance=ExtResource( 3 )]
 position = Vector2( 4.88925, -8.11501 )
@@ -350,7 +341,7 @@ scale = Vector2( -1, 1 )
 ]]
 
 [node name="Slash_hitbox" type="CollisionShape2D" parent="VisualNodes/Damage_area"]
-position = Vector2( -29.9151, 3.6948 )
+position = Vector2( 32.871, -1.34489 )
 shape = SubResource( 2 )
 
 [node name="Hurtbox_area" type="Area2D" parent="VisualNodes" groups=[
