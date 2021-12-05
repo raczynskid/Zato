@@ -106,7 +106,8 @@ func slash_damage():
 		var target = area.get_parent().get_parent()
 		# check if target is enemy and if hurtbox was hit
 		if target.is_in_group("enemies") and area.name == "Hurtbox_area":
-			if not target.dead:
+			var footsies_aligned = abs(self.position.y - target.position.y) < 10
+			if not target.dead and footsies_aligned:
 				#print(slash_enabled)
 				target.get_hit(slash_enabled)
 
