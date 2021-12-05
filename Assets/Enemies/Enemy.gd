@@ -185,7 +185,12 @@ func dispose():
 		Global.ENEMIES_DEFEATED += 1
 
 func strike():
-	# calls for damage if player has not blocked
+	# check for hitbox and hurtbox alignment
+	var hit = player_in_range()
+
 	# check for vertical position (footsies) alignment
-	if abs(self.position.y - player.position.y) < 10:
+	var footsies_aligned : bool = abs(self.position.y - player.position.y) < 10
+	# calls for damage if player has not blocked
+	
+	if hit and footsies_aligned:
 		player.on_attack(self)

@@ -4,6 +4,7 @@ export (int) var speed = 1000
 export (int) var health = 100
 export (bool) var shadow_blob = false
 onready var dead : bool = false
+onready var strafing : bool = false
 
 # load vectors
 var velocity = Vector2.ZERO
@@ -41,9 +42,13 @@ func _ready():
 func _physics_process(delta):
 	# get arrow key inputs
 	input_vector = get_movement_inputs()
+	strafing = Input.get_action_strength("strafe")
 
 	if input_vector != Vector2.ZERO:
-		animationState.travel('Walk')
+		if strafing:
+			animationState.travel("Strafe")
+		else:
+			animationState.travel('Walk')
 	else:
 		animationState.travel('Idle')
 
@@ -65,8 +70,9 @@ func get_movement_inputs():
 		input_vector = Vector2.ZERO
 
 	# flip entire node on direction change
-	if (last_vector.x != input_vector.x) and (input_vector.x != 0):
-		sprites.scale.x = last_vector.x *-1
+	if not strafing:
+		if (last_vector.x != input_vector.x) and (input_vector.x != 0):
+			sprites.scale.x = last_vector.x *-1
 	
 	# save last active movement vector
 	if (last_vector.x != input_vector.x) and (input_vector.x != 0):
@@ -100,7 +106,8 @@ func slash_damage():
 		var target = area.get_parent().get_parent()
 		# check if target is enemy and if hurtbox was hit
 		if target.is_in_group("enemies") and area.name == "Hurtbox_area":
-			if not target.dead:
+			var footsies_aligned = abs(self.position.y - target.position.y) < 10
+			if not target.dead and footsies_aligned:
 				#print(slash_enabled)
 				target.get_hit(slash_enabled)
 
@@ -113,6 +120,9 @@ func slash3():
 	# open window of opportunity for slash 3
 	# called from animation Slash2
 	slash_enabled = 3
+
+func strafe():
+	pass
 
 func on_attack(_enemy):
 	# called on strike frame of enemy attack (damage frame)
