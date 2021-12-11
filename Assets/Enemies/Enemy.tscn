@@ -403,6 +403,7 @@ __meta__ = {
 position = Vector2( 6.576, -28.473 )
 texture = ExtResource( 6 )
 hframes = 37
+frame = 5
 
 [node name="shadow" type="Sprite" parent="VisualNodes/Sprite"]
 self_modulate = Color( 0, 0, 0, 0.2 )
@@ -413,6 +414,7 @@ texture = ExtResource( 6 )
 offset = Vector2( 0, -3.856 )
 flip_v = true
 hframes = 37
+frame = 5
 
 [node name="Damage_area" type="Area2D" parent="VisualNodes"]
 
