@@ -225,8 +225,9 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=27]
+[sub_resource type="Animation" id=10]
 resource_name = "Strafe"
+length = 1.4
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("VisualNodes/Sprite:frame")
@@ -235,13 +236,25 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 0.8 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 18, 19, 20 ]
+"values": [ 38, 39, 40, 41, 42, 43, 44 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("VisualNodes/Sprite/shadow:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 38, 39, 40, 41, 42, 43, 44 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=11]
 length = 1.6
 loop = true
 tracks/0/type = "value"
@@ -269,67 +282,67 @@ tracks/1/keys = {
 "values": [ 27, 28, 29, 30, 31, 32, 33, 34 ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=11]
+[sub_resource type="AnimationNodeAnimation" id=12]
 animation = "Idle"
 
-[sub_resource type="AnimationNodeAnimation" id=12]
+[sub_resource type="AnimationNodeAnimation" id=13]
 animation = "Slash"
 
-[sub_resource type="AnimationNodeAnimation" id=13]
+[sub_resource type="AnimationNodeAnimation" id=14]
 animation = "Slash2"
 
-[sub_resource type="AnimationNodeAnimation" id=14]
+[sub_resource type="AnimationNodeAnimation" id=15]
 animation = "Slash3"
 
-[sub_resource type="AnimationNodeAnimation" id=28]
+[sub_resource type="AnimationNodeAnimation" id=16]
 animation = "Strafe"
 
-[sub_resource type="AnimationNodeAnimation" id=15]
+[sub_resource type="AnimationNodeAnimation" id=17]
 animation = "Walk"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=16]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=17]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=18]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=19]
-switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=20]
-switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=21]
 switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=22]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=23]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=24]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=29]
+[sub_resource type="AnimationNodeStateMachineTransition" id=25]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=30]
+[sub_resource type="AnimationNodeStateMachineTransition" id=26]
 
-[sub_resource type="AnimationNodeStateMachine" id=25]
-states/Idle/node = SubResource( 11 )
+[sub_resource type="AnimationNodeStateMachineTransition" id=27]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=28]
+
+[sub_resource type="AnimationNodeStateMachine" id=29]
+states/Idle/node = SubResource( 12 )
 states/Idle/position = Vector2( 1251.33, 304.667 )
-states/Slash/node = SubResource( 12 )
+states/Slash/node = SubResource( 13 )
 states/Slash/position = Vector2( 1563.46, -20.6667 )
-states/Slash2/node = SubResource( 13 )
+states/Slash2/node = SubResource( 14 )
 states/Slash2/position = Vector2( 1563.24, 87.6707 )
-states/Slash3/node = SubResource( 14 )
+states/Slash3/node = SubResource( 15 )
 states/Slash3/position = Vector2( 1563.9, 171.337 )
-states/Strafe/node = SubResource( 28 )
+states/Strafe/node = SubResource( 16 )
 states/Strafe/position = Vector2( 1045.33, 160.337 )
-states/Walk/node = SubResource( 15 )
+states/Walk/node = SubResource( 17 )
 states/Walk/position = Vector2( 1252, 80 )
-transitions = [ "Idle", "Walk", SubResource( 16 ), "Idle", "Slash", SubResource( 17 ), "Walk", "Idle", SubResource( 18 ), "Slash", "Idle", SubResource( 19 ), "Slash3", "Idle", SubResource( 20 ), "Slash2", "Idle", SubResource( 21 ), "Slash", "Slash2", SubResource( 22 ), "Slash2", "Slash3", SubResource( 23 ), "Walk", "Slash", SubResource( 24 ), "Strafe", "Idle", SubResource( 29 ), "Idle", "Strafe", SubResource( 30 ) ]
+transitions = [ "Idle", "Walk", SubResource( 18 ), "Idle", "Slash", SubResource( 19 ), "Walk", "Idle", SubResource( 20 ), "Slash", "Idle", SubResource( 21 ), "Slash3", "Idle", SubResource( 22 ), "Slash2", "Idle", SubResource( 23 ), "Slash", "Slash2", SubResource( 24 ), "Slash2", "Slash3", SubResource( 25 ), "Walk", "Slash", SubResource( 26 ), "Strafe", "Idle", SubResource( 27 ), "Idle", "Strafe", SubResource( 28 ) ]
 start_node = "Idle"
-graph_offset = Vector2( 859, -28.996 )
+graph_offset = Vector2( 776, -100.996 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=26]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=30]
 
 [node name="Player" type="KinematicBody2D" groups=[
 "Player",
@@ -343,8 +356,8 @@ position = Vector2( 0, -21.052 )
 [node name="Sprite" type="Sprite" parent="VisualNodes"]
 position = Vector2( 18.8435, -8.32087 )
 texture = ExtResource( 1 )
-hframes = 35
-frame = 18
+hframes = 45
+frame = 15
 
 [node name="shadow" type="Sprite" parent="VisualNodes/Sprite"]
 self_modulate = Color( 0, 0, 0, 0.2 )
@@ -354,7 +367,7 @@ position = Vector2( 1.33482, 58.6827 )
 texture = ExtResource( 1 )
 offset = Vector2( -1.137, -2.902 )
 flip_v = true
-hframes = 35
+hframes = 45
 
 [node name="Blood" parent="VisualNodes" instance=ExtResource( 3 )]
 position = Vector2( 4.88925, -8.11501 )
@@ -386,14 +399,14 @@ anims/Idle = SubResource( 6 )
 anims/Slash = SubResource( 7 )
 anims/Slash2 = SubResource( 8 )
 anims/Slash3 = SubResource( 9 )
-anims/Strafe = SubResource( 27 )
-anims/Walk = SubResource( 10 )
+anims/Strafe = SubResource( 10 )
+anims/Walk = SubResource( 11 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 25 )
+tree_root = SubResource( 29 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 26 )
+parameters/playback = SubResource( 30 )
 
 [node name="Label" type="Label" parent="."]
 visible = false

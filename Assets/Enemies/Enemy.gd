@@ -14,6 +14,8 @@ var velocity = Vector2.ZERO
 
 # other
 var is_player_in_range : bool = false
+var ready1 : bool = false
+var ready2 : bool = false
 
 # load timers
 onready var action_cooldown = Cooldown.new(3)
@@ -31,6 +33,10 @@ onready var slash_effects = get_node("VisualNodes/Strikes/AnimationPlayer")
 # load hitboxes and hurtboxes
 onready var damage_area = get_node("VisualNodes/Damage_area")
 onready var slash_hitbox = get_node("VisualNodes/Damage_area/Slash_hitbox")
+
+onready var damage_area_long = get_node("VisualNodes/Damage_area_long")
+onready var slash_hitbox_long = get_node("VisualNodes/Damage_area/Slash_hitbox_long")
+
 onready var player_detection_area = get_node("detection_area")
 
 # load labels
@@ -61,8 +67,11 @@ func player_in_range():
 	var target = player.get_node("VisualNodes/Hurtbox_area")
 	for area in damage_area.get_overlapping_areas():
 		if area == target:
-			return true
-	return false
+			return "short"
+	for area in damage_area_long.get_overlapping_areas():
+		if area == target:
+			return "long"
+	return "none"
 
 func player_vector():
 	# return vector towards player
@@ -72,27 +81,28 @@ func player_vector():
 func set_idle_state():
 	# return to idle state
 	# to be called from animations
-	if health <= 0:
+	if health <= 0 and state != "Dead":
+		die(false)
 		state = "Dead"
-		die()
 		return
 	state = "Idle"
 
-func action_choice():
+func action_choice(expected_range):
 	# strike at time intervals
-	# if not currently parrying
 	# or moving
-	if state != "Parry":
-		if action_cooldown.is_ready():
-			action_cooldown.reset()
+	if action_cooldown.is_ready():
+		action_cooldown.reset()
+		if expected_range == "short":
 			return "Strike"
-		else:
-			action_cooldown.tick(1)
+		if expected_range == "long":
+			return "Strike2"
+	else:
+		action_cooldown.tick(1)
 	return state
 
-func combat_state():
+func combat_state(expected_range):
 	# perform offensive actions
-	state = action_choice()
+	state = action_choice(expected_range)
 	animationState.travel(state)
 
 func dir_facing():
@@ -113,20 +123,23 @@ func rotate_towards_player():
 		visual_nodes.scale.x *= -1
 
 func movement_state():
-	return move_and_slide(player_vector())
+	if not state in ["Strike", "Strike2"]:
+		animationState.travel("Walk Forward")
+		return move_and_slide(player_vector())
 	
 
 func _physics_process(_delta):
-	label1.text = str(health)
+	label1.text = str("ready1 " + str(ready1) + " ready2 " + str(ready2))
 	label2.text = str(state)
 	if state != "Dead":
 		if player_detected():
 			# rotate towards player
 			rotate_towards_player()
 			# if player detected check if in melee attack range
-			if player_in_range():
+			var expected_range : String = player_in_range()
+			if expected_range in ["short", "long"] and not state in ["Strike", "Strike2"]:
 				# start attacking
-				combat_state()
+				combat_state(expected_range)
 			else:
 				# if detected but not in range
 				# move towards player
@@ -143,36 +156,24 @@ func _physics_process(_delta):
 
 func get_hit(slash_type):
 	# triggered on collision with player hurtbox
-	if state == "Idle":
-		# always parry attacki if in idle state
-		state = "Parry"
-		animationState.travel("Parry")
-	if state == "Parry":
-		# reset particle animation if parrying
-		get_node("VisualNodes/Sparks").restart()
-	if state in ["Ready", "Strike"]:
+	if (ready1 or ready2) and player.slash_enabled == 1:
+		die(true)
+		state = "Dead"
+		return
+	if health <= 0:
+		die(false)
+		state = "Dead"
+		return
+	if state in ["Idle", "Strike", "Strike2"]:
 		# show blood effects if hit
 		# in one of vulnerable states
 		slash_effects.play("strike" + str(slash_type))
 		health -= 1
-	if health <= 0:
-		die()
-		state = "Dead"
+
 		
-
-func end_parry():
-	# return to idle after parry
-	# separate from return_to_idle method
-	# in case other actions need to be taken here
-	# eg. counter-strike
-	
-	state = "Idle"
-
-func die():
+func die(fatality):
 	if state != "Dead":
-		randomize()
-		var fatality_roll = int(rand_range(0,5))
-		if fatality_roll == 0:
+		if fatality:
 			animationState.travel("Fatality")
 		else:
 			animationState.travel("Die")
@@ -192,5 +193,15 @@ func strike():
 	var footsies_aligned : bool = abs(self.position.y - player.position.y) < 10
 	# calls for damage if player has not blocked
 	
-	if hit and footsies_aligned:
+	if hit in ["short", "long"] and footsies_aligned:
 		player.on_attack(self)
+
+func ready_strike1():
+	ready1 = true
+
+func ready_strike2():
+	ready2 = true
+
+func end_ready():
+	ready1 = false
+	ready2 = false
