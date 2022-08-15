@@ -509,11 +509,11 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=39]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=42]
+[sub_resource type="AnimationNodeStateMachineTransition" id=40]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=43]
+[sub_resource type="AnimationNodeStateMachineTransition" id=41]
 
-[sub_resource type="AnimationNodeStateMachine" id=40]
+[sub_resource type="AnimationNodeStateMachine" id=42]
 states/Die/node = SubResource( 18 )
 states/Die/position = Vector2( 87.667, 221 )
 states/Fatality/node = SubResource( 19 )
@@ -530,11 +530,11 @@ states/Strike2/node = SubResource( 24 )
 states/Strike2/position = Vector2( 1052, 268 )
 "states/Walk Forward/node" = SubResource( 25 )
 "states/Walk Forward/position" = Vector2( 410.807, 338 )
-transitions = [ "Strike", "Idle", SubResource( 26 ), "Ready", "Strike", SubResource( 27 ), "Idle", "Fatality", SubResource( 28 ), "Idle", "Die", SubResource( 29 ), "Ready", "Idle", SubResource( 30 ), "Idle", "Ready2", SubResource( 31 ), "Strike2", "Idle", SubResource( 32 ), "Idle", "Walk Forward", SubResource( 33 ), "Walk Forward", "Idle", SubResource( 34 ), "Walk Forward", "Ready2", SubResource( 35 ), "Walk Forward", "Ready", SubResource( 36 ), "Ready2", "Strike2", SubResource( 37 ), "Ready2", "Fatality", SubResource( 38 ), "Ready", "Fatality", SubResource( 39 ), "Strike", "Die", SubResource( 42 ), "Strike2", "Die", SubResource( 43 ) ]
+transitions = [ "Strike", "Idle", SubResource( 26 ), "Ready", "Strike", SubResource( 27 ), "Idle", "Fatality", SubResource( 28 ), "Idle", "Die", SubResource( 29 ), "Ready", "Idle", SubResource( 30 ), "Idle", "Ready2", SubResource( 31 ), "Strike2", "Idle", SubResource( 32 ), "Idle", "Walk Forward", SubResource( 33 ), "Walk Forward", "Idle", SubResource( 34 ), "Walk Forward", "Ready2", SubResource( 35 ), "Walk Forward", "Ready", SubResource( 36 ), "Ready2", "Strike2", SubResource( 37 ), "Ready2", "Fatality", SubResource( 38 ), "Ready", "Fatality", SubResource( 39 ), "Strike", "Die", SubResource( 40 ), "Strike2", "Die", SubResource( 41 ) ]
 start_node = "Idle"
 graph_offset = Vector2( -150, -102 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=41]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=43]
 
 [node name="Enemy" type="KinematicBody2D" groups=[
 "enemies",
@@ -573,7 +573,6 @@ __meta__ = {
 position = Vector2( 6.576, -28.473 )
 texture = ExtResource( 6 )
 hframes = 61
-frame = 28
 
 [node name="shadow" type="Sprite" parent="VisualNodes/Sprite"]
 self_modulate = Color( 0, 0, 0, 0.2 )
@@ -584,7 +583,6 @@ texture = ExtResource( 6 )
 offset = Vector2( 0, -3.856 )
 flip_v = true
 hframes = 61
-frame = 28
 
 [node name="Damage_area" type="Area2D" parent="VisualNodes"]
 
@@ -633,7 +631,7 @@ anims/lower_sword = SubResource( 16 )
 anims/raise_sword = SubResource( 17 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 40 )
+tree_root = SubResource( 42 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 41 )
+parameters/playback = SubResource( 43 )
