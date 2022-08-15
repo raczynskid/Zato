@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/MA_Stab Flesh Squelch-003.mp3-30c416c20af7b894f79ba3b7007dcf85.mp3str"
+
+[deps]
+
+source_file="res://Sound/fx/MA_Stab Flesh Squelch-003.mp3"
+dest_files=[ "res://.import/MA_Stab Flesh Squelch-003.mp3-30c416c20af7b894f79ba3b7007dcf85.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

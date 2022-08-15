@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://Sound/fx/Spear2.mp3" type="AudioStream" id=1]
 [ext_resource path="res://Assets/Enemies/Enemy.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Effects/Sparks.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Sprites/Spritesheets/Enemy revC.png" type="Texture" id=6]
 [ext_resource path="res://Sound/fx/Spear3.mp3" type="AudioStream" id=7]
+[ext_resource path="res://Sound/fx/MA_Stab Flesh Squelch-003.mp3" type="AudioStream" id=8]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 77.2865
@@ -85,6 +86,24 @@ tracks/1/keys = {
 "args": [  ],
 "method": "dispose"
 } ]
+}
+tracks/2/type = "audio"
+tracks/2/path = NodePath("AudioStreamPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 8 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": null
+} ],
+"times": PoolRealArray( 0.1, 0.651569 )
 }
 
 [sub_resource type="Animation" id=9]
@@ -611,7 +630,6 @@ __meta__ = {
 position = Vector2( 6.576, -28.473 )
 texture = ExtResource( 6 )
 hframes = 61
-frame = 28
 
 [node name="shadow" type="Sprite" parent="VisualNodes/Sprite"]
 self_modulate = Color( 0, 0, 0, 0.2 )
@@ -622,7 +640,6 @@ texture = ExtResource( 6 )
 offset = Vector2( 0, -3.856 )
 flip_v = true
 hframes = 61
-frame = 28
 
 [node name="Damage_area" type="Area2D" parent="VisualNodes"]
 
