@@ -117,10 +117,11 @@ func dir_facing():
 func rotate_towards_player():
 	# flip all visual nodes
 	# based on relative player position on x axis
-	var facing = dir_facing()
-	if facing != prev_facing:
-		prev_facing = dir_facing()
-		visual_nodes.scale.x *= -1
+	if not state in ["Strike", "Strike2"] and not ready1 and not ready2:
+		var facing = dir_facing()
+		if facing != prev_facing:
+			prev_facing = dir_facing()
+			visual_nodes.scale.x *= -1
 
 func movement_state():
 	if not state in ["Strike", "Strike2"]:
