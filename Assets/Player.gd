@@ -56,6 +56,7 @@ func _physics_process(delta):
 		execute_slash()
 
 	velocity = move_and_slide(input_vector * speed * delta)
+	label1.text = str(slash_enabled)
 
 func _draw():
 	pass

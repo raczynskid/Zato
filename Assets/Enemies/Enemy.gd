@@ -129,8 +129,11 @@ func movement_state():
 	
 
 func _physics_process(_delta):
-	label1.text = str("ready1 " + str(ready1) + " ready2 " + str(ready2))
+	label1.text = str(health)
 	label2.text = str(state)
+	if health <= 0:
+		die(false)
+		state = "Dead"
 	if state != "Dead":
 		if player_detected():
 			# rotate towards player
@@ -156,19 +159,20 @@ func _physics_process(_delta):
 
 func get_hit(slash_type):
 	# triggered on collision with player hurtbox
-	if (ready1 or ready2) and player.slash_enabled == 1:
-		die(true)
-		state = "Dead"
-		return
-	if health <= 0:
-		die(false)
-		state = "Dead"
-		return
-	if state in ["Idle", "Strike", "Strike2"]:
-		# show blood effects if hit
-		# in one of vulnerable states
-		slash_effects.play("strike" + str(slash_type))
-		health -= 1
+	if state != "Dead":
+		if (ready1 or ready2) and slash_type == 1:
+			die(true)
+			state = "Dead"
+			return
+		if health <= 0:
+			die(false)
+			state = "Dead"
+			return
+		if state in ["Idle", "Strike", "Strike2"]:
+			# show blood effects if hit
+			# in one of vulnerable states
+			slash_effects.play("strike" + str(slash_type))
+			health -= 1
 
 		
 func die(fatality):
