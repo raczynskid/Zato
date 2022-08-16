@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/MA_MonumentMusic_RingOfFire_MainVersion (online-audio-converter.com) (1).mp3-e636ee1d4cb9bb7acd8bd397199c13eb.mp3str"
+
+[deps]
+
+source_file="res://Sound/music/MA_MonumentMusic_RingOfFire_MainVersion (online-audio-converter.com) (1).mp3"
+dest_files=[ "res://.import/MA_MonumentMusic_RingOfFire_MainVersion (online-audio-converter.com) (1).mp3-e636ee1d4cb9bb7acd8bd397199c13eb.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

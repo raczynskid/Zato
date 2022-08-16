@@ -1,8 +1,11 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://Assets/Sprites/Spritesheets/Swordmaster-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Player.gd" type="Script" id=2]
 [ext_resource path="res://Effects/Blood.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Sound/fx/swordswing001.mp3" type="AudioStream" id=4]
+[ext_resource path="res://Sound/fx/swordswing002.mp3" type="AudioStream" id=5]
+[ext_resource path="res://Sound/fx/swordswing003.mp3" type="AudioStream" id=6]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 light_mode = 2
@@ -129,6 +132,24 @@ tracks/3/keys = {
 "method": "slash2"
 } ]
 }
+tracks/4/type = "audio"
+tracks/4/path = NodePath("AudioStreamPlayer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 4 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": null
+} ],
+"times": PoolRealArray( 0.0244513, 0.4 )
+}
 
 [sub_resource type="Animation" id=8]
 length = 0.8
@@ -187,6 +208,24 @@ tracks/3/keys = {
 "method": "end_slash"
 } ]
 }
+tracks/4/type = "audio"
+tracks/4/path = NodePath("AudioStreamPlayer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 5 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": null
+} ],
+"times": PoolRealArray( 0.0246084, 0.3 )
+}
 
 [sub_resource type="Animation" id=9]
 tracks/0/type = "value"
@@ -229,6 +268,24 @@ tracks/2/keys = {
 "args": [  ],
 "method": "end_slash"
 } ]
+}
+tracks/3/type = "audio"
+tracks/3/path = NodePath("AudioStreamPlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 6 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": null
+} ],
+"times": PoolRealArray( 0.0409093, 0.231349 )
 }
 
 [sub_resource type="Animation" id=10]
@@ -420,3 +477,5 @@ margin_bottom = 14.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

@@ -162,6 +162,7 @@ func get_hit(slash_type):
 	# triggered on collision with player hurtbox
 	if state != "Dead":
 		if (ready1 or ready2) and slash_type == 1:
+			slash_effects.play("strike" + str(slash_type))
 			die(true)
 			state = "Dead"
 			return

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/swordswing003.mp3-ac4f16c346ecfaebb570f82f25825603.mp3str"
+
+[deps]
+
+source_file="res://Sound/fx/swordswing003.mp3"
+dest_files=[ "res://.import/swordswing003.mp3-ac4f16c346ecfaebb570f82f25825603.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
