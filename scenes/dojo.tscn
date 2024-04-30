@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://cx0ncwi2hluq5"]
+
+[ext_resource type="PackedScene" uid="uid://bvtyxtxgp1npo" path="res://scenes/fx/snow.tscn" id="1_4nugr"]
+[ext_resource type="Texture2D" uid="uid://pq8lhtp7rp8g" path="res://assets/dojo_background.png" id="1_fdol6"]
+[ext_resource type="Texture2D" uid="uid://bbvpoilvo40lo" path="res://assets/dojo_front.png" id="2_rt7u1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yths6"]
+size = Vector2(264, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1sp8n"]
+size = Vector2(264, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yt1k3"]
+size = Vector2(143, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rshtr"]
+size = Vector2(143, 14)
+
+[node name="Dojo" type="Node2D"]
+
+[node name="Snow" parent="." instance=ExtResource("1_4nugr")]
+
+[node name="DojoBackground" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(200, 150)
+texture = ExtResource("1_fdol6")
+
+[node name="DojoFront" type="Sprite2D" parent="."]
+position = Vector2(200, 150)
+texture = ExtResource("2_rt7u1")
+
+[node name="Limiters" type="StaticBody2D" parent="."]
+
+[node name="Top" type="CollisionShape2D" parent="Limiters"]
+position = Vector2(200, 102)
+shape = SubResource("RectangleShape2D_yths6")
+
+[node name="Bottom" type="CollisionShape2D" parent="Limiters"]
+position = Vector2(200, 262)
+shape = SubResource("RectangleShape2D_1sp8n")
+
+[node name="Left" type="CollisionShape2D" parent="Limiters"]
+position = Vector2(61, 181.5)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_yt1k3")
+
+[node name="Right" type="CollisionShape2D" parent="Limiters"]
+position = Vector2(340, 182)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_rshtr")
