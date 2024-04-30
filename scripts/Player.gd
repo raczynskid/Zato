@@ -5,8 +5,8 @@ extends CharacterBody2D
 var input_direction: Vector2
 
 enum State {Idle, Walk, Strike, Sleep}
-var strike_level : int = 1
-var can_strike : bool = false
+var strike_enabled : int = 1
+var continue_strike : bool = false
 var current_state = State.Sleep
 
 func get_input():
@@ -23,30 +23,32 @@ func get_input():
 func enter_state(state) -> void:
 	match state:
 		State.Strike:
-			if current_state == State.Strike:
-				if can_strike:
-					strike_level += 1
-					can_strike = false
-				return
+			pass
 		State.Walk:
 			if current_state == State.Strike:
 				return
 			scale.x = scale.y * (-1 if input_direction.x <0 else 1)
 		State.Idle:
-			if current_state == State.Strike:
-				return
 			if current_state == State.Sleep:
+				return
+			if current_state == State.Strike:
 				return
 	current_state = state
 	
 func exit_state(from_state, to_state) -> void:
 	match from_state:
 		State.Strike:
-			can_strike = true
+			if to_state == State.Idle:
+				strike_enabled = 1
+				continue_strike = false
+			elif to_state == State.Strike:
+				continue_strike = false
 	current_state = to_state
 
 func _physics_process(delta):
 	get_input()
+	$Debug.text = "continue strike " + str(int(continue_strike))
+	$Debug2.text = "strike_enabled " + str(strike_enabled)
 	match current_state:
 		State.Sleep:
 			$AnimatedSprite2D.play("Zazen")
@@ -64,4 +66,3 @@ func _on_animated_sprite_2d_animation_finished():
 	match current_state:
 		State.Strike:
 			exit_state(current_state, State.Idle)
-	
