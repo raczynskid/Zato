@@ -456,17 +456,16 @@ script = ExtResource("4_74pam")
 walk_state = NodePath("../Walk")
 strike_state = NodePath("../Strike")
 animation_name = "Idle"
+move_speed = 0.0
 
-[node name="Walk" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "strike_state")]
+[node name="Walk" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
 script = ExtResource("5_gowuv")
 idle_state = NodePath("../Idle")
-strike_state = NodePath("../Strike")
 animation_name = "Walk"
 
-[node name="Strike" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "walk_state")]
+[node name="Strike" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
 script = ExtResource("6_2hajr")
 idle_state = NodePath("../Idle")
-walk_state = NodePath("../Walk")
 animation_name = "Strike1"
 
-[connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachine/Strike" method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

@@ -1,11 +1,12 @@
-[gd_scene load_steps=60 format=3 uid="uid://dj0vwrytcens8"]
+[gd_scene load_steps=61 format=3 uid="uid://dj0vwrytcens8"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_6v5vy"]
 [ext_resource type="Texture2D" uid="uid://d0uo07ew4ldj1" path="res://assets/zato_spritesheet.png" id="1_ugewn"]
 [ext_resource type="Script" path="res://scripts/StateMachine.gd" id="3_w1606"]
 [ext_resource type="Script" path="res://scripts/Idle.gd" id="4_74pam"]
 [ext_resource type="Script" path="res://scripts/Walk.gd" id="5_gowuv"]
-[ext_resource type="Script" path="res://scripts/Strike.gd" id="6_2hajr"]
+[ext_resource type="Script" path="res://scripts/Sleep.gd" id="6_qj5x0"]
+[ext_resource type="Script" path="res://scripts/Attack.gd" id="7_ma27b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_io3uo"]
 atlas = ExtResource("1_ugewn")
@@ -363,7 +364,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_14rp4")
 }],
-"loop": false,
+"loop": true,
 "name": &"Walk",
 "speed": 5.0
 }, {
@@ -428,7 +429,7 @@ script = ExtResource("1_6v5vy")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0llsr")
-animation = &"Walk"
+animation = &"Zazen"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 34)
@@ -447,26 +448,21 @@ offset_top = -24.0
 offset_right = 38.0
 offset_bottom = -1.0
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+[node name="StateMachine" type="Node" parent="."]
 script = ExtResource("3_w1606")
-starting_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("walk_state", "strike_state")]
+[node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("4_74pam")
-walk_state = NodePath("../Walk")
-strike_state = NodePath("../Strike")
-animation_name = "Idle"
+animation_name = null
+move_speed = null
 
-[node name="Walk" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "strike_state")]
+[node name="Walk" type="Node" parent="StateMachine"]
 script = ExtResource("5_gowuv")
-idle_state = NodePath("../Idle")
-strike_state = NodePath("../Strike")
-animation_name = "Walk"
 
-[node name="Strike" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "walk_state")]
-script = ExtResource("6_2hajr")
-idle_state = NodePath("../Idle")
-walk_state = NodePath("../Walk")
-animation_name = "Strike1"
+[node name="Sleep" type="Node" parent="StateMachine"]
+script = ExtResource("6_qj5x0")
 
-[connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachine/Strike" method="_on_animated_sprite_2d_animation_finished"]
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("7_ma27b")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
