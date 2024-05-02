@@ -6,10 +6,14 @@ var rng = RandomNumberGenerator.new()
 @export
 var level : int = 1
 
+@export
+var spawn_first_enemy : bool = false
+
 var wave_size : Dictionary = {1:1, 2:3, 3:6, 4:8, 5:10}
 
 func _ready():
-	spawn_enemy(1, true)
+	if spawn_first_enemy:
+		spawn_enemy(1, true)
 
 func randomize_spawn_position() -> Vector2:
 	rng.randomize()

@@ -424,7 +424,8 @@ animations = [{
 radius = 5.0
 height = 24.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+collision_layer = 3
 motion_mode = 1
 platform_on_leave = 2
 script = ExtResource("1_6v5vy")

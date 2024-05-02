@@ -6,6 +6,10 @@ var speed = 100
 
 @onready
 var animations = $AnimatedSprite2D
+@onready
+var raycast = $RayCast2D
+@onready
+var raycast_short = $RayCast2D2
 
 @onready
 var state_machine = $StateMachineEnemy

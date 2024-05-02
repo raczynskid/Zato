@@ -30,22 +30,22 @@ texture = ExtResource("1_fdol6")
 position = Vector2(200, 150)
 texture = ExtResource("2_rt7u1")
 
-[node name="Limiters" type="StaticBody2D" parent="."]
+[node name="Limiters" type="StaticBody2D" parent="." groups=["Walls"]]
 
-[node name="Top" type="CollisionShape2D" parent="Limiters"]
+[node name="Top" type="CollisionShape2D" parent="Limiters" groups=["Walls"]]
 position = Vector2(200, 106)
 shape = SubResource("RectangleShape2D_yths6")
 
-[node name="Bottom" type="CollisionShape2D" parent="Limiters"]
+[node name="Bottom" type="CollisionShape2D" parent="Limiters" groups=["Walls"]]
 position = Vector2(200, 258.5)
 shape = SubResource("RectangleShape2D_1sp8n")
 
-[node name="Left" type="CollisionShape2D" parent="Limiters"]
+[node name="Left" type="CollisionShape2D" parent="Limiters" groups=["Walls"]]
 position = Vector2(64.5, 181.5)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_yt1k3")
 
-[node name="Right" type="CollisionShape2D" parent="Limiters"]
+[node name="Right" type="CollisionShape2D" parent="Limiters" groups=["Walls"]]
 position = Vector2(336, 182)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_rshtr")

@@ -552,7 +552,7 @@ animations = [{
 radius = 6.0
 height = 28.0
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
 motion_mode = 1
 script = ExtResource("1_j1fo8")
 
@@ -566,14 +566,23 @@ position = Vector2(0, 33)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_quqjl")
 
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(-132, 0)
+collision_mask = 2
+
+[node name="RayCast2D2" type="RayCast2D" parent="."]
+position = Vector2(0, 4)
+target_position = Vector2(-48, 0)
+
 [node name="StateMachineEnemy" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
 script = ExtResource("3_hajn6")
 starting_state = NodePath("Enter")
 
-[node name="Search" type="Node" parent="StateMachineEnemy" node_paths=PackedStringArray("idle_state", "attack_state")]
+[node name="Search" type="Node" parent="StateMachineEnemy" node_paths=PackedStringArray("idle_state", "attack_state", "follow_state")]
 script = ExtResource("4_k0ju7")
 idle_state = NodePath("../Taunt")
 attack_state = NodePath("../Attack")
+follow_state = NodePath("../Follow")
 animation_name = "WalkForward"
 move_speed = 100.0
 
@@ -583,8 +592,11 @@ script = ExtResource("5_hppau")
 [node name="Die" type="Node" parent="StateMachineEnemy"]
 script = ExtResource("6_fd4w0")
 
-[node name="Follow" type="Node" parent="StateMachineEnemy"]
+[node name="Follow" type="Node" parent="StateMachineEnemy" node_paths=PackedStringArray("attack_state", "search_state")]
 script = ExtResource("7_6spwv")
+attack_state = NodePath("../Attack")
+search_state = NodePath("../Search")
+animation_name = "WalkForward"
 
 [node name="Taunt" type="Node" parent="StateMachineEnemy" node_paths=PackedStringArray("search_state")]
 script = ExtResource("8_84rcn")
