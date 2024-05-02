@@ -1,8 +1,13 @@
-[gd_scene load_steps=66 format=3 uid="uid://na448d2w5gp3"]
+[gd_scene load_steps=71 format=3 uid="uid://na448d2w5gp3"]
 
+[ext_resource type="Script" path="res://scripts/Enemy.gd" id="1_j1fo8"]
 [ext_resource type="Texture2D" uid="uid://c0ewgs8j5w5o5" path="res://assets/enemy_spritesheet.png" id="1_p5cxk"]
-[ext_resource type="Script" path="res://scripts/StateMachine.gd" id="2_jxsp5"]
-[ext_resource type="Script" path="res://scripts/State.gd" id="3_xvajw"]
+[ext_resource type="Script" path="res://scripts/StateMachine.gd" id="3_hajn6"]
+[ext_resource type="Script" path="res://scripts/EnemySearch.gd" id="4_k0ju7"]
+[ext_resource type="Script" path="res://scripts/EnemyAttack.gd" id="5_hppau"]
+[ext_resource type="Script" path="res://scripts/EnemyDie.gd" id="6_fd4w0"]
+[ext_resource type="Script" path="res://scripts/EnemyFollow.gd" id="7_6spwv"]
+[ext_resource type="Script" path="res://scripts/EnemyIdle.gd" id="8_rd1s2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7rak2"]
 atlas = ExtResource("1_p5cxk")
@@ -468,26 +473,51 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_quqjl"]
+radius = 6.0
+height = 28.0
 
 [node name="Enemy" type="CharacterBody2D"]
+disable_mode = 1
+motion_mode = 1
+script = ExtResource("1_j1fo8")
+speed = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_658jt")
 animation = &"Idle"
+flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 27)
+position = Vector2(0, 33)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_quqjl")
 
-[node name="StateMachine" type="Node" parent="."]
-script = ExtResource("2_jxsp5")
+[node name="StateMachineEnemy" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+script = ExtResource("3_hajn6")
+starting_state = NodePath("Idle")
 
-[node name="Search" type="Node" parent="StateMachine"]
-script = ExtResource("3_xvajw")
+[node name="Search" type="Node" parent="StateMachineEnemy"]
+script = ExtResource("4_k0ju7")
 
-[node name="Attack" type="Node" parent="StateMachine"]
-script = ExtResource("3_xvajw")
+[node name="Attack" type="Node" parent="StateMachineEnemy"]
+script = ExtResource("5_hppau")
 
-[node name="Die" type="Node" parent="StateMachine"]
-script = ExtResource("3_xvajw")
+[node name="Die" type="Node" parent="StateMachineEnemy"]
+script = ExtResource("6_fd4w0")
+
+[node name="Follow" type="Node" parent="StateMachineEnemy"]
+script = ExtResource("7_6spwv")
+
+[node name="Idle" type="Node" parent="StateMachineEnemy" node_paths=PackedStringArray("search_state")]
+script = ExtResource("8_rd1s2")
+search_state = NodePath("../Search")
+animation_name = "Idle"
+
+[node name="Debug" type="Label" parent="."]
+offset_top = -34.0
+offset_right = 40.0
+offset_bottom = -11.0
+
+[node name="Debug2" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0

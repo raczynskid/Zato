@@ -363,7 +363,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_14rp4")
 }],
-"loop": true,
+"loop": false,
 "name": &"Walk",
 "speed": 5.0
 }, {
@@ -425,11 +425,10 @@ height = 24.0
 motion_mode = 1
 platform_on_leave = 2
 script = ExtResource("1_6v5vy")
-speed = 100
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0llsr")
-animation = &"Walk"
+animation = &"Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 34)

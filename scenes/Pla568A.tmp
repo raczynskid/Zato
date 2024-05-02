@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_6v5vy"]
 [ext_resource type="Texture2D" uid="uid://d0uo07ew4ldj1" path="res://assets/zato_spritesheet.png" id="1_ugewn"]
-[ext_resource type="Script" path="res://scripts/StateMachine.gd" id="3_kdfbn"]
-[ext_resource type="Script" path="res://scripts/PlayerIdle.gd" id="4_74pam"]
-[ext_resource type="Script" path="res://scripts/PlayerWalk.gd" id="5_gowuv"]
-[ext_resource type="Script" path="res://scripts/PlayerStrike.gd" id="6_2hajr"]
+[ext_resource type="Script" path="res://scripts/StateMachine.gd" id="3_w1606"]
+[ext_resource type="Script" path="res://scripts/Idle.gd" id="4_74pam"]
+[ext_resource type="Script" path="res://scripts/Walk.gd" id="5_gowuv"]
+[ext_resource type="Script" path="res://scripts/Strike.gd" id="6_2hajr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_io3uo"]
 atlas = ExtResource("1_ugewn")
@@ -363,7 +363,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_14rp4")
 }],
-"loop": true,
+"loop": false,
 "name": &"Walk",
 "speed": 5.0
 }, {
@@ -425,11 +425,10 @@ height = 24.0
 motion_mode = 1
 platform_on_leave = 2
 script = ExtResource("1_6v5vy")
-speed = 100
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0llsr")
-animation = &"Walk"
+animation = &"Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 34)
@@ -454,43 +453,43 @@ offset_top = 42.0
 offset_right = 36.0
 offset_bottom = 65.0
 
-[node name="StateMachinePlayer" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
-script = ExtResource("3_kdfbn")
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+script = ExtResource("3_w1606")
 starting_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateMachinePlayer" node_paths=PackedStringArray("walk_state", "strike_state")]
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("walk_state", "strike_state")]
 script = ExtResource("4_74pam")
 walk_state = NodePath("../Walk")
 strike_state = NodePath("../Strike1")
 animation_name = "Idle"
 
-[node name="Walk" type="Node" parent="StateMachinePlayer" node_paths=PackedStringArray("idle_state", "strike_state")]
+[node name="Walk" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "strike_state")]
 script = ExtResource("5_gowuv")
 idle_state = NodePath("../Idle")
 strike_state = NodePath("../Strike1")
 animation_name = "Walk"
 
-[node name="Strike1" type="Node" parent="StateMachinePlayer" node_paths=PackedStringArray("idle_state", "walk_state", "next_strike")]
+[node name="Strike1" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "walk_state", "next_strike")]
 script = ExtResource("6_2hajr")
 idle_state = NodePath("../Idle")
 walk_state = NodePath("../Walk")
 next_strike = NodePath("../Strike2")
 animation_name = "Strike1"
 
-[node name="Strike2" type="Node" parent="StateMachinePlayer" node_paths=PackedStringArray("idle_state", "walk_state", "next_strike")]
+[node name="Strike2" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "walk_state", "next_strike")]
 script = ExtResource("6_2hajr")
 idle_state = NodePath("../Idle")
 walk_state = NodePath("../Walk")
 next_strike = NodePath("../Strike3")
 animation_name = "Strike2"
 
-[node name="Strike3" type="Node" parent="StateMachinePlayer" node_paths=PackedStringArray("idle_state", "walk_state", "next_strike")]
+[node name="Strike3" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "walk_state", "next_strike")]
 script = ExtResource("6_2hajr")
 idle_state = NodePath("../Idle")
 walk_state = NodePath("../Walk")
 next_strike = NodePath("../Walk")
 animation_name = "Strike3"
 
-[connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachinePlayer/Strike1" method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachinePlayer/Strike2" method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachinePlayer/Strike3" method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachine/Strike1" method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachine/Strike2" method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachine/Strike3" method="_on_animated_sprite_2d_animation_finished"]

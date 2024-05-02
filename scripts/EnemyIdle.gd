@@ -1,25 +1,23 @@
-class_name State
-extends Node
+extends State
 
 @export
-var animation_name: String
+var search_state : State
 @export
-var move_speed: float = 300
-
-# Hold a reference to the parent so that it can be controlled by the state
-var parent
+var input_direction = Vector2.ZERO
+var last_orientation = Vector2.ZERO
 
 func enter() -> void:
-	parent.animations.play(animation_name)
+	super()
 
 func exit() -> void:
-	pass
+	return
 
 func process_input(event: InputEvent) -> State:
 	return null
-
+	
 func process_frame(delta: float) -> State:
 	return null
 
 func process_physics(delta: float) -> State:
+	parent.move_and_slide()
 	return null
