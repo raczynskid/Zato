@@ -2,20 +2,25 @@ extends State
 
 @export
 var idle_state : State
+@export
+var attack_state : State
+@export
+var search_speed : int = 50
 
 var target : Vector2
-var direction
-var velocity
+var direction : Vector2
+
+var timer_setting: float = 1.0
+var timer
+
+func randomize_direction() -> Vector2:
+	var rng = RandomNumberGenerator.new()
+	return Vector2(rng.randf_range(-1.0, 1.0), rng.randf_range(-1.0, 1.0)).normalized()
 
 func enter() -> void:
 	super()
-	print("search entered")
-	var rng = RandomNumberGenerator.new()
-	var random_x = rng.randf_range(70.0, 330.0)
-	var random_y = rng.randf_range(110.0, 255.0)
-	target = Vector2(random_x, random_y)
-	direction = parent.global_position.direction_to(target)
-	print(target)
+	direction = randomize_direction()
+	timer = timer_setting
 
 func exit() -> void:
 	return
@@ -24,6 +29,12 @@ func process_input(event: InputEvent) -> State:
 	return null
 
 func process_physics(delta: float) -> State:
-	velocity = Vector2.LEFT * 100
+	parent.scale.x = parent.scale.y * (1 if direction.x <0 else -1)
+	if timer >= 0:
+		timer -= delta
+	else:
+		timer = timer_setting
+		direction = randomize_direction()
+	parent.velocity = direction * search_speed
 	parent.move_and_slide()
 	return null

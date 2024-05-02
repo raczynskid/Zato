@@ -10,10 +10,12 @@ config_version=5
 
 [application]
 
-config/name="Zato 2.0"
+config/name="Zato"
+config/version="2"
 run/main_scene="res://scenes/app.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
-config/icon="res://icon.svg"
+boot_splash/show_image=false
+config/icon="res://assets/dojo_icon.png"
 
 [display]
 
