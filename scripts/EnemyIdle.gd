@@ -2,9 +2,6 @@ extends State
 
 @export
 var search_state : State
-@export
-var input_direction = Vector2.ZERO
-var last_orientation = Vector2.ZERO
 
 func enter() -> void:
 	super()

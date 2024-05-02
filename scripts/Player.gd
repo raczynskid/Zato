@@ -8,6 +8,9 @@ var speed = 400
 var animations = $AnimatedSprite2D
 
 @onready
+var playerFX = $PlayerFX
+
+@onready
 var state_machine = $StateMachinePlayer
 var orientation = 0
 

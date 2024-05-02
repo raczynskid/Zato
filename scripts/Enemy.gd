@@ -2,7 +2,7 @@ class_name Enemy
 extends CharacterBody2D
 
 @export
-var speed = 400
+var speed = 100
 
 @onready
 var animations = $AnimatedSprite2D

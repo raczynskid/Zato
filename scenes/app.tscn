@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cq2vifcorpg2v"]
+[gd_scene load_steps=5 format=3 uid="uid://cq2vifcorpg2v"]
 
 [ext_resource type="PackedScene" uid="uid://dj0vwrytcens8" path="res://scenes/Player.tscn" id="1_mi1hb"]
 [ext_resource type="PackedScene" uid="uid://cx0ncwi2hluq5" path="res://scenes/dojo.tscn" id="2_eck8w"]
 [ext_resource type="PackedScene" uid="uid://na448d2w5gp3" path="res://scenes/Enemy.tscn" id="3_suei4"]
+[ext_resource type="AudioStream" uid="uid://75ysqdha83h0" path="res://sound/music/Music_drums.mp3" id="4_enfrk"]
 
 [node name="App" type="Node2D"]
 y_sort_enabled = true
@@ -10,8 +11,11 @@ y_sort_enabled = true
 [node name="Dojo" parent="." instance=ExtResource("2_eck8w")]
 
 [node name="Player" parent="." instance=ExtResource("1_mi1hb")]
-position = Vector2(116, 170)
+position = Vector2(104, 164)
 
 [node name="Enemy" parent="." instance=ExtResource("3_suei4")]
-position = Vector2(242, 162)
-speed = 400
+position = Vector2(304, 162)
+
+[node name="BackroundMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_enfrk")
+autoplay = true

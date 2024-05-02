@@ -6,6 +6,8 @@ var idle_state : State
 var walk_state : State
 @export
 var next_strike : State
+@export
+var sound: Resource
 
 var is_done : bool = false
 var continue_strike : bool = false
@@ -17,6 +19,8 @@ func enter() -> void:
 	super()
 	is_done = false
 	continue_strike = false
+	parent.playerFX.stream = sound
+	parent.playerFX.play()
 
 func exit() -> void:
 	# reset cooldown on state end
