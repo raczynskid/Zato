@@ -9,6 +9,7 @@ var is_done : bool = false
 
 func enter() -> void:
 	super()
+	is_done = false
 
 func exit() -> void:
 	is_done = false

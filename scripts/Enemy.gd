@@ -10,10 +10,11 @@ var animations = $AnimatedSprite2D
 var raycast = $RayCast2D
 @onready
 var raycast_short = $RayCast2D2
-
 @onready
 var state_machine = $StateMachineEnemy
+
 var orientation = 0
+var player_target = null
 
 @onready
 var debug = $Debug
