@@ -12,6 +12,10 @@ var playerFX = $PlayerFX
 
 @onready
 var state_machine = $StateMachinePlayer
+
+@onready
+var hurtbox = $Hurtbox
+
 var orientation = 0
 
 @onready

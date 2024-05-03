@@ -20,6 +20,7 @@ stream = ExtResource("4_enfrk")
 autoplay = true
 
 [node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 10.488
 
 [node name="Enemy" parent="." instance=ExtResource("3_suei4")]
 position = Vector2(291, 154)

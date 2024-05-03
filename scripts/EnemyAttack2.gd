@@ -4,12 +4,16 @@ extends State
 var follow_state : State
 @export
 var die_state : State
+@export
+var sound : Resource
 
 var is_done : bool = false
 
 func enter() -> void:
 	super()
 	is_done = false
+	parent.enemyFX.stream = sound
+	parent.enemyFX.play()
 
 func exit() -> void:
 	is_done = false

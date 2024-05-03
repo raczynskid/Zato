@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://dj0vwrytcens8"]
+[gd_scene load_steps=65 format=3 uid="uid://dj0vwrytcens8"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_6v5vy"]
 [ext_resource type="Texture2D" uid="uid://d0uo07ew4ldj1" path="res://assets/zato_spritesheet.png" id="1_ugewn"]
@@ -427,6 +427,9 @@ height = 24.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qg32p"]
 height = 46.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ky1jl"]
+radius = 22.0227
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 3
 motion_mode = 1
@@ -436,16 +439,27 @@ speed = 100
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0llsr")
-animation = &"Walk"
+animation = &"Idle"
+frame_progress = 0.365137
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 34)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_qy5w6")
 
-[node name="Hurtbox" type="CollisionShape2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 3
+
+[node name="HitboxArea" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, 13)
 shape = SubResource("CapsuleShape2D_qg32p")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+monitoring = false
+
+[node name="ShortAttackHurtbox" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(30, 13)
+shape = SubResource("CircleShape2D_ky1jl")
 
 [node name="Debug" type="Label" parent="."]
 offset_left = -2.0
@@ -510,3 +524,4 @@ animation_name = "Strike3"
 [connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachinePlayer/Strike1" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachinePlayer/Strike2" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachinePlayer/Strike3" method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="Hurtbox" to="StateMachinePlayer/Strike1" method="_on_hurtbox_body_entered"]

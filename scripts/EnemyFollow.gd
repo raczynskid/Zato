@@ -36,7 +36,7 @@ func enter() -> void:
 	# pass player reference to global
 	if parent.player_target:
 		return
-	var collider = parent.raycast.get_collider()
+	var collider = parent.raycast.get_collider().get_owner()
 	if collider.is_in_group("Player"):
 		parent.player_target = collider
 		player_target = parent.player_target

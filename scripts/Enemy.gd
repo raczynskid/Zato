@@ -3,6 +3,8 @@ extends CharacterBody2D
 
 @export
 var speed = 100
+@export
+var hp : int = 3
 
 @onready
 var animations = $AnimatedSprite2D
@@ -12,14 +14,21 @@ var raycast = $RayCast2D
 var raycast_short = $RayCast2D2
 @onready
 var state_machine = $StateMachineEnemy
-
-var orientation = 0
-var player_target = null
-
+@onready
+var enemyFX = $EnemyFX
+@onready
+var hurtbox = $Hurtbox
+@onready
+var long_hurtbox_collider = $Hurtbox/LongAttackHurtbox
+@onready
+var short_hurtbox_collider = $Hurtbox/ShortAttackHurtbox
 @onready
 var debug = $Debug
 @onready
+
 var debug2 = $Debug2
+var orientation = 0
+var player_target = null
 
 func _ready() -> void:
 	# Initialize the state machine, passing a reference of the player to the states,

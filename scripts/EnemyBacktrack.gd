@@ -56,7 +56,6 @@ func process_physics(delta: float) -> State:
 		# if player not in range, resume normal follow state
 		else:
 			var rand_bool = bool_randomize()
-			print(rand_bool)
 			if rand_bool:
 				return attack2_state
 		return follow_state

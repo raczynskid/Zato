@@ -22,7 +22,7 @@ func randomize_direction() -> Vector2:
 func player_detected() -> bool:
 	var collider = parent.raycast.get_collider()
 	if collider:
-		return collider.is_in_group("Player")
+		return true
 	return false
 	
 func wall_detected() -> bool:

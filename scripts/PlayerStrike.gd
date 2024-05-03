@@ -15,16 +15,20 @@ var continue_strike : bool = false
 var cooldown_setting = 0.2
 var cooldown = cooldown_setting
 
+var i = 1
+
 func enter() -> void:
 	super()
 	is_done = false
 	continue_strike = false
+	parent.hurtbox.monitoring = true
 	parent.playerFX.stream = sound
 	parent.playerFX.play()
 
 func exit() -> void:
 	# reset cooldown on state end
 	cooldown = cooldown_setting
+	parent.hurtbox.monitoring = false
 
 func process_physics(delta: float) -> State:
 	# cound down ticker to make next strike possible
@@ -47,3 +51,9 @@ func process_physics(delta: float) -> State:
 
 func _on_animated_sprite_2d_animation_finished():
 	is_done = true
+
+
+func _on_hurtbox_body_entered(body):
+	print(body.get_name() + " hit " + str(i))
+	i += 1
+	parent.hurtbox.monitoring = false
