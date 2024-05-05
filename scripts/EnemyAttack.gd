@@ -7,8 +7,6 @@ var die_state : State
 @export
 var sound : Resource
 
-var is_done : bool = false
-
 
 func enter() -> void:
 	is_done = false
@@ -22,8 +20,12 @@ func exit() -> void:
 	parent.short_hurtbox_collider.disabled = true
 	
 func process_physics(delta: float) -> State:
-	##### TODO: set up hurtbox activation on specific frame
-	print(parent.animations.get_frame())
+	if parent.animations.get_frame() == 3:
+		var hit_object = parent.hurtbox.get_overlapping_areas()
+		if hit_object:
+			if hit_object[0].get_owner().is_in_group("Player"):
+				Signals.player_hit.emit()
+				parent.short_hurtbox_collider.disabled = true
 	if is_done:
 		return follow_state
 	return null

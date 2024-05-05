@@ -17,6 +17,10 @@ config/features=PackedStringArray("4.2", "Mobile")
 boot_splash/show_image=false
 config/icon="res://assets/dojo_icon.png"
 
+[autoload]
+
+Signals="*res://scripts/Signals.gd"
+
 [display]
 
 window/size/viewport_width=400

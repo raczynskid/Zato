@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://dj0vwrytcens8"]
+[gd_scene load_steps=65 format=3 uid="uid://dj0vwrytcens8"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_6v5vy"]
 [ext_resource type="Texture2D" uid="uid://d0uo07ew4ldj1" path="res://assets/zato_spritesheet.png" id="1_ugewn"]
@@ -9,7 +9,6 @@
 [ext_resource type="AudioStream" uid="uid://b6v2tf7ph23ss" path="res://sound/fx/Sword_swoosh1.mp3" id="7_7lq72"]
 [ext_resource type="AudioStream" uid="uid://be1hxywdrbq1d" path="res://sound/fx/Sword_swoosh2.mp3" id="8_vn0uy"]
 [ext_resource type="AudioStream" uid="uid://bnwqkq3kd3i6a" path="res://sound/fx/Sword_swoosh3.mp3" id="9_v0g0s"]
-[ext_resource type="Script" path="res://scenes/PlayerHit.gd" id="10_1vel8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_io3uo"]
 atlas = ExtResource("1_ugewn")
@@ -123,6 +122,10 @@ region = Rect2(1408, 128, 128, 128)
 atlas = ExtResource("1_ugewn")
 region = Rect2(1536, 128, 128, 128)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_fmqgq"]
+atlas = ExtResource("1_ugewn")
+region = Rect2(0, 768, 128, 128)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_xdpff"]
 atlas = ExtResource("1_ugewn")
 region = Rect2(128, 768, 128, 128)
@@ -158,10 +161,6 @@ region = Rect2(1024, 768, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_14rp4"]
 atlas = ExtResource("1_ugewn")
 region = Rect2(1152, 768, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fmqgq"]
-atlas = ExtResource("1_ugewn")
-region = Rect2(0, 768, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cdi2p"]
 atlas = ExtResource("1_ugewn")
@@ -227,7 +226,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vdoru")
 }],
-"loop": false,
+"loop": true,
 "name": &"GetHit",
 "speed": 5.0
 }, {
@@ -235,7 +234,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_155ds")
 }],
-"loop": false,
+"loop": true,
 "name": &"Idle",
 "speed": 5.0
 }, {
@@ -338,6 +337,9 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_fmqgq")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_xdpff")
 }, {
 "duration": 1.0,
@@ -363,9 +365,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_14rp4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fmqgq")
 }],
 "loop": true,
 "name": &"Walk",
@@ -440,7 +439,8 @@ speed = 100
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0llsr")
-animation = &"Walk"
+animation = &"Idle"
+frame_progress = 0.365137
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 34)
@@ -519,15 +519,9 @@ next_strike = NodePath("../Walk")
 sound = ExtResource("9_v0g0s")
 animation_name = "Strike3"
 
-[node name="Hit" type="Node" parent="StateMachinePlayer" node_paths=PackedStringArray("next_state")]
-script = ExtResource("10_1vel8")
-next_state = NodePath("../Idle")
-animation_name = "GetHit"
-
 [node name="PlayerFX" type="AudioStreamPlayer" parent="."]
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachinePlayer/Strike1" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachinePlayer/Strike2" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachinePlayer/Strike3" method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachinePlayer/Hit" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="Hurtbox" to="StateMachinePlayer/Strike1" method="_on_hurtbox_body_entered"]

@@ -9,7 +9,6 @@ var next_strike : State
 @export
 var sound: Resource
 
-var is_done : bool = false
 var continue_strike : bool = false
 
 var cooldown_setting = 0.2

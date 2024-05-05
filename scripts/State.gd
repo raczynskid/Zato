@@ -3,9 +3,13 @@ extends Node
 
 @export
 var animation_name: String
+
 @export
 var move_speed: float = 300
 var rng = RandomNumberGenerator.new()
+
+@onready
+var is_done: bool = false
 
 # Hold a reference to the parent so that it can be controlled by the state
 var parent
@@ -28,3 +32,6 @@ func process_frame(_delta: float) -> State:
 
 func process_physics(_delta: float) -> State:
 	return null
+
+func _on_animated_sprite_2d_animation_finished():
+	is_done = true

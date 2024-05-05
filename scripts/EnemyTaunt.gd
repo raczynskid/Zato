@@ -6,8 +6,6 @@ var search_state : State
 @export
 var idle_timer: float = 1.0
 
-var is_done: bool = false
-
 func enter() -> void:
 	super()
 	

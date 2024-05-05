@@ -3,16 +3,12 @@ extends CharacterBody2D
 
 @export
 var speed = 400
-
 @onready
 var animations = $AnimatedSprite2D
-
 @onready
 var playerFX = $PlayerFX
-
 @onready
 var state_machine = $StateMachinePlayer
-
 @onready
 var hurtbox = $Hurtbox
 
@@ -27,6 +23,7 @@ func _ready() -> void:
 	# Initialize the state machine, passing a reference of the player to the states,
 	# that way they can move and react accordingly
 	state_machine.init(self)
+	Signals.player_hit.connect(on_hit)
 
 func _unhandled_input(event: InputEvent) -> void:
 	state_machine.process_input(event)
@@ -37,3 +34,6 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	state_machine.process_frame(delta)
+	
+func on_hit():
+	state_machine.change_state($StateMachinePlayer/Hit)

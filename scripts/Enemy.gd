@@ -25,8 +25,8 @@ var short_hurtbox_collider = $Hurtbox/ShortAttackHurtbox
 @onready
 var debug = $Debug
 @onready
-
 var debug2 = $Debug2
+
 var orientation = 0
 var player_target = null
 
@@ -34,6 +34,7 @@ func _ready() -> void:
 	# Initialize the state machine, passing a reference of the player to the states,
 	# that way they can move and react accordingly
 	state_machine.init(self)
+	
 
 func _unhandled_input(event: InputEvent) -> void:
 	state_machine.process_input(event)
