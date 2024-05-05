@@ -698,13 +698,11 @@ next_state = NodePath("../Follow")
 animation_name = "GetHit"
 
 [node name="Debug" type="Label" parent="."]
-visible = false
 offset_top = -34.0
 offset_right = 40.0
 offset_bottom = -11.0
 
 [node name="Debug2" type="Label" parent="."]
-visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 
