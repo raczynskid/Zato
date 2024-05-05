@@ -462,18 +462,21 @@ position = Vector2(30, 13)
 shape = SubResource("CircleShape2D_ky1jl")
 
 [node name="Debug" type="Label" parent="."]
+visible = false
 offset_left = -2.0
 offset_top = -48.0
 offset_right = 38.0
 offset_bottom = -25.0
 
 [node name="Debug2" type="Label" parent="."]
+visible = false
 offset_left = -2.0
 offset_top = -24.0
 offset_right = 38.0
 offset_bottom = -1.0
 
 [node name="Debug3" type="Label" parent="."]
+visible = false
 offset_left = -4.0
 offset_top = 42.0
 offset_right = 36.0
