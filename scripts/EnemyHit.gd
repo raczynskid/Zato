@@ -1,9 +1,10 @@
 extends State
 
 @export
-var next_state: State
+var next_state : State
 
-func enter():
+
+func enter() -> void:
 	is_done = false
 	parent.animations.play(animation_name)
 
@@ -20,3 +21,6 @@ func process_physics(_delta: float) -> State:
 	if is_done:
 		return next_state
 	return null
+
+func _on_animated_sprite_2d_animation_finished():
+	is_done = true

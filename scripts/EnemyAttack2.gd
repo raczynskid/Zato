@@ -17,6 +17,7 @@ func enter() -> void:
 func exit() -> void:
 	is_done = false
 	parent.long_hurtbox_collider.disabled = true
+	parent.enemyFX.stop()
 	
 func process_physics(delta: float) -> State:
 	if parent.animations.get_frame() == 5:

@@ -9,6 +9,7 @@
 [node name="App" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_rjp7n")
+spawn_first_enemy = true
 
 [node name="Dojo" parent="." instance=ExtResource("2_eck8w")]
 

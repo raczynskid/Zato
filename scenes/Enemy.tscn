@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=3 uid="uid://na448d2w5gp3"]
+[gd_scene load_steps=93 format=3 uid="uid://na448d2w5gp3"]
 
 [ext_resource type="Script" path="res://scripts/Enemy.gd" id="1_j1fo8"]
 [ext_resource type="Texture2D" uid="uid://c0ewgs8j5w5o5" path="res://assets/enemy_spritesheet.png" id="1_p5cxk"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://scripts/EnemyBacktrack.gd" id="10_j5rpa"]
 [ext_resource type="Script" path="res://scripts/EnemyAttack2.gd" id="11_1ua6i"]
 [ext_resource type="AudioStream" uid="uid://urngdemgotfw" path="res://sound/fx/Spear3.mp3" id="13_33xsr"]
+[ext_resource type="Script" path="res://scripts/EnemyHit.gd" id="14_bg8l1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7rak2"]
 atlas = ExtResource("1_p5cxk")
@@ -193,6 +194,18 @@ region = Rect2(1792, 640, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_h1ptk"]
 atlas = ExtResource("1_p5cxk")
 region = Rect2(1920, 640, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fyxl0"]
+atlas = ExtResource("1_p5cxk")
+region = Rect2(0, 1152, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gfrpl"]
+atlas = ExtResource("1_p5cxk")
+region = Rect2(128, 1152, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yqb18"]
+atlas = ExtResource("1_p5cxk")
+region = Rect2(256, 1152, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7tr7y"]
 atlas = ExtResource("1_p5cxk")
@@ -458,6 +471,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_fyxl0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gfrpl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yqb18")
+}],
+"loop": false,
+"name": &"GetHit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_7tr7y")
 }],
 "loop": true,
@@ -572,7 +599,7 @@ script = ExtResource("1_j1fo8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_658jt")
-animation = &"WalkForward"
+animation = &"GetHit"
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -665,6 +692,11 @@ search_state = NodePath("../Search")
 follow_state = NodePath("../Follow")
 animation_name = "WalkBackward"
 
+[node name="Hit" type="Node" parent="StateMachineEnemy" node_paths=PackedStringArray("next_state")]
+script = ExtResource("14_bg8l1")
+next_state = NodePath("../Follow")
+animation_name = "GetHit"
+
 [node name="Debug" type="Label" parent="."]
 offset_top = -34.0
 offset_right = 40.0
@@ -679,3 +711,4 @@ offset_bottom = 23.0
 [connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachineEnemy/Attack" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachineEnemy/Attack2" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachineEnemy/Taunt" method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachineEnemy/Hit" method="_on_animated_sprite_2d_animation_finished"]

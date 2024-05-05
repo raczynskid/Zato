@@ -53,6 +53,6 @@ func _on_animated_sprite_2d_animation_finished():
 
 
 func _on_hurtbox_body_entered(body):
-	print(body.get_name() + " hit " + str(i))
-	i += 1
+	if body.is_in_group("Enemy"):
+		body.get_hit()
 	parent.hurtbox.monitoring = false
