@@ -30,6 +30,7 @@ func process_physics(_delta: float) -> State:
 				parent.animations.modulate = Color(1,1,1, alpha)
 			else:
 				parent.queue_free()
+				Signals.enemy_died.emit()
 	return null
 
 func _on_animated_sprite_2d_animation_finished():

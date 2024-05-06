@@ -11,7 +11,7 @@ var sound: Resource
 
 var continue_strike : bool = false
 
-var cooldown_setting = 0.2
+var cooldown_setting = 0.4
 var cooldown = cooldown_setting
 
 var i = 1
@@ -31,6 +31,7 @@ func exit() -> void:
 
 func process_physics(delta: float) -> State:
 	# cound down ticker to make next strike possible
+	parent.debug2.text = str(cooldown)
 	if cooldown > 0:
 		cooldown -= delta
 

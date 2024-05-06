@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cq2vifcorpg2v"]
+[gd_scene load_steps=7 format=3 uid="uid://cq2vifcorpg2v"]
 
 [ext_resource type="PackedScene" uid="uid://dj0vwrytcens8" path="res://scenes/Player.tscn" id="1_mi1hb"]
 [ext_resource type="Script" path="res://scripts/App.gd" id="1_rjp7n"]
 [ext_resource type="PackedScene" uid="uid://cx0ncwi2hluq5" path="res://scenes/dojo.tscn" id="2_eck8w"]
 [ext_resource type="AudioStream" uid="uid://75ysqdha83h0" path="res://sound/music/Music_drums.mp3" id="4_enfrk"]
 [ext_resource type="PackedScene" uid="uid://na448d2w5gp3" path="res://scenes/Enemy.tscn" id="5_xiudo"]
+[ext_resource type="PackedScene" uid="uid://bhhimfmu84dm2" path="res://scenes/GameOverScreen.tscn" id="6_nurll"]
 
 [node name="App" type="Node2D"]
 y_sort_enabled = true
@@ -24,5 +25,8 @@ autostart = true
 
 [node name="Enemy" parent="." instance=ExtResource("5_xiudo")]
 position = Vector2(225, 158)
+
+[node name="GameOverScreen" parent="." instance=ExtResource("6_nurll")]
+visible = false
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
