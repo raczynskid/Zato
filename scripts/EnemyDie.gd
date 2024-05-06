@@ -26,7 +26,7 @@ func process_physics(_delta: float) -> State:
 			cleanup_timer -= _delta
 		else:
 			if alpha > 0:
-				alpha -= 0.005
+				alpha -= 0.01
 				parent.animations.modulate = Color(1,1,1, alpha)
 			else:
 				parent.queue_free()

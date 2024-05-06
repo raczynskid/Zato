@@ -28,6 +28,7 @@ func exit() -> void:
 	# reset cooldown on state end
 	cooldown = cooldown_setting
 	parent.hurtbox.monitoring = false
+	parent.hurtbox.monitorable = false
 
 func process_physics(delta: float) -> State:
 	# cound down ticker to make next strike possible

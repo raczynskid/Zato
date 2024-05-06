@@ -11,13 +11,13 @@ var game_over : bool = false
 @export
 var spawn_first_enemy : bool = false
 
-var wave_size : Dictionary = {1:1, 2:10, 3:1, 4:8, 5:10}
+var wave_size : Dictionary = {1:1, 2:2, 3:3, 4:8, 5:10}
 
 func restart_game():
-	level = 1
+	level = 0
 	enemies_killed = 0
 	game_over = false
-	#$SpawnTimer.start(1)
+	$SpawnTimer.start(1)
 	var player_scene = load("res://scenes/Player.tscn")
 	var new_player = player_scene.instantiate()
 	new_player.position = Vector2(200, 150)

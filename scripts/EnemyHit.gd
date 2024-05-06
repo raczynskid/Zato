@@ -9,8 +9,6 @@ var deathblow : bool = false
 
 func enter() -> void:
 	super()
-	parent.hitbox.monitoring = false
-	parent.hitbox.monitorable = false
 	is_done = false
 	if parent.hp > 0:
 		parent.hp -= 1
