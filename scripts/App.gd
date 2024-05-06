@@ -6,10 +6,11 @@ var rng = RandomNumberGenerator.new()
 @export
 var level : int = 1
 
+
 @export
 var spawn_first_enemy : bool = false
 
-var wave_size : Dictionary = {1:1, 2:3, 3:6, 4:8, 5:10}
+var wave_size : Dictionary = {1:1, 2:1, 3:1, 4:8, 5:10}
 
 func _ready():
 	if spawn_first_enemy:

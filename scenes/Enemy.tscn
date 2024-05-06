@@ -1,4 +1,4 @@
-[gd_scene load_steps=93 format=3 uid="uid://na448d2w5gp3"]
+[gd_scene load_steps=94 format=3 uid="uid://na448d2w5gp3"]
 
 [ext_resource type="Script" path="res://scripts/Enemy.gd" id="1_j1fo8"]
 [ext_resource type="Texture2D" uid="uid://c0ewgs8j5w5o5" path="res://assets/enemy_spritesheet.png" id="1_p5cxk"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://scripts/EnemyAttack2.gd" id="11_1ua6i"]
 [ext_resource type="AudioStream" uid="uid://urngdemgotfw" path="res://sound/fx/Spear3.mp3" id="13_33xsr"]
 [ext_resource type="Script" path="res://scripts/EnemyHit.gd" id="14_bg8l1"]
+[ext_resource type="Script" path="res://scripts/EnemyIdle.gd" id="15_3q7ww"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7rak2"]
 atlas = ExtResource("1_p5cxk")
@@ -599,7 +600,7 @@ script = ExtResource("1_j1fo8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_658jt")
-animation = &"Death2"
+animation = &"Block"
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -699,14 +700,21 @@ next_state = NodePath("../Follow")
 death_state = NodePath("../Die")
 animation_name = "GetHit"
 
+[node name="Idle" type="Node" parent="StateMachineEnemy"]
+script = ExtResource("15_3q7ww")
+animation_name = "Idle"
+
 [node name="Debug" type="Label" parent="."]
+visible = false
 offset_top = -34.0
 offset_right = 40.0
 offset_bottom = -11.0
 
 [node name="Debug2" type="Label" parent="."]
+visible = false
+offset_top = 42.0
 offset_right = 40.0
-offset_bottom = 23.0
+offset_bottom = 65.0
 
 [node name="EnemyFX" type="AudioStreamPlayer2D" parent="."]
 

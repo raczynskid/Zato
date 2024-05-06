@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://dj0vwrytcens8"]
+[gd_scene load_steps=67 format=3 uid="uid://dj0vwrytcens8"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_6v5vy"]
 [ext_resource type="Texture2D" uid="uid://d0uo07ew4ldj1" path="res://assets/zato_spritesheet.png" id="1_ugewn"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://be1hxywdrbq1d" path="res://sound/fx/Sword_swoosh2.mp3" id="8_vn0uy"]
 [ext_resource type="AudioStream" uid="uid://bnwqkq3kd3i6a" path="res://sound/fx/Sword_swoosh3.mp3" id="9_v0g0s"]
 [ext_resource type="Script" path="res://scripts/PlayerHit.gd" id="10_86ixe"]
+[ext_resource type="Script" path="res://scripts/PlayerDie.gd" id="11_t6om0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_io3uo"]
 atlas = ExtResource("1_ugewn")
@@ -437,6 +438,7 @@ motion_mode = 1
 platform_on_leave = 2
 script = ExtResource("1_6v5vy")
 speed = 100
+hp = 10
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0llsr")
@@ -462,18 +464,21 @@ position = Vector2(39, 19)
 shape = SubResource("CircleShape2D_ky1jl")
 
 [node name="Debug" type="Label" parent="."]
+visible = false
 offset_left = -2.0
 offset_top = -48.0
 offset_right = 38.0
 offset_bottom = -25.0
 
 [node name="Debug2" type="Label" parent="."]
+visible = false
 offset_left = -2.0
 offset_top = -24.0
 offset_right = 38.0
 offset_bottom = -1.0
 
 [node name="Debug3" type="Label" parent="."]
+visible = false
 offset_left = -4.0
 offset_top = 42.0
 offset_right = 36.0
@@ -519,10 +524,14 @@ next_strike = NodePath("../Walk")
 sound = ExtResource("9_v0g0s")
 animation_name = "Strike3"
 
-[node name="Hit" type="Node" parent="StateMachinePlayer" node_paths=PackedStringArray("next_state")]
+[node name="Hit" type="Node" parent="StateMachinePlayer" node_paths=PackedStringArray("next_state", "death_state")]
 script = ExtResource("10_86ixe")
 next_state = NodePath("../Idle")
+death_state = NodePath("../Die")
 animation_name = "GetHit"
+
+[node name="Die" type="Node" parent="StateMachinePlayer"]
+script = ExtResource("11_t6om0")
 
 [node name="PlayerFX" type="AudioStreamPlayer" parent="."]
 

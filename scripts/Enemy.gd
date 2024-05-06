@@ -37,17 +37,22 @@ func _ready() -> void:
 	# Initialize the state machine, passing a reference of the player to the states,
 	# that way they can move and react accordingly
 	state_machine.init(self)
+	Signals.player_died.connect(_on_player_death)
 	
-
 func _unhandled_input(event: InputEvent) -> void:
 	state_machine.process_input(event)
 
 func _physics_process(delta: float) -> void:
 	$Debug.text = state_machine.current_state.get_name()
+	$Debug2.text = str(hp)
 	state_machine.process_physics(delta)
 
 func _process(delta: float) -> void:
 	state_machine.process_frame(delta)
 
 func get_hit():
-	state_machine.change_state($StateMachineEnemy/Hit)
+	if state_machine.current_state != $StateMachineEnemy/Enter and state_machine.current_state != $StateMachineEnemy/Taunt:
+		state_machine.change_state($StateMachineEnemy/Hit)
+
+func _on_player_death():
+	state_machine.change_state($StateMachineEnemy/Idle)

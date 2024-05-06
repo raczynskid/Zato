@@ -20,6 +20,7 @@ size = Vector2(143, 5.99998)
 [node name="Dojo" type="Node2D"]
 
 [node name="Snow" parent="." instance=ExtResource("1_4nugr")]
+position = Vector2(207, 2)
 
 [node name="DojoBackground" type="Sprite2D" parent="."]
 z_index = -1

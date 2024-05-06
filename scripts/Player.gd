@@ -3,6 +3,8 @@ extends CharacterBody2D
 
 @export
 var speed = 400
+@export
+var hp : int = 3
 @onready
 var animations = $AnimatedSprite2D
 @onready
@@ -30,6 +32,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	$Debug.text = state_machine.current_state.get_name()
+	$Debug3.text = str(hp)
 	state_machine.process_physics(delta)
 
 func _process(delta: float) -> void:
