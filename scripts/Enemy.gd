@@ -19,6 +19,8 @@ var enemyFX = $EnemyFX
 @onready
 var hurtbox = $Hurtbox
 @onready
+var hitbox = $Hitbox
+@onready
 var long_hurtbox_collider = $Hurtbox/LongAttackHurtbox
 @onready
 var short_hurtbox_collider = $Hurtbox/ShortAttackHurtbox
@@ -28,7 +30,8 @@ var debug = $Debug
 var debug2 = $Debug2
 
 var orientation = 0
-var player_target = null
+@onready
+var player_target = get_tree().get_nodes_in_group("Player")[0]
 
 func _ready() -> void:
 	# Initialize the state machine, passing a reference of the player to the states,

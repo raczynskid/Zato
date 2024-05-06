@@ -9,7 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://b6v2tf7ph23ss" path="res://sound/fx/Sword_swoosh1.mp3" id="7_7lq72"]
 [ext_resource type="AudioStream" uid="uid://be1hxywdrbq1d" path="res://sound/fx/Sword_swoosh2.mp3" id="8_vn0uy"]
 [ext_resource type="AudioStream" uid="uid://bnwqkq3kd3i6a" path="res://sound/fx/Sword_swoosh3.mp3" id="9_v0g0s"]
-[ext_resource type="Script" path="res://scenes/PlayerHit.gd" id="10_1vel8"]
+[ext_resource type="Script" path="res://scripts/PlayerHit.gd" id="10_86ixe"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_io3uo"]
 atlas = ExtResource("1_ugewn")
@@ -429,7 +429,7 @@ height = 24.0
 height = 46.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ky1jl"]
-radius = 22.0227
+radius = 13.0384
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 3
@@ -440,7 +440,7 @@ speed = 100
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0llsr")
-animation = &"Walk"
+animation = &"Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 34)
@@ -458,7 +458,7 @@ shape = SubResource("CapsuleShape2D_qg32p")
 monitoring = false
 
 [node name="ShortAttackHurtbox" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(30, 13)
+position = Vector2(39, 19)
 shape = SubResource("CircleShape2D_ky1jl")
 
 [node name="Debug" type="Label" parent="."]
@@ -520,7 +520,7 @@ sound = ExtResource("9_v0g0s")
 animation_name = "Strike3"
 
 [node name="Hit" type="Node" parent="StateMachinePlayer" node_paths=PackedStringArray("next_state")]
-script = ExtResource("10_1vel8")
+script = ExtResource("10_86ixe")
 next_state = NodePath("../Idle")
 animation_name = "GetHit"
 
@@ -530,4 +530,4 @@ animation_name = "GetHit"
 [connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachinePlayer/Strike2" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachinePlayer/Strike3" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachinePlayer/Hit" method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="body_entered" from="Hurtbox" to="StateMachinePlayer/Strike1" method="_on_hurtbox_body_entered"]
+[connection signal="area_entered" from="Hurtbox" to="StateMachinePlayer/Strike1" method="_on_hurtbox_area_entered"]

@@ -37,7 +37,9 @@ func spawn_enemy(enemies: int, first: bool = false) -> void:
 	
 
 func _on_spawn_timer_timeout() -> void:
-	level += 1
-	if level < wave_size.size():
-		spawn_enemy(wave_size[level], false)
+	var enemies = get_tree().get_nodes_in_group("Enemy")
+	if !enemies:
+		level += 1
+		if level < wave_size.size():
+			spawn_enemy(wave_size[level], false)
 	

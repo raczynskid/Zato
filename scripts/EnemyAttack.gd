@@ -22,9 +22,9 @@ func exit() -> void:
 	
 func process_physics(delta: float) -> State:
 	if parent.animations.get_frame() == 3:
-		var hit_object = parent.hurtbox.get_overlapping_areas()
-		if hit_object:
-			if hit_object[0].get_owner().is_in_group("Player"):
+		var hit_objects = parent.hurtbox.get_overlapping_areas()
+		for hit_object in hit_objects:
+			if parent.player_target == hit_object.get_owner():
 				Signals.player_hit.emit()
 				parent.short_hurtbox_collider.disabled = true
 	if is_done:

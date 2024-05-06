@@ -51,8 +51,9 @@ func process_physics(delta: float) -> State:
 func _on_animated_sprite_2d_animation_finished():
 	is_done = true
 
-
-func _on_hurtbox_body_entered(body):
-	if body.is_in_group("Enemy"):
-		body.get_hit()
+func _on_hurtbox_area_entered(area):
 	parent.hurtbox.monitoring = false
+	if area.get_owner().is_in_group("Enemy"):
+		print('hit')
+		area.get_owner().get_hit()
+		
