@@ -6,6 +6,7 @@ var rng = RandomNumberGenerator.new()
 @export
 var level : int = 1
 
+var enemies_killed : int = 0
 
 @export
 var spawn_first_enemy : bool = false
@@ -13,6 +14,8 @@ var spawn_first_enemy : bool = false
 var wave_size : Dictionary = {1:1, 2:1, 3:1, 4:8, 5:10}
 
 func _ready():
+	Signals.player_died.connect(_on_player_death)
+	Signals.enemy_died.connect(_on_enemy_killed)
 	if spawn_first_enemy:
 		spawn_enemy(1, true)
 
@@ -44,3 +47,8 @@ func _on_spawn_timer_timeout() -> void:
 		if level < wave_size.size():
 			spawn_enemy(wave_size[level], false)
 	
+func _on_player_death() -> void:
+	pass
+	
+func _on_enemy_killed() -> void:
+	enemies_killed += 1

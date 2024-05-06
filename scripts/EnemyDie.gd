@@ -14,15 +14,13 @@ func enter() -> void:
 	parent.raycast_short.enabled = false
 	parent.raycast.enabled = false
 	parent.hitbox.monitoring = false
+	parent.hitbox.monitorable = false
 	parent.set_collision_layer_value(1, false)
 
 func exit() -> void:
 	pass
 
-func process_input(_event: InputEvent) -> State:
-	return null
-
-func process_frame(_delta: float) -> State:
+func process_physics(_delta: float) -> State:
 	if is_done:
 		if cleanup_timer > 0:
 			cleanup_timer -= _delta
@@ -32,9 +30,6 @@ func process_frame(_delta: float) -> State:
 				parent.animations.modulate = Color(1,1,1, alpha)
 			else:
 				parent.queue_free()
-	return null
-
-func process_physics(_delta: float) -> State:
 	return null
 
 func _on_animated_sprite_2d_animation_finished():

@@ -20,6 +20,7 @@ config/icon="res://assets/dojo_icon.png"
 [autoload]
 
 Signals="*res://scripts/Signals.gd"
+Globals="*res://scripts/Globals.gd"
 
 [display]
 

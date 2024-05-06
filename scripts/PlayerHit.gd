@@ -6,9 +6,9 @@ var next_state: State
 var death_state: State
 
 func enter():
+	super()
 	parent.hp -= 1
 	is_done = false
-	parent.animations.play(animation_name)
 
 func exit() -> void:
 	is_done = false

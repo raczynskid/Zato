@@ -54,6 +54,4 @@ func _on_animated_sprite_2d_animation_finished():
 func _on_hurtbox_area_entered(area):
 	parent.hurtbox.monitoring = false
 	if area.get_owner().is_in_group("Enemy"):
-		print("hit")
 		area.get_owner().get_hit()
-		

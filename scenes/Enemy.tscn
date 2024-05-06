@@ -705,13 +705,11 @@ script = ExtResource("15_3q7ww")
 animation_name = "Idle"
 
 [node name="Debug" type="Label" parent="."]
-visible = false
 offset_top = -34.0
 offset_right = 40.0
 offset_bottom = -11.0
 
 [node name="Debug2" type="Label" parent="."]
-visible = false
 offset_top = 42.0
 offset_right = 40.0
 offset_bottom = 65.0

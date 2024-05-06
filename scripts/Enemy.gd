@@ -31,12 +31,15 @@ var debug2 = $Debug2
 
 var orientation = 0
 @onready
+var invulnerable_states = [$StateMachineEnemy/Enter, $StateMachineEnemy/Taunt, $StateMachineEnemy/Die, $StateMachineEnemy/Hit]
+@onready
 var player_target = get_tree().get_nodes_in_group("Player")[0]
 
 func _ready() -> void:
 	# Initialize the state machine, passing a reference of the player to the states,
 	# that way they can move and react accordingly
 	state_machine.init(self)
+	
 	Signals.player_died.connect(_on_player_death)
 	
 func _unhandled_input(event: InputEvent) -> void:
@@ -51,7 +54,7 @@ func _process(delta: float) -> void:
 	state_machine.process_frame(delta)
 
 func get_hit():
-	if state_machine.current_state != $StateMachineEnemy/Enter and state_machine.current_state != $StateMachineEnemy/Taunt:
+	if not invulnerable_states.has(state_machine.current_state):
 		state_machine.change_state($StateMachineEnemy/Hit)
 
 func _on_player_death():
