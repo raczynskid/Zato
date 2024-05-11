@@ -36,6 +36,10 @@ func process_physics(delta: float) -> State:
 	if cooldown > 0:
 		cooldown -= delta
 
+# check if golden frame moment
+	if parent.animations.get_frame() == 1 and Input.is_action_just_pressed("ui_accept"):
+		return next_strike
+
 	# on animation end, check if next attack has been queued
 	if is_done:
 		# if attack queued, proceed to next strike
