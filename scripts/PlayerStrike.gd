@@ -10,8 +10,9 @@ var next_strike : State
 var sound: Resource
 
 var continue_strike : bool = false
+var strike_locked : bool = false
 
-var cooldown_setting = 0.4
+var cooldown_setting = 0.05
 var cooldown = cooldown_setting
 
 var i = 1
@@ -31,14 +32,19 @@ func exit() -> void:
 	parent.hurtbox.monitorable = false
 
 func process_physics(delta: float) -> State:
+	parent.debug3.text = str(int(strike_locked))
 	# cound down ticker to make next strike possible
+	var animation_frame = parent.animations.get_frame()
+	
 	parent.debug2.text = str(cooldown)
 	if cooldown > 0:
 		cooldown -= delta
 
 # check if golden frame moment
-	if parent.animations.get_frame() == 1 and Input.is_action_just_pressed("ui_accept"):
-		return next_strike
+	if animation_frame == 1 and Input.is_action_just_pressed("ui_accept"):
+		if not strike_locked:
+			print("golden frame")
+			return next_strike
 
 	# on animation end, check if next attack has been queued
 	if is_done:
@@ -52,10 +58,13 @@ func process_physics(delta: float) -> State:
 	if Input.is_action_just_pressed("ui_accept") and cooldown <= 0:
 		# if attack pressed in time window, queue next attack
 		continue_strike = true
+		if animation_frame == 0:
+			strike_locked = true
 	return null
 
 func _on_animated_sprite_2d_animation_finished():
 	is_done = true
+	strike_locked = false
 
 func _on_hurtbox_area_entered(area):
 	parent.hurtbox.monitoring = false
