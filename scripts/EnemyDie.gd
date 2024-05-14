@@ -29,7 +29,9 @@ func process_physics(_delta: float) -> State:
 			if alpha > 0:
 				alpha -= 0.01
 				parent.animations.modulate = Color(1,1,1, alpha)
+				parent.shadow.modulate = Color(1,1,1, alpha)
 			else:
+				parent.shadow.queue_free()
 				parent.queue_free()
 				Signals.enemy_died.emit()
 	return null
