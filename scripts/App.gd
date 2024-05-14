@@ -17,6 +17,9 @@ func restart_game():
 	level = 0
 	enemies_killed = 0
 	game_over = false
+	for child in $CanvasGroup.get_children():
+		if child.get_name() != "Shadow":
+			child.queue_free()
 	$SpawnTimer.start(1)
 	var player_scene = load("res://scenes/Player.tscn")
 	var new_player = player_scene.instantiate()
@@ -24,6 +27,7 @@ func restart_game():
 	add_child(new_player)
 	$GameOverScreen.visible = false
 	$BackroundMusic.play()
+
 
 func _ready():
 	Signals.player_died.connect(_on_player_death)
