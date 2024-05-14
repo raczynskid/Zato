@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cq2vifcorpg2v"]
+[gd_scene load_steps=8 format=3 uid="uid://cq2vifcorpg2v"]
 
 [ext_resource type="PackedScene" uid="uid://dj0vwrytcens8" path="res://scenes/Player.tscn" id="1_mi1hb"]
 [ext_resource type="Script" path="res://scripts/App.gd" id="1_rjp7n"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://75ysqdha83h0" path="res://sound/music/Music_drums.mp3" id="4_enfrk"]
 [ext_resource type="PackedScene" uid="uid://na448d2w5gp3" path="res://scenes/Enemy.tscn" id="5_xiudo"]
 [ext_resource type="PackedScene" uid="uid://bhhimfmu84dm2" path="res://scenes/GameOverScreen.tscn" id="6_nurll"]
+[ext_resource type="Texture2D" uid="uid://dkc3aqybpa25u" path="res://assets/dojo_shadow.png" id="7_c307k"]
 
 [node name="App" type="Node2D"]
 y_sort_enabled = true
@@ -16,6 +17,9 @@ script = ExtResource("1_rjp7n")
 [node name="Player" parent="." instance=ExtResource("1_mi1hb")]
 position = Vector2(107, 158)
 
+[node name="Enemy" parent="." instance=ExtResource("5_xiudo")]
+position = Vector2(225, 158)
+
 [node name="BackroundMusic" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_enfrk")
 autoplay = true
@@ -23,10 +27,14 @@ autoplay = true
 [node name="SpawnTimer" type="Timer" parent="."]
 autostart = true
 
-[node name="Enemy" parent="." instance=ExtResource("5_xiudo")]
-position = Vector2(225, 158)
-
 [node name="GameOverScreen" parent="." instance=ExtResource("6_nurll")]
 visible = false
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+self_modulate = Color(0, 0, 0, 0.196078)
+
+[node name="Shadow" type="Sprite2D" parent="CanvasGroup"]
+texture = ExtResource("7_c307k")
+centered = false
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

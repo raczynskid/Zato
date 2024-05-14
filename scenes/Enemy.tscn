@@ -600,8 +600,16 @@ script = ExtResource("1_j1fo8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_658jt")
-animation = &"Block"
+animation = &"Idle"
 flip_h = true
+
+[node name="Shadow" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_658jt")
+animation = &"Idle"
+offset = Vector2(0, 65.58)
+flip_h = true
+flip_v = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 33)

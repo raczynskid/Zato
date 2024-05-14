@@ -20,6 +20,7 @@ func bool_randomize(max_val : int = 1) -> bool:
 
 func enter() -> void:
 	parent.animations.play(animation_name)
+	parent.shadow.play(animation_name)
 
 func exit() -> void:
 	pass

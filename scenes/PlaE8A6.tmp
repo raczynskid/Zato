@@ -555,13 +555,13 @@ motion_mode = 1
 platform_on_leave = 2
 script = ExtResource("1_6v5vy")
 speed = 100
+hp = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0llsr")
 animation = &"Idle"
 
 [node name="Shadow" type="AnimatedSprite2D" parent="."]
-visible = false
 sprite_frames = SubResource("SpriteFrames_8bb6d")
 animation = &"Idle"
 offset = Vector2(0, 64.43)

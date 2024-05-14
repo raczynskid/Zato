@@ -11,6 +11,7 @@ func bool_randomize(max_val : int = 1) -> bool:
 
 func enter() -> void:
 	parent.animations.play(animation_name + str(death_type))
+	parent.shadow.play(animation_name + str(death_type))
 	parent.raycast_short.enabled = false
 	parent.raycast.enabled = false
 	parent.hitbox.monitoring = false
