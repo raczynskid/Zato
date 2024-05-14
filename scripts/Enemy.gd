@@ -9,6 +9,8 @@ var hp : int = 3
 @onready
 var animations = $AnimatedSprite2D
 @onready
+var shadow = $Shadow
+@onready
 var raycast = $RayCast2D
 @onready
 var raycast_short = $RayCast2D2
@@ -39,7 +41,8 @@ func _ready() -> void:
 	# Initialize the state machine, passing a reference of the player to the states,
 	# that way they can move and react accordingly
 	state_machine.init(self)
-	
+	shadow.reparent(get_tree().get_root().get_node("./App/CanvasGroup"))
+	shadow.visible = true
 	Signals.player_died.connect(_on_player_death)
 	
 func _unhandled_input(event: InputEvent) -> void:
@@ -48,6 +51,8 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	$Debug.text = state_machine.current_state.get_name()
 	$Debug2.text = str(hp)
+	shadow.global_position = global_position
+	shadow.scale.x = scale.y
 	state_machine.process_physics(delta)
 
 func _process(delta: float) -> void:

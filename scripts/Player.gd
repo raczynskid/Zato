@@ -8,6 +8,8 @@ var hp : int = 3
 @onready
 var animations = $AnimatedSprite2D
 @onready
+var shadow = $Shadow
+@onready
 var playerFX = $PlayerFX
 @onready
 var state_machine = $StateMachinePlayer
@@ -26,6 +28,8 @@ func _ready() -> void:
 	# that way they can move and react accordingly
 	state_machine.init(self)
 	Signals.player_hit.connect(on_hit)
+	shadow.reparent(get_tree().get_root().get_node("./App/CanvasGroup"))
+	shadow.visible = true
 
 func _unhandled_input(event: InputEvent) -> void:
 	state_machine.process_input(event)
@@ -33,6 +37,8 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	$Debug.text = state_machine.current_state.get_name()
 	$Debug3.text = str(hp)
+	shadow.global_position = global_position
+	shadow.scale.x = scale.y
 	state_machine.process_physics(delta)
 
 func _process(delta: float) -> void:
