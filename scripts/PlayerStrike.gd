@@ -7,7 +7,7 @@ var walk_state : State
 @export
 var next_strike : State
 @export
-var sound: Resource
+var sound : Resource
 
 var continue_strike : bool = false
 var strike_locked : bool = false
@@ -42,8 +42,9 @@ func process_physics(delta: float) -> State:
 
 # check if golden frame moment
 	if animation_frame == 1 and Input.is_action_just_pressed("ui_accept"):
+		# if golden frame attack is not prevented by mashing earlier,
+		# proceed to next strike immediately
 		if not strike_locked:
-			print("golden frame")
 			return next_strike
 
 	# on animation end, check if next attack has been queued
@@ -58,6 +59,8 @@ func process_physics(delta: float) -> State:
 	if Input.is_action_just_pressed("ui_accept") and cooldown <= 0:
 		# if attack pressed in time window, queue next attack
 		continue_strike = true
+		# if attack pressed within the window, but before golden frame,
+		# lock golden frame attack and only proceed after full animation
 		if animation_frame == 0:
 			strike_locked = true
 	return null

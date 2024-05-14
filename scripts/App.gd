@@ -74,5 +74,4 @@ func _on_player_death() -> void:
 		enemy.queue_free()
 	
 func _on_enemy_killed() -> void:
-	print("enemy killed")
 	enemies_killed += 1
