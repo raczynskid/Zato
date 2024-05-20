@@ -39,7 +39,7 @@ func enter() -> void:
 func exit() -> void:
 	return
 
-func process_input(event: InputEvent) -> State:
+func process_input(_event: InputEvent) -> State:
 	return null
 
 func process_physics(delta: float) -> State:

@@ -13,13 +13,13 @@ func enter() -> void:
 func exit() -> void:
 	return
 
-func process_input(event: InputEvent) -> State:
+func process_input(_event: InputEvent) -> State:
 	return null
 	
-func process_frame(delta: float) -> State:
+func process_frame(_delta: float) -> State:
 	return null
 
-func process_physics(delta: float) -> State:
+func process_physics(_delta: float) -> State:
 	input_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	if Input.is_action_just_pressed("ui_accept"):
 		return strike_state

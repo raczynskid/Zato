@@ -67,9 +67,10 @@ func process_physics(delta: float) -> State:
 
 func _on_animated_sprite_2d_animation_finished():
 	is_done = true
+	# unlock the possibility of golden frame
 	strike_locked = false
 
 func _on_hurtbox_area_entered(area):
-	parent.hurtbox.monitoring = false
+	parent.hurtbox.set_deferred("monitoring", false)
 	if area.get_owner().is_in_group("Enemy"):
 		area.get_owner().get_hit()

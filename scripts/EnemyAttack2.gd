@@ -19,7 +19,7 @@ func exit() -> void:
 	parent.long_hurtbox_collider.disabled = true
 	parent.enemyFX.stop()
 	
-func process_physics(delta: float) -> State:
+func process_physics(_delta: float) -> State:
 	if parent.animations.get_frame() == 5:
 		var hit_objects = parent.hurtbox.get_overlapping_areas()
 		for hit_object in hit_objects:

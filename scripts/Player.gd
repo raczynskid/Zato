@@ -28,6 +28,8 @@ func _ready() -> void:
 	# that way they can move and react accordingly
 	state_machine.init(self)
 	Signals.player_hit.connect(on_hit)
+	# reparent the player shadow to top level canvas
+	# necessary for correct shadows blending
 	shadow.reparent(get_tree().get_root().get_node("./App/CanvasGroup"))
 	shadow.visible = true
 
