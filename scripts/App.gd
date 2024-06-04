@@ -56,7 +56,7 @@ func spawn_enemy(enemies: int, first: bool = false) -> void:
 			spawned_enemy.position = spawn_position
 			add_child(spawned_enemy)
 
-func _unhandled_input(event):
+func _unhandled_input(_event):
 	if Input.is_action_just_pressed("ui_accept") and game_over:
 		restart_game()
 
