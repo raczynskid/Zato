@@ -73,6 +73,7 @@ func _on_player_death() -> void:
 	$GameOverScreen.visible = true
 	$GameOverScreen/LabelScore.text = str(enemies_killed) + " enemies killed"
 	$Player.queue_free()
+	$BackroundMusic.stop()
 	var enemies = get_tree().get_nodes_in_group("Enemy")
 	for enemy in enemies:
 		enemy.queue_free()

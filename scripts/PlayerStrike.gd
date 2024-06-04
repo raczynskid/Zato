@@ -12,7 +12,7 @@ var sound : Resource
 var continue_strike : bool = false
 var strike_locked : bool = false
 
-var cooldown_setting = 0.05
+var cooldown_setting = 0.02
 var cooldown = cooldown_setting
 
 var i = 1
@@ -61,8 +61,8 @@ func process_physics(delta: float) -> State:
 		continue_strike = true
 		# if attack pressed within the window, but before golden frame,
 		# lock golden frame attack and only proceed after full animation
-		if animation_frame == 0:
-			strike_locked = true
+		#if animation_frame == 0:
+		strike_locked = true
 	return null
 
 func _on_animated_sprite_2d_animation_finished():
