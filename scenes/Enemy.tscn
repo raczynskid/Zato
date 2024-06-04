@@ -337,7 +337,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Attack1",
-"speed": 8.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -369,7 +369,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Attack2",
-"speed": 8.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -377,7 +377,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Block",
-"speed": 8.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -418,7 +418,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Death1",
-"speed": 8.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -468,7 +468,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Death2",
-"speed": 8.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -482,7 +482,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"GetHit",
-"speed": 8.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -490,7 +490,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Idle",
-"speed": 8.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -525,7 +525,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Taunt",
-"speed": 8.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -551,7 +551,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"WalkBackward",
-"speed": 8.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -577,7 +577,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"WalkForward",
-"speed": 8.0
+"speed": 7.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_quqjl"]
@@ -601,7 +601,7 @@ speed = 120
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_658jt")
-animation = &"WalkForward"
+animation = &"Block"
 flip_h = true
 
 [node name="Shadow" type="AnimatedSprite2D" parent="."]
@@ -705,7 +705,7 @@ animation_name = "WalkBackward"
 
 [node name="Hit" type="Node" parent="StateMachineEnemy" node_paths=PackedStringArray("next_state", "death_state")]
 script = ExtResource("14_bg8l1")
-next_state = NodePath("../Follow")
+next_state = NodePath("../Attack")
 death_state = NodePath("../Die")
 animation_name = "GetHit"
 

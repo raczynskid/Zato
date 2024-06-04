@@ -12,13 +12,13 @@ var search_state : State
 var follow_state : State
 
 @export
-var backtrack_speed : int = 25
+var backtrack_speed : int = 30
 
 var player_target
 var direction : Vector2
 
-var timer_setting_min: float = 0.5
-var timer_setting_max: float = 3.0
+var timer_setting_min: float = 0.25
+var timer_setting_max: float = 2.0
 var timer
 
 

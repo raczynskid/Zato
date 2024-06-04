@@ -28,8 +28,6 @@ func _ready() -> void:
 	# that way they can move and react accordingly
 	state_machine.init(self)
 	Signals.player_hit.connect(on_hit)
-	# reparent the player shadow to top level canvas
-	# necessary for correct shadows blending
 	shadow.reparent(get_tree().get_root().get_node("./App/CanvasGroup"))
 	shadow.visible = true
 
@@ -38,7 +36,6 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	$Debug.text = state_machine.current_state.get_name()
-	$Debug3.text = str(hp)
 	shadow.global_position = global_position
 	shadow.scale.x = scale.y
 	state_machine.process_physics(delta)

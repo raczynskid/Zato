@@ -199,7 +199,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"GetHit",
-"speed": 8.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -207,7 +207,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Idle",
-"speed": 8.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -224,7 +224,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"LiftSword",
-"speed": 8.0
+"speed": 7.0
 }, {
 "frames": [],
 "loop": true,
@@ -246,7 +246,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Strike1",
-"speed": 8.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -263,7 +263,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Strike2",
-"speed": 8.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -280,7 +280,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Strike3",
-"speed": 8.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -315,7 +315,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Walk",
-"speed": 8.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -344,7 +344,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"WalkBack",
-"speed": 8.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -563,7 +563,7 @@ speed = 120
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0llsr")
-animation = &"Slide"
+animation = &"Zazen"
 
 [node name="Shadow" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -599,14 +599,12 @@ offset_right = 38.0
 offset_bottom = -25.0
 
 [node name="Debug2" type="Label" parent="."]
-visible = false
 offset_left = -2.0
 offset_top = -24.0
 offset_right = 38.0
 offset_bottom = -1.0
 
 [node name="Debug3" type="Label" parent="."]
-visible = false
 offset_left = -4.0
 offset_top = 42.0
 offset_right = 36.0

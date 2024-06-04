@@ -9,7 +9,7 @@ var search_state : State
 @export
 var backtrack_state : State
 @export
-var follow_speed : int = 25
+var follow_speed : int = 30
 
 var direction : Vector2
 

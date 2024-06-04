@@ -12,7 +12,7 @@ var sound : Resource
 var continue_strike : bool = false
 var strike_locked : bool = false
 
-var cooldown_setting = 0.02
+var cooldown_setting = 0.2
 var cooldown = cooldown_setting
 
 var i = 1
@@ -32,20 +32,11 @@ func exit() -> void:
 	parent.hurtbox.monitorable = false
 
 func process_physics(delta: float) -> State:
-	parent.debug3.text = str(int(strike_locked))
 	# cound down ticker to make next strike possible
 	var animation_frame = parent.animations.get_frame()
 	
-	parent.debug2.text = str(cooldown)
 	if cooldown > 0:
 		cooldown -= delta
-
-# check if golden frame moment
-	if animation_frame == 1 and Input.is_action_just_pressed("ui_accept"):
-		# if golden frame attack is not prevented by mashing earlier,
-		# proceed to next strike immediately
-		if not strike_locked:
-			return next_strike
 
 	# on animation end, check if next attack has been queued
 	if is_done:
@@ -56,19 +47,13 @@ func process_physics(delta: float) -> State:
 		return walk_state
 	
 	# every frame, check if attack button pressed after ticker elapsed
-	if Input.is_action_just_pressed("ui_accept") and cooldown <= 0:
-		# if attack pressed in time window, queue next attack
-		continue_strike = true
-		# if attack pressed within the window, but before golden frame,
-		# lock golden frame attack and only proceed after full animation
-		#if animation_frame == 0:
-		strike_locked = true
+	if Input.is_action_just_pressed("ui_accept"):
+		if cooldown <= 0:
+			continue_strike = true
 	return null
 
 func _on_animated_sprite_2d_animation_finished():
 	is_done = true
-	# unlock the possibility of golden frame
-	strike_locked = false
 
 func _on_hurtbox_area_entered(area):
 	parent.hurtbox.set_deferred("monitoring", false)

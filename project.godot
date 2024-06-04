@@ -29,6 +29,10 @@ window/size/window_width_override=1000
 window/size/window_height_override=660
 window/stretch/mode="canvas_items"
 
+[physics]
+
+common/max_physics_steps_per_frame=6
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
