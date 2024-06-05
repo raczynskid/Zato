@@ -10,6 +10,11 @@ var seconds_between_enemies : float = 3
 var enemies_killed : int
 var game_over : bool = false
 
+@export
+var game_over_sound : Resource
+
+@export
+var restart_sound : Resource
 
 @export
 var spawn_first_enemy : bool = false
@@ -17,6 +22,9 @@ var spawn_first_enemy : bool = false
 var wave_size : Dictionary = {1:1, 2:2, 3:3, 4:8, 5:10}
 
 func restart_game():
+	$BackgroundFX.stop()
+	$BackgroundFX.stream = restart_sound
+	$BackgroundFX.play()
 	level = 0
 	enemies_killed = 0
 	game_over = false
@@ -82,6 +90,8 @@ func _on_player_death() -> void:
 	$GameOverScreen/LabelScore.text = str(enemies_killed) + " enemies killed"
 	$Player.queue_free()
 	$BackroundMusic.stop()
+	$BackgroundFX.stream = game_over_sound
+	$BackgroundFX.play()
 	var enemies = get_tree().get_nodes_in_group("Enemy")
 	for enemy in enemies:
 		enemy.queue_free()
