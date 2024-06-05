@@ -47,7 +47,17 @@ load_path = "res://.godot/imported/Snowflake2.png-8f7a3ee847a2c29a5496d4ab1ea3ca
 
 [node name="Snow" type="Node2D"]
 
-[node name="ParticlesLayer1" type="GPUParticles2D" parent="."]
+[node name="Control" type="Control" parent="."]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -107.0
+offset_top = -1.0
+offset_right = 105.0
+offset_bottom = 100.0
+
+[node name="ParticlesLayer1" type="GPUParticles2D" parent="Control"]
+position = Vector2(107, 1)
 amount = 100
 process_material = SubResource("2")
 texture = ExtResource("2_ktwcg")
@@ -55,7 +65,8 @@ lifetime = 50.0
 preprocess = 90.0
 speed_scale = 3.0
 
-[node name="ParticlesLayer2" type="GPUParticles2D" parent="."]
+[node name="ParticlesLayer2" type="GPUParticles2D" parent="Control"]
+position = Vector2(107, 1)
 amount = 150
 process_material = SubResource("ParticleProcessMaterial_qu7yc")
 texture = SubResource("CompressedTexture2D_wf83d")
@@ -63,7 +74,8 @@ lifetime = 50.0
 preprocess = 90.0
 speed_scale = 2.0
 
-[node name="ParticlesLayer3" type="GPUParticles2D" parent="."]
+[node name="ParticlesLayer3" type="GPUParticles2D" parent="Control"]
+position = Vector2(107, 1)
 amount = 300
 process_material = SubResource("ParticleProcessMaterial_0pk0a")
 texture = SubResource("CompressedTexture2D_bepnh")
