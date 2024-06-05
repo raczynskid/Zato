@@ -12,10 +12,8 @@ var sound : Resource
 var continue_strike : bool = false
 var strike_locked : bool = false
 
-var cooldown_setting = 0.2
+var cooldown_setting = 0.1
 var cooldown = cooldown_setting
-
-var i = 1
 
 func enter() -> void:
 	super()
@@ -33,7 +31,8 @@ func exit() -> void:
 
 func process_physics(delta: float) -> State:
 	# cound down ticker to make next strike possible
-	var animation_frame = parent.animations.get_frame()
+	parent.debug3.text = str(int(strike_locked))
+	parent.debug2.text = str(cooldown)
 	
 	if cooldown > 0:
 		cooldown -= delta
@@ -45,12 +44,12 @@ func process_physics(delta: float) -> State:
 			return next_strike
 		# if no attack queued, return to idle
 		return walk_state
-	
+
 	# every frame, check if attack button pressed after ticker elapsed
 	if Input.is_action_just_pressed("ui_accept"):
 		if cooldown <= 0:
 			continue_strike = true
-	return null
+	return null 
 
 func _on_animated_sprite_2d_animation_finished():
 	is_done = true
@@ -58,4 +57,5 @@ func _on_animated_sprite_2d_animation_finished():
 func _on_hurtbox_area_entered(area):
 	parent.hurtbox.set_deferred("monitoring", false)
 	if area.get_owner().is_in_group("Enemy"):
-		area.get_owner().get_hit()
+		area.get_owner().get_hit(str(parent.animations.animation))
+

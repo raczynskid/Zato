@@ -7,7 +7,6 @@ var die_state : State
 @export
 var sound : Resource
 
-
 func enter() -> void:
 	is_done = false
 	super()

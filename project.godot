@@ -31,7 +31,7 @@ window/stretch/mode="canvas_items"
 
 [physics]
 
-common/max_physics_steps_per_frame=6
+common/max_physics_steps_per_frame=10
 
 [rendering]
 
