@@ -7,7 +7,6 @@ var die_state : State
 @export
 var sound : Resource
 
-
 func enter() -> void:
 	is_done = false
 	super()
@@ -17,10 +16,10 @@ func enter() -> void:
 
 func exit() -> void:
 	is_done = false
-	parent.short_hurtbox_collider.disabled = true
+	parent.short_hurtbox_collider.set_deferred("disabled", true)
 	parent.enemyFX.stop()
 	
-func process_physics(delta: float) -> State:
+func process_physics(_delta: float) -> State:
 	if parent.animations.get_frame() == 3:
 		var hit_objects = parent.hurtbox.get_overlapping_areas()
 		for hit_object in hit_objects:

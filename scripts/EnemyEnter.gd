@@ -22,7 +22,7 @@ func exit() -> void:
 	parent.set_collision_mask_value(1, true)
 	parent.velocity = Vector2.ZERO
 	
-func process_physics(delta: float) -> State:
+func process_physics(_delta: float) -> State:
 	parent.move_and_slide()
 	var x_pos = parent.global_position.x
 	if (x_pos < 340 and x_pos > 200):

@@ -36,7 +36,6 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	$Debug.text = state_machine.current_state.get_name()
-	$Debug3.text = str(hp)
 	shadow.global_position = global_position
 	shadow.scale.x = scale.y
 	state_machine.process_physics(delta)

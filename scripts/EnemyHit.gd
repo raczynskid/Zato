@@ -8,17 +8,30 @@ var death_state : State
 var deathblow : bool = false
 
 func enter() -> void:
-	super()
-	is_done = false
-	if parent.hp > 0:
-		parent.hp -= 1
+	if parent.last_hit in ["Strike2", "Strike3"]:
+		super()
+		is_done = false
+		if parent.hp > 0:
+			parent.hp -= 1
+		else:
+			deathblow = true
 	else:
-		deathblow = true
+		if parent.last_hit == "Strike1":
+			parent.bloodFX.visible = true
+			parent.bloodFX.play()
+			is_done = true
+			if parent.hp > 0:
+				parent.hp -= 1
+			else:
+				deathblow = true
 
 func exit() -> void:
 	is_done = false
 	parent.hitbox.monitoring = true
 	parent.hitbox.monitorable = true
+	
+	parent.next_strike_delay = parent.next_strike_delay_setting
+	parent.counter_mode = true
 
 func process_input(_event: InputEvent) -> State:
 	return null

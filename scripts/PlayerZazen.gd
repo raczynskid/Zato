@@ -10,7 +10,7 @@ var input_direction : Vector2
 func enter() -> void:
 	super()
 	
-func process_input(event: InputEvent) -> State:
+func process_input(_event: InputEvent) -> State:
 	parent.animations.flip_h = parent.orientation
 	input_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	

@@ -13,13 +13,13 @@ func exit() -> void:
 	parent.animations.flip_h = true
 	return
 
-func process_input(event: InputEvent) -> State:
+func process_input(_event: InputEvent) -> State:
 	return null
 	
-func process_frame(delta: float) -> State:
+func process_frame(_delta: float) -> State:
 	return null
 
-func process_physics(delta: float) -> State:
+func process_physics(_delta: float) -> State:
 	if is_done:
 		return search_state
 	parent.move_and_slide()

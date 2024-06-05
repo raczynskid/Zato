@@ -12,13 +12,13 @@ var search_state : State
 var follow_state : State
 
 @export
-var backtrack_speed : int = 25
+var backtrack_speed : int = 30
 
 var player_target
 var direction : Vector2
 
-var timer_setting_min: float = 0.5
-var timer_setting_max: float = 3.0
+var timer_setting_min: float = 0.25
+var timer_setting_max: float = 2.0
 var timer
 
 
@@ -55,9 +55,9 @@ func process_physics(delta: float) -> State:
 				return attack_state
 		# if player not in range, resume normal follow state
 		else:
-			var rand_bool = bool_randomize()
-			if rand_bool:
-				return attack2_state
+			#var rand_bool = bool_randomize()
+			#if rand_bool:
+			return attack2_state
 		return follow_state
 		
 	# establish vector to player's position

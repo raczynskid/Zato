@@ -199,7 +199,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"GetHit",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -207,7 +207,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Idle",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -224,6 +224,11 @@ animations = [{
 }],
 "loop": true,
 "name": &"LiftSword",
+"speed": 7.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Slide",
 "speed": 5.0
 }, {
 "frames": [{
@@ -241,7 +246,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Strike1",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -258,7 +263,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Strike2",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -275,7 +280,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Strike3",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -310,7 +315,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Walk",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -339,7 +344,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"WalkBack",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -554,8 +559,7 @@ collision_layer = 3
 motion_mode = 1
 platform_on_leave = 2
 script = ExtResource("1_6v5vy")
-speed = 100
-hp = 1
+speed = 120
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0llsr")

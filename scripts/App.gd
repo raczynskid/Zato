@@ -5,8 +5,11 @@ var rng = RandomNumberGenerator.new()
 
 @export
 var level : int = 1
+@export
+var seconds_between_enemies : float = 3
 var enemies_killed : int
 var game_over : bool = false
+
 
 @export
 var spawn_first_enemy : bool = false
@@ -20,7 +23,7 @@ func restart_game():
 	for child in $CanvasGroup.get_children():
 		if child.get_name() != "Shadow":
 			child.queue_free()
-	$SpawnTimer.start(1)
+	$SpawnTimer.start(seconds_between_enemies)
 	var player_scene = load("res://scenes/Player.tscn")
 	var new_player = player_scene.instantiate()
 	new_player.position = Vector2(200, 150)
@@ -56,23 +59,29 @@ func spawn_enemy(enemies: int, first: bool = false) -> void:
 			spawned_enemy.position = spawn_position
 			add_child(spawned_enemy)
 
-func _unhandled_input(event):
+func _unhandled_input(_event):
 	if Input.is_action_just_pressed("ui_accept") and game_over:
 		restart_game()
 
 func _on_spawn_timer_timeout() -> void:
-	var enemies = get_tree().get_nodes_in_group("Enemy")
-	if !enemies:
-		level += 1
-		if level < wave_size.size():
-			if !game_over:
-				spawn_enemy(wave_size[level], false)
+	if !game_over:
+		spawn_enemy(1, false)
+		if $SpawnTimer.wait_time > 1:
+			$SpawnTimer.wait_time -= 0.2
+			print($SpawnTimer.wait_time)
+	#var enemies = get_tree().get_nodes_in_group("Enemy")
+	#if !enemies:
+		#level += 1
+		#if level < wave_size.size():
+			#if !game_over:
+				#spawn_enemy(wave_size[level], false)
 	
 func _on_player_death() -> void:
 	game_over = true
 	$GameOverScreen.visible = true
 	$GameOverScreen/LabelScore.text = str(enemies_killed) + " enemies killed"
 	$Player.queue_free()
+	$BackroundMusic.stop()
 	var enemies = get_tree().get_nodes_in_group("Enemy")
 	for enemy in enemies:
 		enemy.queue_free()

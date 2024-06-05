@@ -10,6 +10,8 @@ func bool_randomize(max_val : int = 1) -> bool:
 	return bool(rng.randi_range(0, max_val))
 
 func enter() -> void:
+	if parent.last_hit == "Strike3":
+		death_type = 2
 	parent.animations.play(animation_name + str(death_type))
 	parent.shadow.play(animation_name + str(death_type))
 	parent.raycast_short.enabled = false
