@@ -25,6 +25,7 @@ func restart_game():
 	$BackgroundFX.stop()
 	$BackgroundFX.stream = restart_sound
 	$BackgroundFX.play()
+	$Dojo.restart_ui()
 	level = 0
 	enemies_killed = 0
 	game_over = false

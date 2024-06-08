@@ -12,6 +12,7 @@ func enter():
 
 func exit() -> void:
 	is_done = false
+	Signals.update_ui.emit(parent.hp)
 
 func process_input(_event: InputEvent) -> State:
 	return null
