@@ -35,6 +35,7 @@ autostart = true
 
 [node name="GameOverScreen" parent="." instance=ExtResource("6_nurll")]
 visible = false
+z_index = 3
 
 [node name="CanvasGroup" type="CanvasGroup" parent="."]
 self_modulate = Color(0, 0, 0, 0.196078)

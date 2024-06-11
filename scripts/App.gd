@@ -19,9 +19,15 @@ var restart_sound : Resource
 @export
 var spawn_first_enemy : bool = false
 
+@onready
+var player_scene = load("res://scenes/Player.tscn")
+
 var wave_size : Dictionary = {1:1, 2:2, 3:3, 4:8, 5:10}
 
 func restart_game():
+	var enemies = get_tree().get_nodes_in_group("Enemy")
+	for enemy in enemies:
+		enemy.queue_free()
 	$BackgroundFX.stop()
 	$BackgroundFX.stream = restart_sound
 	$BackgroundFX.play()
@@ -33,11 +39,11 @@ func restart_game():
 		if child.get_name() != "Shadow":
 			child.queue_free()
 	$SpawnTimer.start(seconds_between_enemies)
-	var player_scene = load("res://scenes/Player.tscn")
 	var new_player = player_scene.instantiate()
 	new_player.position = Vector2(200, 150)
 	add_child(new_player)
-	$GameOverScreen.visible = false
+	#$GameOverScreen.visible = false
+	$GameOverScreen/AnimationPlayer.play_backwards("default")
 	$BackroundMusic.play()
 
 
@@ -77,7 +83,6 @@ func _on_spawn_timer_timeout() -> void:
 		spawn_enemy(1, false)
 		if $SpawnTimer.wait_time > 1:
 			$SpawnTimer.wait_time -= 0.2
-			print($SpawnTimer.wait_time)
 	#var enemies = get_tree().get_nodes_in_group("Enemy")
 	#if !enemies:
 		#level += 1
@@ -88,14 +93,12 @@ func _on_spawn_timer_timeout() -> void:
 func _on_player_death() -> void:
 	game_over = true
 	$GameOverScreen.visible = true
-	$GameOverScreen/LabelScore.text = str(enemies_killed) + " enemies killed"
-	$Player.queue_free()
+	$GameOverScreen/AnimationPlayer.play("default")
+	$GameOverScreen/LabelScore.text = str(enemies_killed) + " KILLED"
 	$BackroundMusic.stop()
 	$BackgroundFX.stream = game_over_sound
 	$BackgroundFX.play()
-	var enemies = get_tree().get_nodes_in_group("Enemy")
-	for enemy in enemies:
-		enemy.queue_free()
+	$Player.queue_free()
 	
 func _on_enemy_killed() -> void:
 	enemies_killed += 1

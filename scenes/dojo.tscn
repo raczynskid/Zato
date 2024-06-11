@@ -368,6 +368,7 @@ shape = SubResource("RectangleShape2D_rshtr")
 [node name="KanjiLeft" type="AnimatedSprite2D" parent="."]
 visible = false
 position = Vector2(53, 49)
+scale = Vector2(1, 0.955849)
 sprite_frames = SubResource("SpriteFrames_6elm1")
 frame = 4
 frame_progress = 1.0
