@@ -28,6 +28,8 @@ func restart_game():
 	var enemies = get_tree().get_nodes_in_group("Enemy")
 	for enemy in enemies:
 		enemy.queue_free()
+	for fx in get_tree().get_nodes_in_group("fx"):
+		fx.queue_free()
 	$BackgroundFX.stop()
 	$BackgroundFX.stream = restart_sound
 	$BackgroundFX.play()

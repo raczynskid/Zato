@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://cf0lenuqol67s"]
+
+[ext_resource type="Script" path="res://scripts/FootstepSpawner.gd" id="1_i7nxf"]
+
+[node name="FootprintSpawner" type="Node2D"]
+position = Vector2(0, 34)
+script = ExtResource("1_i7nxf")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[node name="EmittingTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="EmittingTimer" to="." method="_on_emitting_timer_timeout"]

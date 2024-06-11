@@ -1,4 +1,4 @@
-[gd_scene load_steps=100 format=3 uid="uid://na448d2w5gp3"]
+[gd_scene load_steps=101 format=3 uid="uid://na448d2w5gp3"]
 
 [ext_resource type="Script" path="res://scripts/Enemy.gd" id="1_j1fo8"]
 [ext_resource type="Texture2D" uid="uid://c0ewgs8j5w5o5" path="res://assets/enemy_spritesheet.png" id="1_p5cxk"]
@@ -16,6 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://urngdemgotfw" path="res://sound/fx/Spear3.mp3" id="13_33xsr"]
 [ext_resource type="Script" path="res://scripts/EnemyHit.gd" id="14_bg8l1"]
 [ext_resource type="Script" path="res://scripts/EnemyIdle.gd" id="15_3q7ww"]
+[ext_resource type="PackedScene" uid="uid://cf0lenuqol67s" path="res://scenes/fx/footprint_spawner.tscn" id="17_fc4ny"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7rak2"]
 atlas = ExtResource("1_p5cxk")
@@ -638,7 +639,7 @@ speed = 120
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_658jt")
-animation = &"Attack2"
+animation = &"Death2"
 flip_h = true
 
 [node name="blood" type="AnimatedSprite2D" parent="."]
@@ -774,6 +775,11 @@ offset_right = 40.0
 offset_bottom = 65.0
 
 [node name="EnemyFX" type="AudioStreamPlayer2D" parent="."]
+
+[node name="FootprintSpawner" parent="." instance=ExtResource("17_fc4ny")]
+frequency = 0.5
+emit_time = 1.0
+emitting = false
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachineEnemy/Attack" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachineEnemy/Attack2" method="_on_animated_sprite_2d_animation_finished"]
