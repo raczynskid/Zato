@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://dj0vwrytcens8"]
+[gd_scene load_steps=76 format=3 uid="uid://dj0vwrytcens8"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_6v5vy"]
 [ext_resource type="Texture2D" uid="uid://d0uo07ew4ldj1" path="res://assets/zato_spritesheet.png" id="1_ugewn"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://scripts/PlayerHit.gd" id="10_86ixe"]
 [ext_resource type="Script" path="res://scripts/PlayerDie.gd" id="11_t6om0"]
 [ext_resource type="Script" path="res://scripts/PlayerZazen.gd" id="12_guyje"]
+[ext_resource type="AudioStream" uid="uid://n43kegn3vok8" path="res://sound/fx/hit.mp3" id="12_veyv0"]
 [ext_resource type="PackedScene" uid="uid://cf0lenuqol67s" path="res://scenes/fx/footprint_spawner.tscn" id="14_ui6p2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bwtxu"]
@@ -747,6 +748,7 @@ animation_name = "Strike3"
 script = ExtResource("10_86ixe")
 next_state = NodePath("../Idle")
 death_state = NodePath("../Die")
+sound = ExtResource("12_veyv0")
 animation_name = "GetHit"
 
 [node name="Die" type="Node" parent="StateMachinePlayer"]

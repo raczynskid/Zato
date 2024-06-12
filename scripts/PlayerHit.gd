@@ -4,6 +4,8 @@ extends State
 var next_state: State
 @export
 var death_state: State
+@export
+var sound : Resource
 
 func enter():
 	#super()
@@ -12,6 +14,8 @@ func enter():
 		animation_name = "Die"
 	super()
 	is_done = false
+	parent.playerFX.stream = sound
+	parent.playerFX.play()
 
 func exit() -> void:
 	is_done = false
