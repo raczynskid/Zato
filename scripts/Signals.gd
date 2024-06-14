@@ -5,3 +5,4 @@ signal player_died()
 signal enemy_died()
 
 signal update_ui()
+signal leadearboard_updated()

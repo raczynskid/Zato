@@ -7,8 +7,8 @@ var rng = RandomNumberGenerator.new()
 var level : int = 1
 @export
 var seconds_between_enemies : float = 3
-var enemies_killed : int
 var game_over : bool = false
+var highscore : bool = false
 
 @export
 var game_over_sound : Resource
@@ -30,13 +30,15 @@ func restart_game():
 		enemy.queue_free()
 	for fx in get_tree().get_nodes_in_group("fx"):
 		fx.queue_free()
+	$GameOverScreen/HighScore.visible = false
 	$BackgroundFX.stop()
 	$BackgroundFX.stream = restart_sound
 	$BackgroundFX.play()
 	$Dojo.restart_ui()
 	level = 0
-	enemies_killed = 0
+	Globals.enemies_killed = 0
 	game_over = false
+	highscore = false
 	for child in $CanvasGroup.get_children():
 		if child.get_name() != "Shadow":
 			child.queue_free()
@@ -52,7 +54,8 @@ func restart_game():
 func _ready():
 	Signals.player_died.connect(_on_player_death)
 	Signals.enemy_died.connect(_on_enemy_killed)
-	enemies_killed = 0
+	Signals.leadearboard_updated.connect(_on_leaderboard_update)
+	Globals.enemies_killed = 0
 	if spawn_first_enemy:
 		spawn_enemy(1, true)
 
@@ -78,7 +81,12 @@ func spawn_enemy(enemies: int, first: bool = false) -> void:
 
 func _unhandled_input(_event):
 	if Input.is_action_just_pressed("ui_accept") and game_over:
-		restart_game()
+		if highscore:
+			$GameOverScreen/Leaderboard.refresh()
+			$GameOverScreen/AnimationPlayer.play("leaderboard_show")
+			$GameOverScreen/Leaderboard/ColorRect/VBoxContainer/LineEdit.grab_focus()
+		else:
+			restart_game()
 
 func _on_spawn_timer_timeout() -> void:
 	if !game_over:
@@ -96,11 +104,24 @@ func _on_player_death() -> void:
 	game_over = true
 	$GameOverScreen.visible = true
 	$GameOverScreen/AnimationPlayer.play("default")
-	$GameOverScreen/LabelScore.text = str(enemies_killed) + " KILLED"
+	$GameOverScreen/LabelScore.text = str(Globals.enemies_killed) + " KILLED"
+	if (Globals.enemies_killed > 0) and (Globals.enemies_killed > await get_lowest_score()):
+		highscore = true
+	if highscore:
+		$GameOverScreen/HighScore.visible = true
 	$BackroundMusic.stop()
 	$BackgroundFX.stream = game_over_sound
 	$BackgroundFX.play()
 	$Player.queue_free()
 	
+	
 func _on_enemy_killed() -> void:
-	enemies_killed += 1
+	Globals.enemies_killed += 1
+	
+func _on_leaderboard_update():
+	$GameOverScreen/AnimationPlayer.play_backwards("leaderboard_show")
+	highscore = false
+
+func get_lowest_score():
+	var sw_result: Dictionary = await SilentWolf.Scores.get_scores().sw_get_scores_complete
+	return sw_result.scores[len(sw_result.scores)-1]["score"]
