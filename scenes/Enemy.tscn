@@ -1,4 +1,4 @@
-[gd_scene load_steps=101 format=3 uid="uid://na448d2w5gp3"]
+[gd_scene load_steps=102 format=3 uid="uid://na448d2w5gp3"]
 
 [ext_resource type="Script" path="res://scripts/Enemy.gd" id="1_j1fo8"]
 [ext_resource type="Texture2D" uid="uid://c0ewgs8j5w5o5" path="res://assets/enemy_spritesheet.png" id="1_p5cxk"]
@@ -16,6 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://urngdemgotfw" path="res://sound/fx/Spear3.mp3" id="13_33xsr"]
 [ext_resource type="Script" path="res://scripts/EnemyHit.gd" id="14_bg8l1"]
 [ext_resource type="Script" path="res://scripts/EnemyIdle.gd" id="15_3q7ww"]
+[ext_resource type="AudioStream" uid="uid://bkbe5runbdw32" path="res://sound/fx/Hit_with_Blood_1.mp3" id="16_7vwji"]
 [ext_resource type="PackedScene" uid="uid://cf0lenuqol67s" path="res://scenes/fx/footprint_spawner.tscn" id="17_fc4ny"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7rak2"]
@@ -756,6 +757,7 @@ animation_name = "WalkBackward"
 script = ExtResource("14_bg8l1")
 next_state = NodePath("../Follow")
 death_state = NodePath("../Die")
+sound = ExtResource("16_7vwji")
 animation_name = "GetHit"
 
 [node name="Idle" type="Node" parent="StateMachineEnemy"]
@@ -775,6 +777,7 @@ offset_right = 40.0
 offset_bottom = 65.0
 
 [node name="EnemyFX" type="AudioStreamPlayer2D" parent="."]
+max_polyphony = 3
 
 [node name="FootprintSpawner" parent="." instance=ExtResource("17_fc4ny")]
 frequency = 0.5

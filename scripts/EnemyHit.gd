@@ -4,10 +4,15 @@ extends State
 var next_state : State
 @export
 var death_state : State
+@export
+var sound : Resource
 
 var deathblow : bool = false
 
 func enter() -> void:
+	parent.enemyFX.stream = sound
+	parent.enemyFX.play()
+	print("hit")
 	if parent.last_hit in ["Strike2", "Strike3"]:
 		super()
 		is_done = false
