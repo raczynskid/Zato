@@ -20,6 +20,8 @@ config/icon="res://assets/dojo_icon.png"
 [autoload]
 
 Signals="*res://scripts/Signals.gd"
+SilentWolf="*res://addons/silent_wolf/SilentWolf.gd"
+Globals="*res://scripts/Globals.gd"
 
 [display]
 
@@ -28,6 +30,10 @@ window/size/viewport_height=300
 window/size/window_width_override=1000
 window/size/window_height_override=660
 window/stretch/mode="canvas_items"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/silent_wolf/plugin.cfg")
 
 [physics]
 
