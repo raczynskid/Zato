@@ -26,11 +26,11 @@ func process_physics(_delta: float) -> State:
 	parent.move_and_slide()
 	var x_pos = parent.global_position.x
 	if (x_pos < 340 and x_pos > 200):
-		parent.global_position.y -= 17
+		parent.global_position.y -= 3
 		parent.global_position.x -= 20
 		return next_state
 	elif (x_pos > 60 and x_pos < 200):
-		parent.global_position.y -= 17
+		parent.global_position.y -= 3
 		parent.global_position.x += 20
 		return next_state
 	return null
