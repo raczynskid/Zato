@@ -97,4 +97,8 @@ scale = Vector2(4.73333, 4.73333)
 shape = SubResource("CircleShape2D_lsyk3")
 action = "ui_accept"
 
+[node name="RestartTimer" type="Timer" parent="."]
+wait_time = 1.5
+
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="RestartTimer" to="." method="_on_restart_timer_timeout"]

@@ -9,6 +9,7 @@ var level : int = 1
 var seconds_between_enemies : float = 3
 var game_over : bool = false
 var highscore : bool = false
+var ready_to_restart : bool = false
 
 @export
 var game_over_sound : Resource
@@ -49,6 +50,7 @@ func restart_game():
 	#$GameOverScreen.visible = false
 	$GameOverScreen/AnimationPlayer.play_backwards("default")
 	$BackroundMusic.play()
+	ready_to_restart = false
 
 
 func _ready():
@@ -86,7 +88,8 @@ func _unhandled_input(_event):
 			$GameOverScreen/AnimationPlayer.play("leaderboard_show")
 			$GameOverScreen/Leaderboard/ColorRect/VBoxContainer/LineEdit.grab_focus()
 		else:
-			restart_game()
+			if ready_to_restart:
+				restart_game()
 
 func _on_spawn_timer_timeout() -> void:
 	if !game_over:
@@ -113,6 +116,7 @@ func _on_player_death() -> void:
 	$BackgroundFX.stream = game_over_sound
 	$BackgroundFX.play()
 	$Player.queue_free()
+	$RestartTimer.start()
 	
 	
 func _on_enemy_killed() -> void:
@@ -126,3 +130,8 @@ func get_lowest_score():
 	var sw_result: Dictionary = await SilentWolf.Scores.get_scores().sw_get_scores_complete
 	return sw_result.scores[len(sw_result.scores)-1]["score"]
 
+
+
+func _on_restart_timer_timeout():
+	ready_to_restart = true
+	$RestartTimer.stop()
