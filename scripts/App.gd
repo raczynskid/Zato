@@ -90,7 +90,15 @@ func _unhandled_input(_event):
 		else:
 			if ready_to_restart:
 				restart_game()
-
+	if Input.is_action_just_pressed("ui_cancel"):
+		if $TouchscreenControls/Control/joystick.visible:
+			$TouchscreenControls/Control/joystick.visible = false
+			$TouchscreenControls/Control/attackbutton.visible = false
+		else:
+			$TouchscreenControls/Control/joystick.visible = true
+			$TouchscreenControls/Control/attackbutton.visible = true
+			
+	
 func _on_spawn_timer_timeout() -> void:
 	if !game_over:
 		spawn_enemy(1, false)
