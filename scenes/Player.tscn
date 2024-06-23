@@ -637,14 +637,14 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qy5w6"]
-radius = 5.0
+radius = 3.0
 height = 24.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qg32p"]
-height = 46.0
+height = 40.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ky1jl"]
-radius = 13.0384
+radius = 16.0
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 3
@@ -665,7 +665,7 @@ offset = Vector2(0, 64.43)
 flip_v = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 34)
+position = Vector2(-1, 32)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_qy5w6")
 
@@ -673,14 +673,14 @@ shape = SubResource("CapsuleShape2D_qy5w6")
 collision_layer = 3
 
 [node name="HitboxArea" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(0, 13)
+position = Vector2(0, 11)
 shape = SubResource("CapsuleShape2D_qg32p")
 
 [node name="Hurtbox" type="Area2D" parent="."]
 monitoring = false
 
 [node name="ShortAttackHurtbox" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(39, 19)
+position = Vector2(30, 14)
 shape = SubResource("CircleShape2D_ky1jl")
 
 [node name="Debug" type="Label" parent="."]

@@ -125,3 +125,4 @@ func _on_leaderboard_update():
 func get_lowest_score():
 	var sw_result: Dictionary = await SilentWolf.Scores.get_scores().sw_get_scores_complete
 	return sw_result.scores[len(sw_result.scores)-1]["score"]
+

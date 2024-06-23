@@ -627,8 +627,9 @@ height = 28.0
 radius = 12.0
 height = 42.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_qnpae"]
-radius = 19.0263
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b0hmk"]
+radius = 10.4342
+height = 52.491
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ufo1r"]
 radius = 6.3222
@@ -640,7 +641,7 @@ speed = 120
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_658jt")
-animation = &"Death2"
+animation = &"Idle"
 flip_h = true
 
 [node name="blood" type="AnimatedSprite2D" parent="."]
@@ -655,7 +656,7 @@ flip_h = true
 [node name="Shadow" type="AnimatedSprite2D" parent="."]
 visible = false
 sprite_frames = SubResource("SpriteFrames_658jt")
-animation = &"Idle"
+animation = &"Block"
 offset = Vector2(0, 65.58)
 flip_h = true
 flip_v = true
@@ -674,14 +675,16 @@ shape = SubResource("CapsuleShape2D_332u1")
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_mask = 2
+monitorable = false
 
 [node name="ShortAttackHurtbox" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(-23, 13)
-shape = SubResource("CircleShape2D_qnpae")
+position = Vector2(-33, 17)
+rotation = 1.15751
+shape = SubResource("CapsuleShape2D_b0hmk")
 disabled = true
 
 [node name="LongAttackHurtbox" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(-43, 3)
+position = Vector2(-44, 2)
 rotation = 1.91986
 scale = Vector2(1, 1.4)
 shape = SubResource("CapsuleShape2D_ufo1r")
@@ -694,7 +697,7 @@ collide_with_areas = true
 
 [node name="RayCast2D2" type="RayCast2D" parent="."]
 position = Vector2(0, 32)
-target_position = Vector2(-34, 0)
+target_position = Vector2(-48, 0)
 
 [node name="StateMachineEnemy" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
 script = ExtResource("3_hajn6")
