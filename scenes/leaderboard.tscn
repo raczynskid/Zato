@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cfd22e7odavyq"]
+[gd_scene load_steps=6 format=3 uid="uid://cfd22e7odavyq"]
 
 [ext_resource type="Script" path="res://scripts/leaderboard.gd" id="1_ogiss"]
 [ext_resource type="FontFile" uid="uid://cditnl3ksh5cj" path="res://assets/fonts/press_start_2p/PressStart2P.ttf" id="2_najao"]
 [ext_resource type="Texture2D" uid="uid://bpwlmhjjruckw" path="res://assets/Death Kanji-small.png" id="3_dtjby"]
+[ext_resource type="PackedScene" uid="uid://dys2esto1hma6" path="res://scenes/VirtualKeyboard.tscn" id="4_3fdde"]
 
 [sub_resource type="Theme" id="Theme_82jbx"]
 default_font = ExtResource("2_najao")
@@ -81,10 +82,13 @@ text_overrun_behavior = 0
 
 [node name="TextureRect" type="TextureRect" parent="ColorRect"]
 layout_mode = 0
-offset_left = 197.0
-offset_top = 74.0
-offset_right = 397.0
-offset_bottom = 224.0
+offset_left = 198.0
+offset_top = 149.0
+offset_right = 398.0
+offset_bottom = 299.0
 texture = ExtResource("3_dtjby")
+
+[node name="VirtualKeyboard" parent="." instance=ExtResource("4_3fdde")]
+position = Vector2(292, 58)
 
 [connection signal="text_submitted" from="ColorRect/VBoxContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]

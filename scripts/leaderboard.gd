@@ -6,6 +6,9 @@ var player_list = $ColorRect/VBoxContainer/HBoxContainer/PlayerNames
 var score_list = $ColorRect/VBoxContainer/HBoxContainer/PlayerScores
 
 func _ready():
+	Signals.leaderboard_activated.emit()
+	Signals.vk_letter_entered.connect(_on_vk_letter_entered)
+	Signals.vk_submitted.connect(_on_vk_submitted)
 	refresh()
 
 func refresh():
@@ -23,3 +26,9 @@ func _on_line_edit_text_submitted(new_text):
 	$ColorRect/VBoxContainer/LineEdit.release_focus()
 	Signals.leadearboard_updated.emit()
 	
+func _on_vk_letter_entered(letter):
+	$ColorRect/VBoxContainer/LineEdit.insert_text_at_caret(letter)
+
+func _on_vk_submitted():
+	if len($ColorRect/VBoxContainer/LineEdit.text) > 0:
+		_on_line_edit_text_submitted($ColorRect/VBoxContainer/LineEdit.text)

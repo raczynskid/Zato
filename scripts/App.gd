@@ -84,6 +84,7 @@ func spawn_enemy(enemies: int, first: bool = false) -> void:
 func _unhandled_input(_event):
 	if Input.is_action_just_pressed("ui_accept") and game_over:
 		if highscore:
+			$TouchscreenControls/Control/TouchScreenButton.visible = false
 			$GameOverScreen/Leaderboard.refresh()
 			$GameOverScreen/AnimationPlayer.play("leaderboard_show")
 			$GameOverScreen/Leaderboard/ColorRect/VBoxContainer/LineEdit.grab_focus()
@@ -133,6 +134,8 @@ func _on_enemy_killed() -> void:
 func _on_leaderboard_update():
 	$GameOverScreen/AnimationPlayer.play_backwards("leaderboard_show")
 	highscore = false
+	$TouchscreenControls/Control/TouchScreenButton.visible = false
+	$RestartTimer.start(1)
 
 func get_lowest_score():
 	var sw_result: Dictionary = await SilentWolf.Scores.get_scores().sw_get_scores_complete
@@ -143,3 +146,5 @@ func get_lowest_score():
 func _on_restart_timer_timeout():
 	ready_to_restart = true
 	$RestartTimer.stop()
+	if not $TouchscreenControls/Control/TouchScreenButton.visible:
+		$TouchscreenControls/Control/TouchScreenButton.visible = true
