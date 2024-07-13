@@ -8,14 +8,14 @@ var death_state: State
 var sound : Resource
 
 func enter():
-	#super()
+	if parent.hp > 0:
+		parent.playerFX.stream = sound
+		parent.playerFX.play()
 	parent.hp -= 1
 	if parent.hp <= 0:
 		animation_name = "Die"
 	super()
 	is_done = false
-	parent.playerFX.stream = sound
-	parent.playerFX.play()
 
 func exit() -> void:
 	is_done = false

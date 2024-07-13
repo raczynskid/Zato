@@ -16,7 +16,7 @@ var emitting = true
 func _ready():
 	$Timer.wait_time = frequency
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	pass
 
 func start_emitting():
