@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bt8j8u3n1qpb7"]
 
 [ext_resource type="Texture2D" uid="uid://fk5mil8dvge8" path="res://assets/blood_on_floor.png" id="1_efceu"]
-[ext_resource type="Script" path="res://scripts/blood_remain.gd" id="1_i8yk0"]
+[ext_resource type="Script" path="res://scripts/fx/blood_remain.gd" id="1_i8yk0"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6jayv"]
 radius = 3.0

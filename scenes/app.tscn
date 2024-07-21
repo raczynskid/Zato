@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cq2vifcorpg2v"]
+[gd_scene load_steps=13 format=3 uid="uid://cq2vifcorpg2v"]
 
 [ext_resource type="PackedScene" uid="uid://dj0vwrytcens8" path="res://scenes/Player.tscn" id="1_mi1hb"]
 [ext_resource type="Script" path="res://scripts/App.gd" id="1_rjp7n"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bhhimfmu84dm2" path="res://scenes/GameOverScreen.tscn" id="6_nurll"]
 [ext_resource type="Texture2D" uid="uid://dkc3aqybpa25u" path="res://assets/dojo_shadow.png" id="7_c307k"]
 [ext_resource type="Texture2D" uid="uid://dvtwnfyuop2ut" path="res://assets/touch controls.png" id="9_wjm2c"]
+[ext_resource type="PackedScene" uid="uid://c2ft1icfcouhu" path="res://scenes/Archer.tscn" id="10_yfg1c"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_1qvbn"]
 points = PackedVector2Array(-22, 6, 0, 0, 22, 6, 15, 12, 0, 15, -15, 12)
@@ -18,9 +19,9 @@ points = PackedVector2Array(-22, 6, 0, 0, 22, 6, 15, 12, 0, 15, -15, 12)
 [node name="App" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_rjp7n")
+seconds_between_enemies = 60.0
 game_over_sound = ExtResource("5_gkmkr")
 restart_sound = ExtResource("3_j7ixq")
-spawn_first_enemy = true
 
 [node name="Dojo" parent="." instance=ExtResource("2_eck8w")]
 
@@ -37,7 +38,6 @@ volume_db = -10.632
 
 [node name="SpawnTimer" type="Timer" parent="."]
 wait_time = 3.0
-autostart = true
 
 [node name="GameOverScreen" parent="." instance=ExtResource("6_nurll")]
 visible = false
@@ -53,6 +53,7 @@ centered = false
 [node name="TouchscreenControls" type="CanvasGroup" parent="."]
 
 [node name="Control" type="Control" parent="TouchscreenControls"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = -11.0
@@ -118,6 +119,9 @@ texture = ExtResource("9_wjm2c")
 
 [node name="RestartTimer" type="Timer" parent="."]
 wait_time = 1.5
+
+[node name="Enemy" parent="." instance=ExtResource("10_yfg1c")]
+position = Vector2(303, 116)
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="RestartTimer" to="." method="_on_restart_timer_timeout"]

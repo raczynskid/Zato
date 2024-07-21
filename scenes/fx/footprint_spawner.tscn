@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cf0lenuqol67s"]
 
-[ext_resource type="Script" path="res://scripts/FootstepSpawner.gd" id="1_i7nxf"]
+[ext_resource type="Script" path="res://scripts/fx/FootstepSpawner.gd" id="1_i7nxf"]
 
 [node name="FootprintSpawner" type="Node2D"]
 position = Vector2(0, 34)
