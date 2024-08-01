@@ -7,8 +7,6 @@ var idle_state : State
 @export
 var attack_state : State
 @export
-var attack2_state : State
-@export
 var search_state : State
 @export
 var backtrack_state : State
@@ -40,6 +38,13 @@ func enter() -> void:
 func exit() -> void:
 	return
 
+func is_aimed() -> bool:
+	var collider = parent.raycast.get_collider()
+	if collider:
+		return collider.get_parent().is_in_group("Player")
+	return false
+
+
 func process_physics(delta: float) -> State:
 	# when ticker elapses, return to search state
 	if timer > 0:
@@ -50,6 +55,9 @@ func process_physics(delta: float) -> State:
 
 	if in_range():
 		return backtrack_state
+	
+	if is_aimed():
+		return attack_state
 
 	# establish vector to player's position
 	direction = Vector2(player_position().x * -0.01, player_position().y)
