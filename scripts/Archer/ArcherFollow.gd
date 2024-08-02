@@ -13,12 +13,10 @@ var backtrack_state : State
 @export
 var follow_speed : int = 30
 
+@onready
+var shot_ready : bool = false
+
 var direction : Vector2
-
-var timer_setting: float = 10.0
-var timer
-
-var attack2_timer : float = attack2_cooldown
 	
 func player_position() -> Vector2:
 	# calculate direction vector to player
@@ -32,8 +30,7 @@ func in_range() -> bool:
 
 func enter() -> void:
 	super()
-	# reset follow timer
-	timer = timer_setting
+	parent.shot_timer.start()
 
 func exit() -> void:
 	return
@@ -46,18 +43,13 @@ func is_aimed() -> bool:
 
 
 func process_physics(delta: float) -> State:
-	# when ticker elapses, return to search state
-	if timer > 0:
-		timer -= delta
-	else:
-		pass
-		# placeholder for attack transition
-
 	if in_range():
 		return backtrack_state
 	
 	if is_aimed():
-		return attack_state
+		if shot_ready:
+			shot_ready = false
+			return attack_state
 
 	# establish vector to player's position
 	direction = Vector2(player_position().x * -0.01, player_position().y)
@@ -66,3 +58,7 @@ func process_physics(delta: float) -> State:
 	parent.velocity = direction * follow_speed
 	parent.move_and_slide()
 	return null
+
+
+func _on_shot_timer_timeout():
+	shot_ready = true

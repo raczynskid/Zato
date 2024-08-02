@@ -655,7 +655,7 @@ speed = 120
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0llsr")
-animation = &"Idle"
+animation = &"Strike1"
 
 [node name="Shadow" type="AnimatedSprite2D" parent="."]
 visible = false

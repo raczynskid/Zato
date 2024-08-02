@@ -32,6 +32,10 @@ var hitbox = $Hitbox
 var debug = $Debug
 @onready
 var debug2 = $Debug2
+@onready
+var arrow = $Arrow
+@onready
+var shot_timer = $ShotTimer
 
 var orientation = 0
 @onready

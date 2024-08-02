@@ -21,3 +21,7 @@ func fire():
 	pass
 	$Arrow.visible=true
 	$Arrow.play("default")
+
+
+func _on_arrow_animation_finished():
+	queue_free()

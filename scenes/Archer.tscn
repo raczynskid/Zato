@@ -246,7 +246,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Attack",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -459,6 +459,8 @@ script = ExtResource("1_2g1qm")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_658jt")
 animation = &"Attack"
+frame = 7
+frame_progress = 1.0
 flip_h = true
 
 [node name="blood" type="AnimatedSprite2D" parent="."]
@@ -546,7 +548,10 @@ frequency = 0.5
 emit_time = 1.0
 emitting = false
 
+[node name="ShotTimer" type="Timer" parent="."]
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachineArcher/Attack" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachineArcher/Die" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachineArcher/Hit" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="blood" to="." method="_on_blood_animation_finished"]
+[connection signal="timeout" from="ShotTimer" to="StateMachineArcher/Follow" method="_on_shot_timer_timeout"]
